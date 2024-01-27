@@ -9,7 +9,6 @@ let server = null;
 const dashboardRoutes = require("./partials/dashboard.routes");
 const websiteRoutes = require("./partials/website.routes");
 const authRoutes = require("./partials/auth.routes");
-// const categoryRoutes = require("./partials/category.routes");
 const apiRoutes = require("./api.routes");
 
 module.exports = (mainserver) => {
@@ -19,11 +18,6 @@ module.exports = (mainserver) => {
 
     router.use(authRoutes());
     router.use(dashboardRoutes());
-    // router.use(blogRoutes());
-    // router.use(emailRoutes());
-    // router.use(userRoutes());
-    // router.use(userRoleRoutes());
-    // router.use(categoryRoutes());
 
     return router;
 
