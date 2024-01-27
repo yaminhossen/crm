@@ -1,0 +1,47 @@
+GET http://localhost:8082/product/allProducts HTTP/1.1
+
+###
+GET http://localhost:8080/api/product/allReviews HTTP/1.1
+
+###
+GET http://localhost:8080/api/product/getProductReviews HTTP/1.1
+
+###
+GET http://localhost:8080/api/product/published HTTP/1.1
+
+###
+GET http://localhost:8080/api/product/3 HTTP/1.1
+
+###
+DELETE http://localhost:8080/api/product/1 HTTP/1.1
+
+###
+POST http://localhost:8082/product/store HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Earphone",
+    "price": 300,
+    "description": "This is very good",
+    "published" : true
+}
+
+###
+POST http://localhost:8080/api/product/addReview HTTP/1.1
+content-type: application/json
+
+{
+    "rating": 2
+}
+
+
+###
+PUT http://localhost:8080/api/product/2 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Iphone13 pro max",
+    "price": 1000,
+    "description": "This is very good",
+    "published" : false
+}

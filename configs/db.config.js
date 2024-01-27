@@ -1,5 +1,14 @@
-const db_url = "mongodb://127.0.0.1:27017/ChairmanDB";
-
 module.exports = {
-    db_url,
-};
+    HOST: 'localhost',
+    USER: 'root',
+    PASSWORD: '1234',
+    DB: 'sequelize',
+    dialect: 'mysql',
+
+    pool: {
+        max: 5,
+        min:0,
+        acquire: 30000,
+        idle: 10000
+    }
+}

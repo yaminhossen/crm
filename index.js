@@ -20,7 +20,7 @@ server.use(cors())
 // parse application/json 01965522673
 server.use(bodyParser.json());
 server.set('json spaces', 4);
-
+server.use(express.json())
 server.use(express.urlencoded({
     extended: true
 }))
@@ -63,16 +63,13 @@ server.use(allRoutes(server));
 // 	});
 
 // const db_url = "mongodb+srv://mongo:0h4lYcX9RCOo8pHn@cluster0.gn949by.mongodb.net/blogDB";
+// port
+const PORT = process.env.PORT || 8082
 
-
-let connection = mongoose.connect(db_url)
-	.then(()=>{
-		console.log('db connected');
-		server.listen(5001, () => {
-			console.log(`app is listening on http://127.0.0.1:5001`);
-		});
-	});
-
+// server
+server.listen(PORT, ()=>{
+    console.log(`server in running on port ${PORT}`);
+})
 
 
 
