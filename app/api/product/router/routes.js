@@ -13,7 +13,7 @@ let prefix = 'product'
 router
     .get(`/${prefix}`, controllers.getAllProducts)
     .post(`/${prefix}/store`, controllers.addProduct)
-    .post(`/${prefix}/delete`, controllers.deleteProduct)
+    .delete(`/${prefix}/delete/:id`, controllers.deleteProduct)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
     

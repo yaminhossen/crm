@@ -1,4 +1,4 @@
-GET http://localhost:8082/product/allProducts HTTP/1.1
+GET http://localhost:8082/product HTTP/1.1
 
 ###
 GET http://localhost:8080/api/product/allReviews HTTP/1.1
@@ -13,7 +13,7 @@ GET http://localhost:8080/api/product/published HTTP/1.1
 GET http://localhost:8080/api/product/3 HTTP/1.1
 
 ###
-DELETE http://localhost:8080/api/product/1 HTTP/1.1
+DELETE http://localhost:8082/product/delete/5 HTTP/1.1
 
 ###
 POST http://localhost:8082/product/store HTTP/1.1
