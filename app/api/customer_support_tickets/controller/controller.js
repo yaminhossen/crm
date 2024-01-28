@@ -4,7 +4,6 @@ const db = require('../../index')
 
 // create main model 
 const Product = db.products
-const Review = db.reviews
 
 // main works
 
@@ -67,19 +66,7 @@ const getPublishedProduct = async (req, res) => {
     res.status(200).send(products)
 }
 
-// 7. connect one to many relation Product and reviews
 
-const getProductReviews = async (req, res) => {
-    
-    const data = await Product.findAll({
-        include: [{
-            model: Review,
-            as: 'review'
-        }],
-        where: { id: 2 }
-    })
-    res.status(200).send(data)
-}
 
 module.exports = {
     addProduct,
@@ -87,6 +74,5 @@ module.exports = {
     getOneProduct,
     UpdateProduct,
     deleteProduct,
-    getPublishedProduct,
-    getProductReviews
+    getPublishedProduct
 }

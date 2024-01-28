@@ -2,7 +2,6 @@
 module.exports = async (server, req) => {
     server.locals.commonData = {
        
-
     };
 
     server.locals = {

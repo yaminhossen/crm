@@ -12,13 +12,11 @@ const authRoutes = require("./partials/auth.routes");
 const apiRoutes = require("./api.routes");
 
 module.exports = (mainserver) => {
+    
     router.use(apiRoutes());
-
     router.use(websiteRoutes(mainserver));
-
     router.use(authRoutes());
     router.use(dashboardRoutes());
-
     return router;
 
 };
