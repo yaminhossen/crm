@@ -11,13 +11,13 @@ const router = express.Router();
 
 let prefix = 'product'
 router
-    .get(`/${prefix}`, controllers.getAllProducts)
-    .post(`/${prefix}/store`, controllers.addProduct)
-    .delete(`/${prefix}/delete/:id`, controllers.deleteProduct)
+    .get(`/${prefix}`, controllers.All)
+    .post(`/${prefix}/store`, controllers.store)
+    .delete(`/${prefix}/delete/:id`, controllers.destroy)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
-    .post(`/${prefix}/update/:id`, controllers.UpdateProduct)
-    .get(`/${prefix}/details/:id`, controllers.getOneProduct);
+    .post(`/${prefix}/update/:id`, controllers.Update)
+    .get(`/${prefix}/details/:id`, controllers.get);
 
 
 module.exports = () => router;

@@ -3,11 +3,11 @@ const db = require('../../index')
 // const db = db
 
 // create main model 
-const Product = db.customer_support_tickets
+const DataTable = db.customer_support_tickets
 
 // main works
 
-// 1. create product
+// 1. create item
 
 const store = async (req, res) => {
 
@@ -19,61 +19,61 @@ const store = async (req, res) => {
         priority: req.body.priority
     }
 
-    const product = await Product.create(info)
-    res.status(200).send(product)
+    const item = await DataTable.create(info)
+    res.status(200).send(item)
 
 }
 
-// 2. get all products
+// 2. get all items
 
-const getAllProducts = async (req, res) => {
+const All = async (req, res) => {
     
-    let products = await Product.findAll({})
-    res.status(200).send(products)
+    let items = await DataTable.findAll({})
+    res.status(200).send(items)
 }
 
-// 3. get single product
+// 3. get single item
 
-const getOneProduct = async (req, res) => {
-    
-    let id = req.params.id
-    let product = await Product.findOne({ where: { id: id }})
-    res.status(200).send(product)
-}
-
-// 4. update products
-
-const UpdateProduct = async (req, res) => {
+const get = async (req, res) => {
     
     let id = req.params.id
-    const product = await Product.update(req.body, { where: { id: id }})
-    res.status(200).send(product)
+    let item = await DataTable.findOne({ where: { id: id }})
+    res.status(200).send(item)
 }
 
-// 5. delete product
+// 4. update items
 
-const deleteProduct = async (req, res) => {
+const update = async (req, res) => {
     
     let id = req.params.id
-    await Product.destroy({ where: { id: id }})
-    res.status(200).send('Product is deleted !')
+    const item = await DataTable.update(req.body, { where: { id: id }})
+    res.status(200).send(item)
 }
 
-// 6. get published product
+// 5. delete item
 
-const getPublishedProduct = async (req, res) => {
+const destroy = async (req, res) => {
+    
+    let id = req.params.id
+    await DataTable.destroy({ where: { id: id }})
+    res.status(200).send('item is deleted !')
+}
 
-    const products = await Product.findAll({ where: { published: true }})
-    res.status(200).send(products)
+// 6. get published item
+
+const getPublisheditem = async (req, res) => {
+
+    const items = await DataTable.findAll({ where: { published: true }})
+    res.status(200).send(items)
 }
 
 
 
 module.exports = {
     store,
-    getAllProducts,
-    getOneProduct,
-    UpdateProduct,
-    deleteProduct,
-    getPublishedProduct
+    All,
+    get,
+    update,
+    destroy,
+    getPublisheditem
 }

@@ -10,7 +10,7 @@ const Review = db.reviews
 
 // 1. create product
 
-const addProduct = async (req, res) => {
+const store = async (req, res) => {
 
     let info = {
         title: req.body.title,
@@ -26,7 +26,7 @@ const addProduct = async (req, res) => {
 
 // 2. get all products
 
-const getAllProducts = async (req, res) => {
+const All = async (req, res) => {
     
     let products = await Product.findAll({})
     res.status(200).send(products)
@@ -34,7 +34,7 @@ const getAllProducts = async (req, res) => {
 
 // 3. get single product
 
-const getOneProduct = async (req, res) => {
+const get = async (req, res) => {
     
     let id = req.params.id
     let product = await Product.findOne({ where: { id: id }})
@@ -43,7 +43,7 @@ const getOneProduct = async (req, res) => {
 
 // 4. update products
 
-const UpdateProduct = async (req, res) => {
+const  Update = async (req, res) => {
     
     let id = req.params.id
     const product = await Product.update(req.body, { where: { id: id }})
@@ -52,7 +52,7 @@ const UpdateProduct = async (req, res) => {
 
 // 5. delete product
 
-const deleteProduct = async (req, res) => {
+const destroy = async (req, res) => {
     
     let id = req.params.id
     await Product.destroy({ where: { id: id }})
@@ -82,11 +82,11 @@ const getProductReviews = async (req, res) => {
 }
 
 module.exports = {
-    addProduct,
-    getAllProducts,
-    getOneProduct,
-    UpdateProduct,
-    deleteProduct,
+    store,
+    All,
+    get,
+    Update,
+    destroy,
     getPublishedProduct,
     getProductReviews
 }

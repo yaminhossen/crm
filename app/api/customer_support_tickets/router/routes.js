@@ -11,13 +11,13 @@ const router = express.Router();
 
 let prefix = 'customer-support-ticket'
 router
-    .get(`/${prefix}`, controllers.getAllProducts)
+    .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
-    .delete(`/${prefix}/delete/:id`, controllers.deleteProduct)
+    .delete(`/${prefix}/delete/:id`, controllers.destroy)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
-    .post(`/${prefix}/update/:id`, controllers.UpdateProduct)
-    .get(`/${prefix}/details/:id`, controllers.getOneProduct);
+    .post(`/${prefix}/update/:id`, controllers.update)
+    .get(`/${prefix}/details/:id`, controllers.get);
 
 
 module.exports = () => router;
