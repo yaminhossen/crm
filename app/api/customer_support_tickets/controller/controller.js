@@ -9,7 +9,7 @@ const Product = db.customer_support_tickets
 
 // 1. create product
 
-const addProduct = async (req, res) => {
+const store = async (req, res) => {
 
     let info = {
         customer_id: req.body.customer_id,
@@ -70,7 +70,7 @@ const getPublishedProduct = async (req, res) => {
 
 
 module.exports = {
-    addProduct,
+    store,
     getAllProducts,
     getOneProduct,
     UpdateProduct,

@@ -12,7 +12,7 @@ const router = express.Router();
 let prefix = 'customer-support-ticket'
 router
     .get(`/${prefix}`, controllers.getAllProducts)
-    .post(`/${prefix}/store`, controllers.addProduct)
+    .post(`/${prefix}/store`, controllers.store)
     .delete(`/${prefix}/delete/:id`, controllers.deleteProduct)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
