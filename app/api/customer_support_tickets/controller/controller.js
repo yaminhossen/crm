@@ -3,7 +3,7 @@ const db = require('../../index')
 // const db = db
 
 // create main model 
-const Product = db.products
+const Product = db.customer_support_tickets
 
 // main works
 
@@ -12,10 +12,11 @@ const Product = db.products
 const addProduct = async (req, res) => {
 
     let info = {
-        title: req.body.title,
-        price: req.body.price,
+        customer_id: req.body.customer_id,
+        ticket_uuid: req.body.ticket_uuid,
+        subject: req.body.subject,
         description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        priority: req.body.priority
     }
 
     const product = await Product.create(info)

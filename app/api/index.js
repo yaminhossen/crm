@@ -37,8 +37,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 
 db.products = require('./product/model/model.js')(sequelize, DataTypes)
-// db.products = require('./model.js')(sequelize, DataTypes)
-// db.reviews = require('./reviewModel.js')(sequelize, DataTypes)
+db.customer_support_tickets = require('./customer_support_tickets/model/model.js')(sequelize, DataTypes)
 
 db.sequelize.sync({force: false})
 .then(()=>{

@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 1
         },
         priority: {
-            type: DataTypes.enum(['high', 'emergency', 'low'])
+            type: DataTypes.ENUM(['high', 'emergency', 'low'])
         },
         is_complete: {
             type: DataTypes.BOOLEAN,

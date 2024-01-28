@@ -9,7 +9,7 @@ const router = express.Router();
 //     return res.json({data:users});
 // })
 
-let prefix = 'product'
+let prefix = 'customer-support-ticket'
 router
     .get(`/${prefix}`, controllers.getAllProducts)
     .post(`/${prefix}/store`, controllers.addProduct)

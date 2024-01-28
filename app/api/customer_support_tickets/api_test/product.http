@@ -8,14 +8,15 @@ GET http://localhost:8082/product/details/4 HTTP/1.1
 DELETE http://localhost:8082/product/delete/5 HTTP/1.1
 
 ###
-POST http://localhost:8082/product/store HTTP/1.1
+POST http://localhost:8082/customer-support-ticket/store HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Earphone",
-    "price": 300,
-    "description": "This is very good",
-    "published" : true
+        "customer_id": 123,
+        "ticket_uuid": "11",
+        "subject": "English",
+        "description": "This is good",
+        "priority": "low"
 }
 
 ###
