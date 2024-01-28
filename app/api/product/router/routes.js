@@ -16,8 +16,7 @@ router
     .delete(`/${prefix}/delete/:id`, controllers.deleteProduct)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
-    
-    .post(`/${prefix}/update`, controllers.UpdateProduct)
+    .post(`/${prefix}/update/:id`, controllers.UpdateProduct)
     .get(`/${prefix}/details/:id`, controllers.getOneProduct);
 
 
