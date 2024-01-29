@@ -40,6 +40,7 @@ db.products = require('./product/model/model.js')(sequelize, DataTypes)
 db.customer_support_tickets = require('./customers/customer_support_tickets/model/model.js')(sequelize, DataTypes)
 db.customers = require('./customers/customer/model/model.js')(sequelize, DataTypes)
 db.calender_events = require('./customers/calender_events/model/model.js')(sequelize, DataTypes)
+db.customer_contact_numbers = require('./customers/customer_contact_numbers/model/model.js')(sequelize, DataTypes)
 
 db.sequelize.sync({force: false})
 .then(()=>{
