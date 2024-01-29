@@ -1,0 +1,28 @@
+@routeName = customer-group-customer
+
+GET http://localhost:8082/{{routeName}} HTTP/1.1
+
+###
+GET http://localhost:8082/{{routeName}}/details/3 HTTP/1.1
+
+
+###
+DELETE http://localhost:8082/{{routeName}}/delete/4 HTTP/1.1
+
+###
+POST http://localhost:8082/{{routeName}}/store HTTP/1.1
+content-type: application/json
+
+{
+        "customer_group_id": "123",
+        "customer_id": "11"
+}
+
+###
+POST http://localhost:8082/{{routeName}}/update/3 HTTP/1.1
+content-type: application/json
+
+{
+        "customer_group_id": "444",
+        "customer_id": "44"
+}
