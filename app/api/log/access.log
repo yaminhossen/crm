@@ -125,3 +125,6 @@
 ::ffff:127.0.0.1 - - [Sat Jan 27 2024 4:23:51 PM] "GET /favicon.ico HTTP/1.1" 404 150 "http://127.0.0.1:8082/" "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [Sun Jan 28 2024 10:43:13 AM] "GET /favicon.ico HTTP/1.1" 404 150 "http://127.0.0.1:8082/login" "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [Sun Jan 28 2024 4:21:49 PM] "POST /customer-support-ticket/store HTTP/1.1" 404 169 "-" "-" "vscode-restclient"
+::ffff:127.0.0.1 - - [Mon Jan 29 2024 10:11:26 AM] "GET /favicon.ico HTTP/1.1" 404 150 "http://127.0.0.1:8082/dashboard" "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [Mon Jan 29 2024 11:17:56 AM] "GET /%7B%7B%7B%7BrouteName%7D%7D%7D%7D HTTP/1.1" 404 172 "-" "-" "vscode-restclient"
+::ffff:127.0.0.1 - - [Mon Jan 29 2024 11:37:48 AM] "POST /customer/store HTTP/1.1" 404 154 "-" "-" "vscode-restclient"

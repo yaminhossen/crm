@@ -1,14 +1,16 @@
-GET http://localhost:8082/customer-support-ticket HTTP/1.1
+@routeName = customer-support-ticket
+
+GET http://localhost:8082/{{routeName}} HTTP/1.1
 
 ###
-GET http://localhost:8082/product/details/4 HTTP/1.1
+GET http://localhost:8082/{{routeName}}/details/4 HTTP/1.1
 
 
 ###
-DELETE http://localhost:8082/customer-support-ticket/delete/2 HTTP/1.1
+DELETE http://localhost:8082/{{routeName}}/delete/2 HTTP/1.1
 
 ###
-POST http://localhost:8082/customer-support-ticket/store HTTP/1.1
+POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
@@ -20,13 +22,13 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:8082/customer-support-ticket/update/3 HTTP/1.1
+POST http://localhost:8082/{{routeName}}/update/4 HTTP/1.1
 content-type: application/json
 
 {
     "customer_id": 111,
         "ticket_uuid": "22",
-        "subject": "Web Development",
+        "subject": "Graphics Design",
         "description": "This is good Course",
-        "priority": "high"
+        "priority": "low"
 }
