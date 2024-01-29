@@ -1,9 +1,9 @@
-const db = require('../../index')
+const db = require('../../../index')
 
 // const db = db
 
 // create main model 
-const DataTable = db.customer_support_tickets
+const DataTable = db.calender_events
 
 // main works
 
@@ -11,12 +11,14 @@ const DataTable = db.customer_support_tickets
 
 const store = async (req, res) => {
 
+    // return res.json(req.body);
     let info = {
         customer_id: req.body.customer_id,
-        ticket_uuid: req.body.ticket_uuid,
-        subject: req.body.subject,
-        description: req.body.description,
-        priority: req.body.priority
+        event_date: req.body.event_date,
+        event_type: req.body.event_type,
+        event_description: req.body.event_description,
+        creator: req.body.creator,
+        meet_link: req.body.meet_link
     }
 
     const item = await DataTable.create(info)
