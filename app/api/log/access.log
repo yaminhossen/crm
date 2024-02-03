@@ -131,3 +131,5 @@
 ::ffff:127.0.0.1 - - [Sat Feb 03 2024 10:37:11 AM] "GET /favicon.ico HTTP/1.1" 404 150 "http://127.0.0.1:8082/dashboard" "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [Sat Feb 03 2024 12:05:59 PM] "POST /customer-variant-customer/store HTTP/1.1" 404 171 "-" "-" "vscode-restclient"
 ::ffff:127.0.0.1 - - [Sat Feb 03 2024 12:06:01 PM] "POST /customer-variant-customer/store HTTP/1.1" 404 171 "-" "-" "vscode-restclient"
+::ffff:127.0.0.1 - - [Sat Feb 03 2024 12:34:11 PM] "POST /customer-variant/store HTTP/1.1" 404 162 "-" "-" "vscode-restclient"
+::ffff:127.0.0.1 - - [Sat Feb 03 2024 12:34:13 PM] "POST /customer-variant/store HTTP/1.1" 404 162 "-" "-" "vscode-restclient"

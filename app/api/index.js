@@ -45,6 +45,7 @@ db.customer_group_customers = require('./customers/customer_group_customers/mode
 db.customer_relevent_documents = require('./customers/customer_relevent_documents/model/model.js')(sequelize, DataTypes)
 db.customer_variant_customer = require('./customers/customer_variant_customers/model/model.js')(sequelize, DataTypes)
 db.customer_variant_values = require('./customers/customer_variant_values/model/model.js')(sequelize, DataTypes)
+db.customer_variants = require('./customers/customer_variants/model/model.js')(sequelize, DataTypes)
 
 db.sequelize.sync({force: false})
 .then(()=>{
