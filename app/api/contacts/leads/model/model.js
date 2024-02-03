@@ -1,11 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer_group_customer = sequelize.define("customer_group_customer", {
-        customer_group_id: {
+    const Lead = sequelize.define("lead", {
+        customer_id: {
+            type: DataTypes.BIGINT.UNSIGNED
+        },
+        lead_status: {
             type: DataTypes.STRING(50)
         },
-        customer_id: {
-            type: DataTypes.STRING(50)
+        lead_source: {
+            type: DataTypes.STRING(150)
+        },
+        assigned_to: {
+            type: DataTypes.BIGINT
+        },
+        qualification_notes: {
+            type: DataTypes.TEXT
+        },
+        follow_up_date: {
+            type: DataTypes.DATE
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -13,6 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Customer_group_customer
+    return Lead
 
 }

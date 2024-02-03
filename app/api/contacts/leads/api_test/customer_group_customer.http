@@ -1,4 +1,4 @@
-@routeName = customer-group-customer
+@routeName = lead
 
 GET http://localhost:8082/{{routeName}} HTTP/1.1
 
@@ -14,8 +14,12 @@ POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "customer_group_id": "123",
-        "customer_id": "11"
+        "customer_id": 2,
+        "lead_status": "pending",
+        "lead_source": "facebook",
+        "assigned_to": 3,
+        "qualification_notes": "Needs analysis",
+        "follow_up_date": "2022-10-12"
 }
 
 ###

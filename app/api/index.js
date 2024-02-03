@@ -50,6 +50,7 @@ db.customer_groups = require('./customers/customer_groups/model/model.js')(seque
 db.contact_appointment_reasons = require('./contacts/contact_appointment_reason/model/model.js')(sequelize, DataTypes)
 db.contact_appointments = require('./contacts/contact_appointments/model/model.js')(sequelize, DataTypes)
 db.contact_histories = require('./contacts/contact_histories/model/model.js')(sequelize, DataTypes)
+db.leads = require('./contacts/leads/model/model.js')(sequelize, DataTypes)
 
 db.sequelize.sync({force: false})
 .then(()=>{
