@@ -1,20 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer = sequelize.define("customer", {
-        uuid: {
-            type: DataTypes.STRING(50)
+    const contact_historie = sequelize.define("contact_historie", {
+        contact_number_id: {
+            type: DataTypes.STRING
         },
-        full_name: {
-            type: DataTypes.STRING(50)
+        customer_id: {
+            type: DataTypes.BIGINT.UNSIGNED
         },
-        email: {
-            type: DataTypes.STRING(30)
+        date: {
+            type: DataTypes.DATE
         },
-        contact_number: {
-            type: DataTypes.STRING(20)
+        contact_type: {
+            type: DataTypes.STRING
         },
-        address: {
-            type: DataTypes.STRING(250)
+        note: {
+            type: DataTypes.STRING
+        },
+        creator: {
+            type: DataTypes.BIGINT.UNSIGNED
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -22,6 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Customer
+    return contact_historie
 
 }
