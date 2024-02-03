@@ -1,4 +1,4 @@
-@routeName = customer
+@routeName = customer-variant-value
 
 GET http://localhost:8082/{{routeName}} HTTP/1.1
 
@@ -14,21 +14,15 @@ POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "uuid": "123",
-        "full_name": "Tarek don",
-        "email": "tarek@gamil.com",
-        "contact_number": "01777777777",
-        "address": "mirpur"
+        "variant_id": "123",
+        "title": "Tarek don"
 }
 
 ###
-POST http://localhost:8082/{{routeName}}/update/2 HTTP/1.1
+POST http://localhost:8082/{{routeName}}/update/1 HTTP/1.1
 content-type: application/json
 
 {
-    "uuid": "321",
-        "full_name": "Ehsan sir",
-        "email": "ehsan@gamil.com",
-        "contact_number": "018777775",
-        "address": "shonir akhrha"
+    "variant_id": "55",
+        "title": "Momin don"
 }

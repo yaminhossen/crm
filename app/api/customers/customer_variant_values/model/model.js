@@ -1,20 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer = sequelize.define("customer", {
-        uuid: {
+    const Customer_variant_values = sequelize.define("customer_variant_value", {
+        variant_id: {
+            type: DataTypes.BIGINT.UNSIGNED,
+        },
+        title: {
             type: DataTypes.STRING(50)
-        },
-        full_name: {
-            type: DataTypes.STRING(50)
-        },
-        email: {
-            type: DataTypes.STRING(30)
-        },
-        contact_number: {
-            type: DataTypes.STRING(20)
-        },
-        address: {
-            type: DataTypes.STRING(250)
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -22,6 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Customer
+    return Customer_variant_values
 
 }
