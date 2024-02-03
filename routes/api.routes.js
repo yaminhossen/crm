@@ -6,6 +6,8 @@ const customers  = require("../app/api/customers/customer/router/routes");
 const calender_events  = require("../app/api/customers/calender_events/router/routes");
 const customer_contact_numbers  = require("../app/api/customers/customer_contact_numbers/router/routes");
 const customer_group_customers  = require("../app/api/customers/customer_group_customers/router/routes");
+const  customer_relevent_documents  = require("../app/api/customers/customer_relevent_documents/router/routes");
+const  customer_variant_customer  = require("../app/api/customers/customer_variant_customers/router/routes");
 
 const router = express.Router();
 
@@ -18,6 +20,8 @@ router.use(customers());
 router.use(calender_events());
 router.use(customer_contact_numbers());
 router.use(customer_group_customers());
+router.use(customer_relevent_documents());
+router.use(customer_variant_customer());
 
 
 

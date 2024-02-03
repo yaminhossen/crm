@@ -42,6 +42,8 @@ db.customers = require('./customers/customer/model/model.js')(sequelize, DataTyp
 db.calender_events = require('./customers/calender_events/model/model.js')(sequelize, DataTypes)
 db.customer_contact_numbers = require('./customers/customer_contact_numbers/model/model.js')(sequelize, DataTypes)
 db.customer_group_customers = require('./customers/customer_group_customers/model/model.js')(sequelize, DataTypes)
+db.customer_relevent_documents = require('./customers/customer_relevent_documents/model/model.js')(sequelize, DataTypes)
+db.customer_variant_customer = require('./customers/customer_variant_customers/model/model.js')(sequelize, DataTypes)
 
 db.sequelize.sync({force: false})
 .then(()=>{

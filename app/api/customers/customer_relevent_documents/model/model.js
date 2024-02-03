@@ -1,32 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer_support_ticket = sequelize.define("customer_support_ticket", {
+    const Customer_relevent_document = sequelize.define("customer_relevent_document", {
         customer_id: {
             type: DataTypes.BIGINT.UNSIGNED,
             
         },
-        ticket_uuid: {
+        document_path: {
             type: DataTypes.STRING(50)
-        },
-        subject: {
-            type: DataTypes.TEXT
-        },
-        description: {
-            type: DataTypes.TEXT
         },
         status: {
             type: DataTypes.BOOLEAN,
             defaultValue: 1
-        },
-        priority: {
-            type: DataTypes.ENUM(['high', 'emergency', 'low'])
-        },
-        is_complete: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: 0
         }
     })
 
-    return Customer_support_ticket
+    return Customer_relevent_document
 
 }
