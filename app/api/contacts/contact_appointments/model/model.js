@@ -1,14 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer_contact_numbers = sequelize.define("customer_contact_numbers", {
+    const contact_appointment = sequelize.define("contact_appointment", {
+        contact_number_id: {
+            type: DataTypes.STRING
+        },
         customer_id: {
             type: DataTypes.BIGINT.UNSIGNED
         },
-        operator: {
-            type: DataTypes.STRING(30)
+        date: {
+            type: DataTypes.DATE
         },
-        details: {
-            type: DataTypes.TEXT
+        contact_type: {
+            type: DataTypes.STRING
+        },
+        note: {
+            type: DataTypes.STRING
+        },
+        creator: {
+            type: DataTypes.BIGINT.UNSIGNED
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -16,6 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Customer_contact_numbers
+    return contact_appointment
 
 }

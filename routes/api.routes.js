@@ -12,6 +12,7 @@ const  customer_variant_values  = require("../app/api/customers/customer_variant
 const  customer_variants  = require("../app/api/customers/customer_variants/router/routes");
 const  customer_groups  = require("../app/api/customers/customer_groups/router/routes");
 const  contact_appointment_reasons  = require("../app/api/contacts/contact_appointment_reason/router/routes");
+const  contact_appointments  = require("../app/api/contacts/contact_appointments/router/routes");
 
 const router = express.Router();
 
@@ -32,6 +33,7 @@ router.use(customer_groups());
 
 // contact routes
 router.use(contact_appointment_reasons());
+router.use(contact_appointments());
 
 
 
