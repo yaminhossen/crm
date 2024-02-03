@@ -1,0 +1,28 @@
+@routeName = customer-relevent-document
+
+GET http://localhost:8082/{{routeName}} HTTP/1.1
+
+###
+GET http://localhost:8082/{{routeName}}/details/2 HTTP/1.1
+
+
+###
+DELETE http://localhost:8082/{{routeName}}/delete/2 HTTP/1.1
+
+###
+POST http://localhost:8082/{{routeName}}/store HTTP/1.1
+content-type: application/json
+
+{
+        "customer_id": 123,
+        "document_path": "customer"
+}
+
+###
+POST http://localhost:8082/{{routeName}}/update/2 HTTP/1.1
+content-type: application/json
+
+{
+    "customer_id": 222,
+        "document_path": "student"
+}

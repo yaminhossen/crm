@@ -1,0 +1,36 @@
+@routeName = calender-event
+
+GET http://localhost:8082/{{routeName}} HTTP/1.1
+
+###
+GET http://localhost:8082/{{routeName}}/details/2 HTTP/1.1
+
+
+###
+DELETE http://localhost:8082/{{routeName}}/delete/4 HTTP/1.1
+
+###
+POST http://localhost:8082/{{routeName}}/store HTTP/1.1
+content-type: application/json
+
+{
+        "customer_id": 111,
+        "event_date": "2022-11-22",
+        "event_type": "spoken",
+        "event_description": "practice makes man perfect",
+        "creator": "Yamin",
+        "meet_link": "1212.mirpur.33"
+}
+
+###
+POST http://localhost:8082/{{routeName}}/update/2 HTTP/1.1
+content-type: application/json
+
+{
+        "customer_id": 222,
+        "event_date": "2023-11-24",
+        "event_type": "Reading",
+        "event_description": "Gossip makes man mad",
+        "creator": "Yamin",
+        "meet_link": "1212.mirpur.33"
+}

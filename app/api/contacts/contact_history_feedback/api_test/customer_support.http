@@ -1,0 +1,26 @@
+@routeName = customer-group
+
+GET http://localhost:8082/{{routeName}} HTTP/1.1
+
+###
+GET http://localhost:8082/{{routeName}}/details/2 HTTP/1.1
+
+
+###
+DELETE http://localhost:8082/{{routeName}}/delete/4 HTTP/1.1
+
+###
+POST http://localhost:8082/{{routeName}}/store HTTP/1.1
+content-type: application/json
+
+{
+        "title": "total"
+}
+
+###
+POST http://localhost:8082/{{routeName}}/update/1 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "students"
+}
