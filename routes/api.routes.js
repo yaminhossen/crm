@@ -10,6 +10,7 @@ const  customer_relevent_documents  = require("../app/api/customers/customer_rel
 const  customer_variant_customer  = require("../app/api/customers/customer_variant_customers/router/routes");
 const  customer_variant_values  = require("../app/api/customers/customer_variant_values/router/routes");
 const  customer_variants  = require("../app/api/customers/customer_variants/router/routes");
+const  customer_groups  = require("../app/api/customers/customer_groups/router/routes");
 
 const router = express.Router();
 
@@ -26,6 +27,7 @@ router.use(customer_relevent_documents());
 router.use(customer_variant_customer());
 router.use(customer_variant_values());
 router.use(customer_variants());
+router.use(customer_groups());
 
 
 
