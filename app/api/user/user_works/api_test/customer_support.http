@@ -1,4 +1,4 @@
-@routeName = contact-reason
+@routeName = user-work
 
 GET http://localhost:8082/{{routeName}} HTTP/1.1
 
@@ -14,7 +14,7 @@ POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "title": "customer segment"
+        "title": "teaching"
 }
 
 ###
@@ -22,5 +22,5 @@ POST http://localhost:8082/{{routeName}}/update/4 HTTP/1.1
 content-type: application/json
 
 {
-    "title": "student type"
+    "title": "teaching"
 }

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Contact_reason = sequelize.define("contact_reason", {
+    const User_work = sequelize.define("user_work", {
         title: {
             type: DataTypes.STRING(150),
             
@@ -11,6 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Contact_reason
+    return User_work
 
 }

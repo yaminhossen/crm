@@ -43,6 +43,8 @@ db.user_Designations = require('./user/user_designations/model/model.js')(sequel
 db.user_infos = require('./user/user_infos/model/model.js')(sequelize, DataTypes)
 db.user_work_departments = require('./user/user_work_departments/model/model.js')(sequelize, DataTypes)
 db.user_work_users = require('./user/user_work_users/model/model.js')(sequelize, DataTypes)
+db.user_works = require('./user/user_works/model/model.js')(sequelize, DataTypes)
+db.users = require('./user/users/model/model.js')(sequelize, DataTypes)
 
 // customer DB
 db.customer_support_tickets = require('./customers/customer_support_tickets/model/model.js')(sequelize, DataTypes)

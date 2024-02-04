@@ -1,23 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const contact_appointment = sequelize.define("contact_appointment", {
-        contact_number_id: {
+    const User = sequelize.define("user", {
+        user_uid: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4
+        },
+        user_name: {
+            type: DataTypes.STRING(30)
+        },
+        password: {
             type: DataTypes.STRING
         },
-        customer_id: {
-            type: DataTypes.BIGINT.UNSIGNED
-        },
-        date: {
-            type: DataTypes.DATE
-        },
-        contact_type: {
+        email: {
             type: DataTypes.STRING
         },
-        note: {
-            type: DataTypes.STRING
-        },
-        creator: {
-            type: DataTypes.BIGINT.UNSIGNED
+        role: {
+            type: DataTypes.ENUM('admin', 'moderator', 'student')
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -25,6 +23,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return contact_appointment
+    return User
 
 }

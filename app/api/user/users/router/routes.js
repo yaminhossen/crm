@@ -9,7 +9,7 @@ const router = express.Router();
 //     return res.json({data:users});
 // })
 
-let prefix = 'contact-appointment'
+let prefix = 'user'
 router
     .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)

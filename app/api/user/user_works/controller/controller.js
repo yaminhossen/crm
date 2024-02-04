@@ -3,7 +3,7 @@ const db = require('../../../index')
 // const db = db
 
 // create main model 
-const DataTable = db.contact_reasons
+const DataTable = db.user_works
 
 // main works
 
