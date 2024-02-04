@@ -1,8 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer_group = sequelize.define("Customer_group", {
-        title: {
-            type: DataTypes.STRING(50)
+    const Contact_history_feedback = sequelize.define("contact_history_feedback", {
+        contact_history_id: {
+            type: DataTypes.BIGINT.UNSIGNED
+        },
+        date: {
+            type: DataTypes.DATE
+        },
+        feedback_type: {
+            type: DataTypes.STRING(200)
+        },
+        notes: {
+            type: DataTypes.STRING(150)
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -10,6 +19,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Customer_group
+    return Contact_history_feedback
 
 }
