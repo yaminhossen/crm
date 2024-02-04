@@ -37,6 +37,11 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 
 db.products = require('./product/model/model.js')(sequelize, DataTypes)
+
+// user
+db.user_Designations = require('./user/user_designations/model/model.js')(sequelize, DataTypes)
+
+// customer DB
 db.customer_support_tickets = require('./customers/customer_support_tickets/model/model.js')(sequelize, DataTypes)
 db.customers = require('./customers/customer/model/model.js')(sequelize, DataTypes)
 db.calender_events = require('./customers/calender_events/model/model.js')(sequelize, DataTypes)
@@ -47,6 +52,8 @@ db.customer_variant_customer = require('./customers/customer_variant_customers/m
 db.customer_variant_values = require('./customers/customer_variant_values/model/model.js')(sequelize, DataTypes)
 db.customer_variants = require('./customers/customer_variants/model/model.js')(sequelize, DataTypes)
 db.customer_groups = require('./customers/customer_groups/model/model.js')(sequelize, DataTypes)
+
+// contact DB
 db.contact_appointment_reasons = require('./contacts/contact_appointment_reason/model/model.js')(sequelize, DataTypes)
 db.contact_appointments = require('./contacts/contact_appointments/model/model.js')(sequelize, DataTypes)
 db.contact_histories = require('./contacts/contact_histories/model/model.js')(sequelize, DataTypes)
@@ -54,8 +61,9 @@ db.contact_history_feedbacks = require('./contacts/contact_history_feedback/mode
 db.contact_history_reasons = require('./contacts/contact_history_reason/model/model.js')(sequelize, DataTypes)
 db.contact_reasons = require('./contacts/contact_reasons/model/model.js')(sequelize, DataTypes)
 db.crm_contact_numbers = require('./contacts/crm_contact_numbers/model/model.js')(sequelize, DataTypes)
-
 db.leads = require('./contacts/leads/model/model.js')(sequelize, DataTypes)
+
+
 
 db.sequelize.sync({force: false})
 .then(()=>{

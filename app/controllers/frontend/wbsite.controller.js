@@ -1,6 +1,6 @@
 let ObjectId = require('mongodb').ObjectId;
 
-const uesrProfileInfosModel = require("../../api/user/model/model")
+const uesrProfileInfosModel = require("../../api/user_demo/model/model")
 
 
 

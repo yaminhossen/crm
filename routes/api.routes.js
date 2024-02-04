@@ -1,5 +1,6 @@
 const express = require("express");
-const user_routes = require("../app/api/user/router/routes");
+const user_routes = require("../app/api/user/user_designations/router/routes");
+const user_demo_routes = require("../app/api/user_demo/router/routes");
 const product_routes = require("../app/api/product/router/routes");
 const customer_support_tickets  = require("../app/api/customers/customer_support_tickets/router/routes");
 const customers  = require("../app/api/customers/customer/router/routes");
@@ -24,8 +25,8 @@ const  leads  = require("../app/api/contacts/leads/router/routes");
 const router = express.Router();
 
 
-
 router.use(user_routes());
+router.use(user_demo_routes());
 router.use(product_routes());
 router.use(customer_support_tickets());
 router.use(customers());

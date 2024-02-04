@@ -1,4 +1,4 @@
-const apiUserSeeder = require("./app/api/user/seeder/seeder");
+const apiUserSeeder = require("./app/api/user_demo/seeder/seeder");
 const apiUserrolesSeeder = require("./app/api/user_roles/seeder/seeder")
 const apiUseracheivementSeeder = require("./app/api/user_acheivements/seeder/seeder")
 const apiUsercontactnumberSeeder = require("./app/api/user_contact_numbers/seeder/seeder")
