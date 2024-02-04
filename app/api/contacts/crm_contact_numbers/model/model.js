@@ -1,27 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer = sequelize.define("calender_events", {
-        customer_id: {
-            type: DataTypes.BIGINT.UNSIGNED
+    const Crm_contact_number = sequelize.define("crm_contact_number", {
+        operator: {
+            type: DataTypes.STRING(50)
         },
-        event_date: {
-            type: DataTypes.DATE
-        },
-        event_description: {
-            type: DataTypes.STRING(200)
-        },
-        event_type: {
-            type: DataTypes.STRING(100)
-        },
-        creator: {
-            type: DataTypes.STRING(30)
-        },
-        meet_link: {
-            type: DataTypes.STRING(250)
-        },
-        is_complete: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: 0
+        details: {
+            type: DataTypes.TEXT
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -29,6 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Customer
+    return Crm_contact_number
 
 }

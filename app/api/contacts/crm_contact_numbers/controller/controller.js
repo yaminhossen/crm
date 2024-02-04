@@ -3,7 +3,7 @@ const db = require('../../../index')
 // const db = db
 
 // create main model 
-const DataTable = db.calender_events
+const DataTable = db.crm_contact_numbers
 
 // main works
 
@@ -13,12 +13,8 @@ const store = async (req, res) => {
 
     // return res.json(req.body);
     let info = {
-        customer_id: req.body.customer_id,
-        event_date: req.body.event_date,
-        event_type: req.body.event_type,
-        event_description: req.body.event_description,
-        creator: req.body.creator,
-        meet_link: req.body.meet_link
+        operator: req.body.operator,
+        details: req.body.details,
     }
 
     const item = await DataTable.create(info)

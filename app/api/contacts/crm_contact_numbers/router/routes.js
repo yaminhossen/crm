@@ -9,7 +9,7 @@ const router = express.Router();
 //     return res.json({data:users});
 // })
 
-let prefix = 'calender-event'
+let prefix = 'crm-contact-number'
 router
     .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
