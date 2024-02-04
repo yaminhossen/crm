@@ -40,6 +40,7 @@ db.products = require('./product/model/model.js')(sequelize, DataTypes)
 
 // user
 db.user_Designations = require('./user/user_designations/model/model.js')(sequelize, DataTypes)
+db.user_infos = require('./user/user_infos/model/model.js')(sequelize, DataTypes)
 
 // customer DB
 db.customer_support_tickets = require('./customers/customer_support_tickets/model/model.js')(sequelize, DataTypes)

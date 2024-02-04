@@ -21,13 +21,20 @@ const  contact_reasons  = require("../app/api/contacts/contact_reasons/router/ro
 const  crm_contact_numbers  = require("../app/api/contacts/crm_contact_numbers/router/routes");
 
 const  leads  = require("../app/api/contacts/leads/router/routes");
+const  user_infos  = require("../app/api/user/user_infos/router/routes");
 
 const router = express.Router();
 
+// user routes
 
 router.use(user_routes());
+router.use(user_infos());
 router.use(user_demo_routes());
+
+// product routes
 router.use(product_routes());
+
+// customer routes
 router.use(customer_support_tickets());
 router.use(customers());
 router.use(calender_events());

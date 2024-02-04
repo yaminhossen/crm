@@ -1,23 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const contact_historie = sequelize.define("contact_historie", {
-        contact_number_id: {
-            type: DataTypes.STRING
+    const User_info = sequelize.define("user_info", {
+        user_id: {
+            type: DataTypes.BIGINT
         },
-        customer_id: {
-            type: DataTypes.BIGINT.UNSIGNED
+        first_name: {
+            type: DataTypes.STRING(30)
         },
-        date: {
+        phone_number: {
+            type: DataTypes.STRING(20)
+        },
+        last_name: {
+            type: DataTypes.STRING(20)
+        },
+        designation: {
+            type: DataTypes.STRING(30)
+        },
+        date_of_birth: {
             type: DataTypes.DATE
-        },
-        contact_type: {
-            type: DataTypes.STRING
-        },
-        note: {
-            type: DataTypes.STRING
-        },
-        creator: {
-            type: DataTypes.BIGINT.UNSIGNED
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -25,6 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return contact_historie
+    return User_info
 
 }
