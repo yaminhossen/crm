@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Contact_history_reason = sequelize.define("contact_history_reason", {
-        customer_id: {
+    const User_work_department = sequelize.define("user_work_department", {
+        work_id: {
             type: DataTypes.BIGINT.UNSIGNED,
             
         },
-        reason_id: {
-            type: DataTypes.BIGINT.UNSIGNED,
+        title: {
+            type: DataTypes.STRING(25),
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -14,6 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Contact_history_reason
+    return User_work_department
 
 }

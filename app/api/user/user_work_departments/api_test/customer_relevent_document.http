@@ -1,4 +1,4 @@
-@routeName = contact-history-reason
+@routeName = user-work-department
 
 GET http://localhost:8082/{{routeName}} HTTP/1.1
 
@@ -14,8 +14,8 @@ POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "customer_id": 3,
-        "reason_id": 1
+        "work_id": 3,
+        "title": "teacher"
 }
 
 ###
@@ -23,6 +23,6 @@ POST http://localhost:8082/{{routeName}}/update/2 HTTP/1.1
 content-type: application/json
 
 {
-    "customer_id": 2,
-        "reason_id": 2
+     "work_id": 3,
+        "title": "Engineer"
 }

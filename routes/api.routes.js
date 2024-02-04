@@ -22,6 +22,8 @@ const  crm_contact_numbers  = require("../app/api/contacts/crm_contact_numbers/r
 
 const  leads  = require("../app/api/contacts/leads/router/routes");
 const  user_infos  = require("../app/api/user/user_infos/router/routes");
+const  user_work_departments  = require("../app/api/user/user_work_departments/router/routes");
+const  user_work_users  = require("../app/api/user/user_work_users/router/routes");
 
 const router = express.Router();
 
@@ -29,6 +31,10 @@ const router = express.Router();
 
 router.use(user_routes());
 router.use(user_infos());
+router.use(user_work_departments());
+router.use(user_work_users());
+
+// demo user
 router.use(user_demo_routes());
 
 // product routes
