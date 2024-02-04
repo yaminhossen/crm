@@ -52,6 +52,7 @@ db.contact_appointments = require('./contacts/contact_appointments/model/model.j
 db.contact_histories = require('./contacts/contact_histories/model/model.js')(sequelize, DataTypes)
 db.contact_history_feedbacks = require('./contacts/contact_history_feedback/model/model.js')(sequelize, DataTypes)
 db.contact_history_reasons = require('./contacts/contact_history_reason/model/model.js')(sequelize, DataTypes)
+db.contact_reasons = require('./contacts/contact_reasons/model/model.js')(sequelize, DataTypes)
 
 db.leads = require('./contacts/leads/model/model.js')(sequelize, DataTypes)
 
