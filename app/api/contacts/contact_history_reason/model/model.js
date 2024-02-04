@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const Customer_relevent_document = sequelize.define("customer_relevent_document", {
+    const Contact_history_reason = sequelize.define("contact_history_reason", {
         customer_id: {
             type: DataTypes.BIGINT.UNSIGNED,
             
         },
-        document_path: {
-            type: DataTypes.STRING(50)
+        reason_id: {
+            type: DataTypes.BIGINT.UNSIGNED,
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -14,6 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return Customer_relevent_document
+    return Contact_history_reason
 
 }

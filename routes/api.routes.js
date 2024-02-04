@@ -15,6 +15,8 @@ const  contact_appointment_reasons  = require("../app/api/contacts/contact_appoi
 const  contact_appointments  = require("../app/api/contacts/contact_appointments/router/routes");
 const  contact_histories  = require("../app/api/contacts/contact_histories/router/routes");
 const  contact_history_feedbacks  = require("../app/api/contacts/contact_history_feedback/router/routes");
+const  contact_history_reasons  = require("../app/api/contacts/contact_history_reason/router/routes");
+
 const  leads  = require("../app/api/contacts/leads/router/routes");
 
 const router = express.Router();
@@ -39,6 +41,7 @@ router.use(contact_appointment_reasons());
 router.use(contact_appointments());
 router.use(contact_histories());
 router.use(contact_history_feedbacks());
+router.use(contact_history_reasons());
 router.use(leads());
 
 

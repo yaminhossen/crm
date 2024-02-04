@@ -3,7 +3,7 @@ const db = require('../../../index')
 // const db = db
 
 // create main model 
-const DataTable = db.customer_relevent_documents
+const DataTable = db.contact_history_reasons
 
 // main works
 
@@ -13,7 +13,7 @@ const store = async (req, res) => {
 
     let info = {
         customer_id: req.body.customer_id,
-        document_path: req.body.document_path
+        reason_id: req.body.reason_id
     }
 
     const item = await DataTable.create(info)
