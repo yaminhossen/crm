@@ -1,13 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const user_work_user = sequelize.define("user_work_user", {
-        user_id: {
+    const Task_variant_task = sequelize.define("task_variant_task", {
+        task_id: {
             type: DataTypes.BIGINT.UNSIGNED
         },
-        work_id: {
+        variant_id: {
             type: DataTypes.BIGINT.UNSIGNED
         },
-        department_id: {
+        task_variant_value_id: {
             type: DataTypes.BIGINT.UNSIGNED
         },
         status: {
@@ -16,6 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return user_work_user
+    return Task_variant_task
 
 }

@@ -1,4 +1,4 @@
-@routeName = user-work-user
+@routeName = task-variant-task
 
 GET http://localhost:8082/{{routeName}} HTTP/1.1
 
@@ -14,9 +14,9 @@ POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "user_id": 3,
-        "work_id": 2,
-        "department_id": 2
+        "task_id": 3,
+        "variant_id": 2,
+        "task_variant_value_id": 2
 }
 
 ###
@@ -24,7 +24,7 @@ POST http://localhost:8082/{{routeName}}/update/1 HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": 3,
-        "work_id": 2,
-        "department_id": 2
+     "task_id": 2,
+        "variant_id": 2,
+        "task_variant_value_id": 2
 }

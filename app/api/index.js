@@ -74,6 +74,7 @@ db.task_users = require('./tasks/task_users/model/model.js')(sequelize, DataType
 db.tasks = require('./tasks/tasks/model/model.js')(sequelize, DataTypes)
 db.task_variants = require('./tasks/task_variants/model/model.js')(sequelize, DataTypes)
 db.task_variant_values = require('./tasks/task_variant_values/model/model.js')(sequelize, DataTypes)
+db.task_variant_tasks = require('./tasks/task_variant_tasks/model/model.js')(sequelize, DataTypes)
 
 
 
