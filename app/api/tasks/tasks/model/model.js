@@ -1,23 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const User_info = sequelize.define("user_info", {
-        user_id: {
-            type: DataTypes.BIGINT
-        },
-        first_name: {
+    const Task = sequelize.define("task", {
+        title: {
             type: DataTypes.STRING(30)
         },
-        phone_number: {
-            type: DataTypes.STRING(20)
-        },
-        last_name: {
-            type: DataTypes.STRING(20)
-        },
-        designation: {
-            type: DataTypes.STRING(30)
-        },
-        date_of_birth: {
+        end_time: {
             type: DataTypes.DATE
+        },
+        description: {
+            type: DataTypes.TEXT
+        },
+        is_complete: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: 0
+        },
+        is_urgent: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: 0
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -25,6 +24,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return User_info
+    return Task
 
 }

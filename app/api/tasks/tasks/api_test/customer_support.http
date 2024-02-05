@@ -1,4 +1,4 @@
-@routeName = user-info
+@routeName = task
 
 GET http://localhost:8082/{{routeName}} HTTP/1.1
 
@@ -14,12 +14,9 @@ POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "user_id": 2,
-        "first_name": "alif",
-        "last_name": "sagir",
-        "designation": "student",
-        "date_of_birth": "2022-10-12",
-        "phone_number": "01778639643"
+        "title": "user onboarding",
+        "description": "Create a seamless onboarding process",
+        "end_time": "2024-10-12"
 }
 
 ###
@@ -27,10 +24,7 @@ POST http://localhost:8082/{{routeName}}/update/1 HTTP/1.1
 content-type: application/json
 
 {
-        "user_id": 1,
-        "first_name": "abdullah",
-        "last_name": "sadik",
-        "designation": "student",
-        "date_of_birth": "2022-10-12",
-        "phone_number": "01798398934"
+        "title": "data inport",
+        "description": "Develop a feature to import existing customer",
+        "end_time": "2024-10-12"
 }

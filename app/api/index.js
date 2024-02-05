@@ -71,6 +71,7 @@ db.leads = require('./contacts/leads/model/model.js')(sequelize, DataTypes)
 
 // task management DB
 db.task_users = require('./tasks/task_users/model/model.js')(sequelize, DataTypes)
+db.tasks = require('./tasks/tasks/model/model.js')(sequelize, DataTypes)
 
 
 

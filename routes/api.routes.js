@@ -27,6 +27,7 @@ const  user_work_users  = require("../app/api/user/user_work_users/router/routes
 const  user_works  = require("../app/api/user/user_works/router/routes");
 const  users  = require("../app/api/user/users/router/routes");
 const  task_user  = require("../app/api/tasks/task_users/router/routes");
+const  tasks  = require("../app/api/tasks/tasks/router/routes");
 
 const router = express.Router();
 
@@ -69,6 +70,7 @@ router.use(leads());
 
 // task routes
 router.use(task_user());
+router.use(tasks());
 
 
 
