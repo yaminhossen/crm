@@ -1,9 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     
-    const User_work = sequelize.define("user_work", {
+    const Task_variant_value = sequelize.define("task_variant_value", {
+        task_variant_id: {
+            type: DataTypes.BIGINT.UNSIGNED,
+        },
         title: {
             type: DataTypes.STRING(150),
-            
         },
         status: {
             type: DataTypes.BOOLEAN,
@@ -11,6 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    return User_work
+    return Task_variant_value
 
 }

@@ -3,7 +3,7 @@ const db = require('../../../index')
 // const db = db
 
 // create main model 
-const DataTable = db.user_works
+const DataTable = db.task_variant_values
 
 // main works
 
@@ -12,6 +12,7 @@ const DataTable = db.user_works
 const store = async (req, res) => {
 
     let info = {
+        task_variant_id: req.body.task_variant_id,
         title: req.body.title
     }
 

@@ -1,4 +1,4 @@
-@routeName = user-work
+@routeName = task-variant-value
 
 GET http://localhost:8082/{{routeName}} HTTP/1.1
 
@@ -14,6 +14,7 @@ POST http://localhost:8082/{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
+        "task_variant_id": 1,
         "title": "teaching"
 }
 
@@ -22,5 +23,6 @@ POST http://localhost:8082/{{routeName}}/update/4 HTTP/1.1
 content-type: application/json
 
 {
-    "title": "teaching"
+     "task_variant_id": 1,
+        "title": "teaching"
 }

@@ -29,6 +29,7 @@ const  users  = require("../app/api/user/users/router/routes");
 const  task_user  = require("../app/api/tasks/task_users/router/routes");
 const  tasks  = require("../app/api/tasks/tasks/router/routes");
 const  task_variants  = require("../app/api/tasks/task_variants/router/routes");
+const  task_variant_values  = require("../app/api/tasks/task_variant_values/router/routes");
 
 const router = express.Router();
 
@@ -73,6 +74,7 @@ router.use(leads());
 router.use(task_user());
 router.use(tasks());
 router.use(task_variants());
+router.use(task_variant_values());
 
 
 
