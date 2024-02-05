@@ -26,6 +26,7 @@ const  user_work_departments  = require("../app/api/user/user_work_departments/r
 const  user_work_users  = require("../app/api/user/user_work_users/router/routes");
 const  user_works  = require("../app/api/user/user_works/router/routes");
 const  users  = require("../app/api/user/users/router/routes");
+const  task_user  = require("../app/api/tasks/task_users/router/routes");
 
 const router = express.Router();
 
@@ -65,6 +66,10 @@ router.use(contact_history_reasons());
 router.use(contact_reasons());
 router.use(crm_contact_numbers());
 router.use(leads());
+
+// task routes
+router.use(task_user());
+
 
 
 

@@ -69,6 +69,10 @@ db.crm_contact_numbers = require('./contacts/crm_contact_numbers/model/model.js'
 db.leads = require('./contacts/leads/model/model.js')(sequelize, DataTypes)
 
 
+// task management DB
+db.task_users = require('./tasks/task_users/model/model.js')(sequelize, DataTypes)
+
+
 
 db.sequelize.sync({force: false})
 .then(()=>{
