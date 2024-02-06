@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
         title: {
             type: DataTypes.STRING(50)
         },
+        // userName: {
+        //     type: DataTypes.STRING(20)
+        // },
         status: {
             type: DataTypes.BOOLEAN,
             defaultValue: 1
