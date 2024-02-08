@@ -47,7 +47,7 @@ const get = async (req, res) => {
 const get_support_ticket = async (req, res) => {
     
     let id = req.params.userid
-    let item = await support_ticket_table.findOne({ where: { id: id }})
+    let item = await support_ticket_table.findAll({ where: { assigned_to: id }})
     res.status(200).send(item)
 }
 
