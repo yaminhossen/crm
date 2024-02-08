@@ -17,6 +17,7 @@ router
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
     .post(`/${prefix}/update/:id`, controllers.update)
+    .get(`/user/:userid/department`, controllers.get_department)
     .get(`/${prefix}/details/:id`, controllers.get);
 
 
