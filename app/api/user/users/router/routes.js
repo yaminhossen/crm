@@ -17,7 +17,8 @@ router
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
     .post(`/${prefix}/update/:id`, controllers.update)
-    .get(`/${prefix}/details/:id`, controllers.get);
+    .get(`/${prefix}/details/:id`, controllers.get)
+    .get(`/${prefix}/full-details/:id`, controllers.get_full_details);
 
 
 module.exports = () => router;

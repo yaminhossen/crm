@@ -5,6 +5,9 @@ GET http://localhost:8082/{{routeName}} HTTP/1.1
 ###
 GET http://localhost:8082/{{routeName}}/details/2 HTTP/1.1
 
+###
+GET http://localhost:8082/user/1/info HTTP/1.1
+
 
 ###
 DELETE http://localhost:8082/{{routeName}}/delete/4 HTTP/1.1

@@ -87,15 +87,15 @@ db.sequelize.sync({force: false})
 // One to Many Relation 
 // this would be work for the controller 
 
-db.products.hasMany(db.reviews, {
-    foreignKey: 'product_id',
-    as: 'reviews'
-})
+// db.products.hasMany(db.reviews, {
+//     foreignKey: 'product_id',
+//     as: 'reviews'
+// })
 
-db.reviews.belongsTo(db.products, {
-    foreignKey: 'product_id', 
-    as: 'product'
-})
+// db.reviews.belongsTo(db.products, {
+//     foreignKey: 'product_id', 
+//     as: 'product'
+// })
 
 
 

@@ -41,6 +41,15 @@ const get = async (req, res) => {
     let item = await DataTable.findOne({ where: { id: id }})
     res.status(200).send(item)
 }
+// 3. get user info item
+
+const getinfo = async (req, res) => {
+    
+    let id = req.params.userid
+    console.log("user id from info", id);
+    let item = await DataTable.findOne({ where: { user_id: id }})
+    res.status(200).send(item)
+}
 
 // 4. update items
 
@@ -76,5 +85,6 @@ module.exports = {
     get,
     update,
     destroy,
-    getPublisheditem
+    getPublisheditem,
+    getinfo
 }

@@ -4,6 +4,11 @@ const db = require('../../../index')
 
 // create main model 
 const DataTable = db.users
+const infoDataTable = db.user_infos
+const designationDataTable = db.user_Designations
+const workUserDataTable = db.user_work_users
+const workDataTable = db.user_works
+const departmentDataTable = db.user_work_departments
 
 // main works
 
@@ -41,6 +46,27 @@ const get = async (req, res) => {
     res.status(200).send(item)
 }
 
+// 3. get single item
+
+const get_full_details = async (req, res) => {
+    
+    let id = req.params.id
+    let user_infos = await infoDataTable.findOne({ where: { user_id: id }})
+    let user_work_users = await workUserDataTable.findOne({ where: { user_id: id }})
+    let user_designations = await designationDataTable.findOne({ where: { user_id: id }})
+    let user = await DataTable.findOne({ where: { id: id }})
+    let user_works = await workDataTable.findOne({ where: { id: user_work_users.work_id }})
+    let user_work_department = await departmentDataTable.findOne({ where: { id: user_work_users.department_id }})
+    res.status(200).json({
+        user_infos,
+        user_designations,
+        user_work_users,
+        user,
+        user_works,
+        user_work_department
+    })
+}
+
 // 4. update items
 
 const update = async (req, res) => {
@@ -75,5 +101,6 @@ module.exports = {
     get,
     update,
     destroy,
-    getPublisheditem
+    getPublisheditem,
+    get_full_details
 }
