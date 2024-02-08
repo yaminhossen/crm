@@ -30,12 +30,21 @@ const All = async (req, res) => {
     res.status(200).send(items)
 }
 
-// 3. get single item
+// 3. get single item by id
 
 const get = async (req, res) => {
     
     let id = req.params.id
     let item = await DataTable.findOne({ where: { id: id }})
+    res.status(200).send(item)
+}
+
+// 3. get single item by user_id
+
+const get_designation = async (req, res) => {
+    
+    let id = req.params.userid
+    let item = await DataTable.findOne({ where: { user_id: id }})
     res.status(200).send(item)
 }
 
@@ -73,5 +82,6 @@ module.exports = {
     get,
     update,
     destroy,
-    getPublisheditem
+    getPublisheditem,
+    get_designation
 }

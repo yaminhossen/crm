@@ -18,7 +18,7 @@ router
     // .post(`/${prefix}/destroy`, controllers.destroy)
     .post(`/${prefix}/update/:id`, controllers.update)
     .get(`/user/:userid/info`, controllers.getinfo)
-    // .get(`/${prefix}/details/:id`, controllers.get);
+    .get(`/${prefix}/details/:id`, controllers.get);
 
 
 module.exports = () => router;
