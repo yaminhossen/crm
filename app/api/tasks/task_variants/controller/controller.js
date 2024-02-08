@@ -4,6 +4,7 @@ const db = require('../../../db')
 
 // create main model 
 const DataTable = db.task_variants
+const variantValueDataTable = db.task_variant_values
 
 // main works
 
@@ -33,7 +34,14 @@ const All = async (req, res) => {
 const get = async (req, res) => {
     
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
+    let item = await DataTable.findOne({
+         where: { id: id },
+         include: [
+            {
+                model: variantValueDataTable
+            }
+        ]
+        })
     res.status(200).send(item)
 }
 

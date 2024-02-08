@@ -76,6 +76,8 @@ db.task_variant_values = require('./tasks/task_variant_values/model/model.js')(s
 db.task_variant_tasks = require('./tasks/task_variant_tasks/model/model.js')(sequelize, DataTypes)
 
 /** relations */
+// task related relation
+
 db.task_users.belongsTo(db.tasks, {
     foreignKey: 'task_id'
 });
@@ -86,10 +88,27 @@ db.tasks.hasMany(db.task_users, {
     foreignKey: 'task_id',
 });
 
+db.tasks.belongsToMany(db.task_variants, {
+    through: db.task_variant_tasks,
+    foreignKey: 'task_id'
+});
+db.task_variants.belongsToMany(db.tasks, {
+    through: db.task_variant_tasks,
+    foreignKey: 'variant_id'
+});
+db.task_variants.hasMany(db.task_variant_values, {
+    foreignKey: 'task_variant_id'
+});
+
 // db.sequelize.sync({ force: false })
 //     .then(() => {
 //         console.log('yes sequelize re-sync done!');
 //     })
+
+/**
+ User
+there is 2 tables in my sql, tasks, task_variant, and task_variant_task create a sequelize function which will perform belongs to many tasks with variant
+ */
 
 
 

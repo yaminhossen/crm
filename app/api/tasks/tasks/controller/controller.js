@@ -5,6 +5,8 @@ const db = require('../../../db')
 // create main model 
 const DataTable = db.tasks
 const TaskUsers = db.task_users
+const TaskVariants= db.task_variants
+const TaskVariantTasks = db.task_variant_tasks
 const Users = db.users
 
 // main works
@@ -44,6 +46,9 @@ const get = async (req, res) => {
             {
                 model: TaskUsers,
                 include: [Users]
+            },
+            {
+                model: TaskVariants,
             }
         ]
     })
