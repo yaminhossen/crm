@@ -6,7 +6,7 @@ const allRoutes = require("./routes/all.routes");
 const checkAuthMiddleware = require("./app/middlewares/checkAuth.middleware");
 const frontendCommonDataMiddleware = require("./app/middlewares/frontendCommonData.middleware");
 const mongoose = require("mongoose");
-const { db_url } = require("./configs/db.config");
+// const { db_url } = require("./configs/db.config");
 var cookieParser = require('cookie-parser')
 const formData = require('express-form-data');
 var cors = require('cors');
@@ -49,11 +49,10 @@ server.use((req, res, next) => {
 		req.session.old = {}
 	}
 	checkAuthMiddleware(server, req, res, next);
-	frontendCommonDataMiddleware(server, req, res, next);
+	// frontendCommonDataMiddleware(server, req, res, next);
 	next();
 });
 
-log(server);
 // routes
 server.use(allRoutes(server));
 

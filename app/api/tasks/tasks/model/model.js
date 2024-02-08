@@ -1,3 +1,4 @@
+const TaskUser = require('../../task_users/model/model');
 module.exports = (sequelize, DataTypes) => {
     
     const Task = sequelize.define("task", {

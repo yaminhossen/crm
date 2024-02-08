@@ -1,9 +1,11 @@
-const db = require('../../../index')
+const db = require('../../../db')
 
 // const db = db
 
 // create main model 
 const DataTable = db.tasks
+const TaskUsers = db.task_users
+const Users = db.users
 
 // main works
 
@@ -33,9 +35,18 @@ const All = async (req, res) => {
 // 3. get single item
 
 const get = async (req, res) => {
-    
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
+    let item = await DataTable.findOne({ 
+        where: { 
+            id: id 
+        }, 
+        include: [
+            {
+                model: TaskUsers,
+                include: [Users]
+            }
+        ]
+    })
     res.status(200).send(item)
 }
 

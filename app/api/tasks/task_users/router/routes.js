@@ -15,6 +15,10 @@ router
     .post(`/${prefix}/store`, controllers.store)
     .delete(`/${prefix}/delete/:id`, controllers.destroy)
     .post(`/${prefix}/update/:id`, controllers.update)
+
+    .get(`/user/:userid/task`, controllers.gettask)
+    .get(`/user/:userid/task`, controllers.gettask)
+
     .get(`/${prefix}/details/:id`, controllers.get);
 
 

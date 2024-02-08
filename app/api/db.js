@@ -1,21 +1,20 @@
 // const dbConfig = require("../config/dbConfig");
 
-const {Sequelize, DataTypes} = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const dbConfig = require('../../configs/db.config.js');
-
-
 
 const sequelize = new Sequelize(
     dbConfig.DB,
     dbConfig.USER,
-    dbConfig.PASSWORD, {
+    dbConfig.PASSWORD,
+    {
         host: dbConfig.HOST,
         dialect: dbConfig.dialect,
         operatorsAliases: false,
 
         pool: {
             max: dbConfig.pool.max,
-            min:dbConfig.pool.min,
+            min: dbConfig.pool.min,
             acquire: dbConfig.pool.acquire,
             idle: dbConfig.pool.idle
         }
@@ -24,19 +23,19 @@ const sequelize = new Sequelize(
 
 
 sequelize.authenticate()
-.then(() =>{
-    console.log('connected..');
-})
-.catch(err => {
-    console.log('Error' + err);
-})
+    .then(() => {
+        console.log('connected..');
+    })
+    .catch(err => {
+        console.log('Error' + err);
+    })
 
-const db = {} 
+const db = {}
 
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.products = require('./product/model/model.js')(sequelize, DataTypes)
+// db.products = require('./product/model/model.js')(sequelize, DataTypes)
 
 // user
 db.user_Designations = require('./user/user_designations/model/model.js')(sequelize, DataTypes)
@@ -76,26 +75,21 @@ db.task_variants = require('./tasks/task_variants/model/model.js')(sequelize, Da
 db.task_variant_values = require('./tasks/task_variant_values/model/model.js')(sequelize, DataTypes)
 db.task_variant_tasks = require('./tasks/task_variant_tasks/model/model.js')(sequelize, DataTypes)
 
+/** relations */
+db.task_users.belongsTo(db.tasks, {
+    foreignKey: 'task_id'
+});
+db.task_users.belongsTo(db.users, {
+    foreignKey: 'user_id'
+});
+db.tasks.hasMany(db.task_users, {
+    foreignKey: 'task_id',
+});
 
-
-db.sequelize.sync({force: false})
-.then(()=>{
-    console.log('yes sequelize re-sync done!');
-})
-
-
-// One to Many Relation 
-// this would be work for the controller 
-
-// db.products.hasMany(db.reviews, {
-//     foreignKey: 'product_id',
-//     as: 'reviews'
-// })
-
-// db.reviews.belongsTo(db.products, {
-//     foreignKey: 'product_id', 
-//     as: 'product'
-// })
+// db.sequelize.sync({ force: false })
+//     .then(() => {
+//         console.log('yes sequelize re-sync done!');
+//     })
 
 
 
