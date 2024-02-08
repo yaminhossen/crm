@@ -4,6 +4,7 @@ const db = require('../../../index')
 
 // create main model 
 const DataTable = db.user_works
+const userWorkUserDataTable = db.user_work_users
 
 // main works
 
@@ -35,6 +36,16 @@ const get = async (req, res) => {
     let id = req.params.id
     let item = await DataTable.findOne({ where: { id: id }})
     res.status(200).send(item)
+}
+
+// 3. get single item by user id
+
+const get_work = async (req, res) => {
+    
+    let id = req.params.userid
+    let item = await userWorkUserDataTable.findOne({ where: { work_id: id }})
+    let user_work = await DataTable.findOne({ where: { id: item.work_id }})
+    res.status(200).send(user_work)
 }
 
 // 4. update items
@@ -71,5 +82,6 @@ module.exports = {
     get,
     update,
     destroy,
-    getPublisheditem
+    getPublisheditem,
+    get_work
 }
