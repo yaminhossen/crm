@@ -100,10 +100,10 @@ db.task_variants.hasMany(db.task_variant_values, {
     foreignKey: 'task_variant_id'
 });
 
-// db.sequelize.sync({ force: false })
-//     .then(() => {
-//         console.log('yes sequelize re-sync done!');
-//     })
+db.sequelize.sync({ force: false })
+    .then(() => {
+        console.log('yes sequelize re-sync done!');
+    })
 
 /**
  User

@@ -17,7 +17,7 @@ router
     .post(`/${prefix}/update/:id`, controllers.update)
 
     .get(`/user/:userid/task`, controllers.gettask)
-    .get(`/user/:userid/task`, controllers.gettask)
+    // .get(`/user/:userid/task`, controllers.gettask)
 
     .get(`/${prefix}/details/:id`, controllers.get);
 

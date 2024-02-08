@@ -7,6 +7,10 @@ GET http://localhost:8082/{{routeName}}/details/4 HTTP/1.1
 
 
 ###
+GET http://localhost:8082/user/1/support-ticket HTTP/1.1
+
+
+###
 DELETE http://localhost:8082/{{routeName}}/delete/2 HTTP/1.1
 
 ###
@@ -18,17 +22,19 @@ content-type: application/json
         "ticket_uuid": "11",
         "subject": "English",
         "description": "This is good",
+        "assigned_to": 3,
         "priority": "low"
 }
 
 ###
-POST http://localhost:8082/{{routeName}}/update/4 HTTP/1.1
+POST http://localhost:8082/{{routeName}}/update/3 HTTP/1.1
 content-type: application/json
 
 {
-    "customer_id": 111,
-        "ticket_uuid": "22",
-        "subject": "Graphics Design",
-        "description": "This is good Course",
+        "customer_id": 3,
+        "ticket_uuid": "11",
+        "subject": "English",
+        "description": "This is good",
+        "assigned_to": 1,
         "priority": "low"
 }
