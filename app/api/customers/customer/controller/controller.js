@@ -3,7 +3,12 @@ const db = require('../../../db')
 // const db = db
 
 // create main model 
-const DataTable = db.customers
+const Customer_DataTable = db.customers
+const Contact_number_Datatable = db.customer_contact_numbers
+const Group_customer_Datatable = db.customer_group_customers
+const Variant_customer_Datatable = db.customer_variant_customer
+const Calender_event_Datatable = db.calender_events
+const Relevent_document_Datatable = db.customer_relevent_documents
 
 // main works
 
@@ -19,7 +24,7 @@ const store = async (req, res) => {
         address: req.body.address
     }
 
-    const item = await DataTable.create(info)
+    const item = await Customer_DataTable.create(info)
     res.status(200).send(item)
 
 }
@@ -28,7 +33,7 @@ const store = async (req, res) => {
 
 const All = async (req, res) => {
     
-    let items = await DataTable.findAll({})
+    let items = await Customer_DataTable.findAll({})
     res.status(200).send(items)
 }
 
@@ -37,8 +42,14 @@ const All = async (req, res) => {
 const get = async (req, res) => {
     
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
-    res.status(200).send(item)
+    let customer = await Customer_DataTable.findOne({ where: { id: id }})
+    let contact_number = await Contact_number_Datatable.findOne({where: {customer_id: id}})
+    let group_customer = await Group_customer_Datatable.findOne({where: {customer_id: id}})
+    let variant_customer = await Variant_customer_Datatable.findOne({where: {customer_id: id}})
+    let calender_event = await Calender_event_Datatable.findOne({where: {customer_id: id}})
+    let relevent_document = await Relevent_document_Datatable.findOne({where: {customer_id: id}})
+
+    res.status(200).json({customer,contact_number,group_customer,variant_customer,calender_event,relevent_document})
 }
 
 // 4. update items
@@ -46,7 +57,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     
     let id = req.params.id
-    const item = await DataTable.update(req.body, { where: { id: id }})
+    const item = await Customer_DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }
 
@@ -55,7 +66,7 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
     
     let id = req.params.id
-    await DataTable.destroy({ where: { id: id }})
+    await Customer_DataTable.destroy({ where: { id: id }})
     res.status(200).send('item is deleted !')
 }
 
@@ -63,7 +74,7 @@ const destroy = async (req, res) => {
 
 const getPublisheditem = async (req, res) => {
 
-    const items = await DataTable.findAll({ where: { published: true }})
+    const items = await Customer_DataTable.findAll({ where: { published: true }})
     res.status(200).send(items)
 }
 
