@@ -3,7 +3,8 @@ const db = require('../../../db')
 // const db = db
 
 // create main model 
-const DataTable = db.customer_groups
+const customer_group_dataTable = db.customer_groups
+const group_customer_dataTable = db.customer_group_customers
 
 // main works
 
@@ -15,7 +16,7 @@ const store = async (req, res) => {
         title: req.body.title
     }
 
-    const item = await DataTable.create(info)
+    const item = await customer_group_dataTable.create(info)
     res.status(200).send(item)
 
 }
@@ -24,7 +25,7 @@ const store = async (req, res) => {
 
 const All = async (req, res) => {
     
-    let items = await DataTable.findAll({})
+    let items = await customer_group_dataTable.findAll({})
     res.status(200).send(items)
 }
 
@@ -33,8 +34,9 @@ const All = async (req, res) => {
 const get = async (req, res) => {
     
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
-    res.status(200).send(item)
+    let customer_group = await customer_group_dataTable.findOne({ where: { id: id }})
+    let customer_group_customer = await group_customer_dataTable.findOne({ where: { customer_group_id: id }})
+    res.status(200).json({customer_group,customer_group_customer})
 }
 
 // 4. update items
@@ -42,7 +44,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     
     let id = req.params.id
-    const item = await DataTable.update(req.body, { where: { id: id }})
+    const item = await customer_group_dataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }
 
@@ -51,7 +53,7 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
     
     let id = req.params.id
-    await DataTable.destroy({ where: { id: id }})
+    await customer_group_dataTable.destroy({ where: { id: id }})
     res.status(200).send('item is deleted !')
 }
 
@@ -59,7 +61,7 @@ const destroy = async (req, res) => {
 
 const getPublisheditem = async (req, res) => {
 
-    const items = await DataTable.findAll({ where: { published: true }})
+    const items = await customer_group_dataTable.findAll({ where: { published: true }})
     res.status(200).send(items)
 }
 

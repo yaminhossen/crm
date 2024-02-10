@@ -3,8 +3,10 @@ const db = require('../../../db')
 // const db = db
 
 // create main model 
-const DataTable = db.contact_histories
-
+const history_dataTable = db.contact_histories
+const crm_contact_dataTable = db.crm_contact_numbers
+const history_feedback_dataTable = db.contact_history_feedbacks
+const history_reason_dataTable = db.contact_reasons
 // main works
 
 // 1. create item
@@ -20,7 +22,7 @@ const store = async (req, res) => {
         creator: req.body.creator
     }
 
-    const item = await DataTable.create(info)
+    const item = await history_dataTable.create(info)
     res.status(200).send(item)
 
 }
@@ -28,35 +30,50 @@ const store = async (req, res) => {
 // 2. get all items
 
 const All = async (req, res) => {
-    
-    let items = await DataTable.findAll({})
+
+    let items = await history_dataTable.findAll({})
     res.status(200).send(items)
 }
 
 // 3. get single item
 
 const get = async (req, res) => {
-    
+
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
+    let item = await history_dataTable.findOne({
+        where: {
+            id: id
+        },
+        include: [
+            {
+                model: crm_contact_dataTable,
+            },
+            {
+                model: history_feedback_dataTable,
+            },
+            {
+                model: history_reason_dataTable,
+            }
+        ]
+    })
     res.status(200).send(item)
 }
 
 // 4. update items
 
 const update = async (req, res) => {
-    
+
     let id = req.params.id
-    const item = await DataTable.update(req.body, { where: { id: id }})
+    const item = await history_dataTable.update(req.body, { where: { id: id } })
     res.status(200).send(item)
 }
 
 // 5. delete item
 
 const destroy = async (req, res) => {
-    
+
     let id = req.params.id
-    await DataTable.destroy({ where: { id: id }})
+    await history_dataTable.destroy({ where: { id: id } })
     res.status(200).send('item is deleted !')
 }
 
@@ -64,7 +81,7 @@ const destroy = async (req, res) => {
 
 const getPublisheditem = async (req, res) => {
 
-    const items = await DataTable.findAll({ where: { published: true }})
+    const items = await history_dataTable.findAll({ where: { published: true } })
     res.status(200).send(items)
 }
 

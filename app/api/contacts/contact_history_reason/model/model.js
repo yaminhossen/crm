@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     
     const Contact_history_reason = sequelize.define("contact_history_reason", {
-        customer_id: {
+        contact_histories_id: {
             type: DataTypes.BIGINT.UNSIGNED,
             
         },

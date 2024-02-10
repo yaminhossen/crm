@@ -100,6 +100,22 @@ db.task_variants.hasMany(db.task_variant_values, {
     foreignKey: 'task_variant_id'
 });
 
+// contact relation
+
+db.contact_histories.belongsTo(db.crm_contact_numbers, {
+    foreignKey: 'contact_number_id'
+});
+db.contact_histories.hasMany(db.contact_history_feedbacks, {
+    foreignKey: 'contact_history_id'
+});
+db.contact_histories.belongsToMany(db.contact_reasons, {
+    through: db.contact_history_reasons,
+    foreignKey: 'contact_histories_id'
+});
+db.contact_reasons.belongsToMany(db.contact_histories,{
+    through: db.contact_history_reasons,
+    foreignKey: 'reason_id',
+})
 // db.sequelize.sync({ force: false })
 //     .then(() => {
 //         console.log('yes sequelize re-sync done!');
