@@ -52,7 +52,7 @@ db.calender_events = require('./customers/calender_events/model/model.js')(seque
 db.customer_contact_numbers = require('./customers/customer_contact_numbers/model/model.js')(sequelize, DataTypes)
 db.customer_group_customers = require('./customers/customer_group_customers/model/model.js')(sequelize, DataTypes)
 db.customer_relevent_documents = require('./customers/customer_relevent_documents/model/model.js')(sequelize, DataTypes)
-db.customer_variant_customer = require('./customers/customer_variant_customers/model/model.js')(sequelize, DataTypes)
+db.customer_variant_customers = require('./customers/customer_variant_customers/model/model.js')(sequelize, DataTypes)
 db.customer_variant_values = require('./customers/customer_variant_values/model/model.js')(sequelize, DataTypes)
 db.customer_variants = require('./customers/customer_variants/model/model.js')(sequelize, DataTypes)
 db.customer_groups = require('./customers/customer_groups/model/model.js')(sequelize, DataTypes)
@@ -100,15 +100,11 @@ db.task_variants.hasMany(db.task_variant_values, {
     foreignKey: 'task_variant_id'
 });
 
-db.sequelize.sync({ force: false })
-    .then(() => {
-        console.log('yes sequelize re-sync done!');
-    })
+// db.sequelize.sync({ force: false })
+//     .then(() => {
+//         console.log('yes sequelize re-sync done!');
+//     })
 
-/**
- User
-there is 2 tables in my sql, tasks, task_variant, and task_variant_task create a sequelize function which will perform belongs to many tasks with variant
- */
 
 
 

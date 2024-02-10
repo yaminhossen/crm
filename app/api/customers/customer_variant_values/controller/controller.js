@@ -3,7 +3,8 @@ const db = require('../../../db')
 // const db = db
 
 // create main model 
-const DataTable = db.customer_variant_values
+const variant_values_datatable = db.customer_variant_values
+const variant_customer_datatables = db.customer_variant_customers
 
 // main works
 
@@ -16,7 +17,7 @@ const store = async (req, res) => {
         title: req.body.title
     }
 
-    const item = await DataTable.create(info)
+    const item = await variant_values_datatable.create(info)
     res.status(200).send(item)
 
 }
@@ -25,7 +26,7 @@ const store = async (req, res) => {
 
 const All = async (req, res) => {
     
-    let items = await DataTable.findAll({})
+    let items = await variant_values_datatable.findAll({})
     res.status(200).send(items)
 }
 
@@ -34,8 +35,9 @@ const All = async (req, res) => {
 const get = async (req, res) => {
     
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
-    res.status(200).send(item)
+    let customer_variant_value = await variant_values_datatable.findOne({ where: { id: id }})
+    let customer_variant_customer = await variant_customer_datatables.findOne({ where: { variant_value_id: id }})
+    res.status(200).json({customer_variant_value,customer_variant_customer})
 }
 
 // 4. update items
@@ -43,7 +45,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     
     let id = req.params.id
-    const item = await DataTable.update(req.body, { where: { id: id }})
+    const item = await variant_values_datatable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }
 
@@ -52,7 +54,7 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
     
     let id = req.params.id
-    await DataTable.destroy({ where: { id: id }})
+    await variant_values_datatable.destroy({ where: { id: id }})
     res.status(200).send('item is deleted !')
 }
 
@@ -60,7 +62,7 @@ const destroy = async (req, res) => {
 
 const getPublisheditem = async (req, res) => {
 
-    const items = await DataTable.findAll({ where: { published: true }})
+    const items = await variant_values_datatable.findAll({ where: { published: true }})
     res.status(200).send(items)
 }
 
