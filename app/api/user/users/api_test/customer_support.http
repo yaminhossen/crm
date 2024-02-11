@@ -1,6 +1,7 @@
 @routeName = user
+@host = http://localhost:8082/api/
 
-GET http://localhost:8082/{{routeName}} HTTP/1.1
+GET {{host}}{{routeName}} HTTP/1.1
 
 ###
 GET http://localhost:8082/{{routeName}}/details/2 HTTP/1.1
