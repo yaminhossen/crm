@@ -3,7 +3,9 @@ const db = require('../../../db')
 // const db = db
 
 // create main model 
-const DataTable = db.contact_appointments
+const appointment_dataTable = db.contact_appointments
+const reason_dataTable = db.contact_reasons
+const appointment_reason_dataTable = db.contact_appointment_reasons
 
 // main works
 
@@ -20,7 +22,7 @@ const store = async (req, res) => {
         creator: req.body.creator
     }
 
-    const item = await DataTable.create(info)
+    const item = await appointment_dataTable.create(info)
     res.status(200).send(item)
 
 }
@@ -29,7 +31,7 @@ const store = async (req, res) => {
 
 const All = async (req, res) => {
     
-    let items = await DataTable.findAll({})
+    let items = await appointment_dataTable.findAll({})
     res.status(200).send(items)
 }
 
@@ -38,7 +40,16 @@ const All = async (req, res) => {
 const get = async (req, res) => {
     
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
+    let item = await appointment_dataTable.findOne({
+        where: {
+            id: id
+        },
+        include: [
+            {
+                model: reason_dataTable,
+            }
+        ]
+    })
     res.status(200).send(item)
 }
 
@@ -47,7 +58,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     
     let id = req.params.id
-    const item = await DataTable.update(req.body, { where: { id: id }})
+    const item = await appointment_dataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }
 
@@ -56,7 +67,7 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
     
     let id = req.params.id
-    await DataTable.destroy({ where: { id: id }})
+    await appointment_dataTable.destroy({ where: { id: id }})
     res.status(200).send('item is deleted !')
 }
 
@@ -64,7 +75,7 @@ const destroy = async (req, res) => {
 
 const getPublisheditem = async (req, res) => {
 
-    const items = await DataTable.findAll({ where: { published: true }})
+    const items = await appointment_dataTable.findAll({ where: { published: true }})
     res.status(200).send(items)
 }
 

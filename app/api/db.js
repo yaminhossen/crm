@@ -115,6 +115,14 @@ db.contact_histories.belongsToMany(db.contact_reasons, {
 db.contact_reasons.belongsToMany(db.contact_histories,{
     through: db.contact_history_reasons,
     foreignKey: 'reason_id',
+});
+db.contact_appointments.belongsToMany(db.contact_reasons,{
+    through: db.contact_appointment_reasons,
+    foreignKey: 'contact_appointment_id',
+});
+db.contact_reasons.belongsToMany(db.contact_appointments,{
+    through: db.contact_appointment_reasons,
+    foreignKey: 'contact_reason_id',
 })
 // db.sequelize.sync({ force: false })
 //     .then(() => {
