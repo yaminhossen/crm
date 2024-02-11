@@ -67,7 +67,7 @@ const PORT = process.env.PORT || 8082
 
 // server
 server.listen(PORT, ()=>{
-    console.log(`server in running on port ${PORT}`);
+    console.log(`server in running on port http://127.0.0.1:${PORT}`);
 })
 
 
