@@ -54,7 +54,7 @@ server.use((req, res, next) => {
 });
 
 // routes
-server.use(allRoutes(server));
+server.use("/api",allRoutes(server));
 
 // mongoose.connect("mongodb+srv://mongo:0h4lYcX9RCOo8pHn@cluster0.gn949by.mongodb.net/blogDB")
 // 	.then(()=>{

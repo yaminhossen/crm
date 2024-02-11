@@ -3,7 +3,7 @@ const db = require('../../../db')
 // const db = db
 
 // create main model 
-const DataTable = db.customer_variant_customer
+const DataTable = db.customer_variant_customers
 
 // main works
 

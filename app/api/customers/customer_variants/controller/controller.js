@@ -30,6 +30,25 @@ const All = async (req, res) => {
     res.status(200).send(items)
 }
 
+// // 3. get single item
+
+// const get = async (req, res) => {
+    
+//     let id = req.params.id
+//     let item = await customer_variant_datatable.findOne({ 
+//         where: { 
+//             id: id 
+//         }, 
+//         include: [
+//             {
+//                 model: db.variant_values_datatable,
+//             }
+//         ]
+//     })
+//     res.status(200).json(item)
+// }
+
+
 // 3. get single item
 
 const get = async (req, res) => {
