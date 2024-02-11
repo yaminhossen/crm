@@ -38,7 +38,10 @@ const All = async (req, res) => {
 }
 
 const PaginateData = async (req, res) => {
-    let items = await paginate(req, DataTable, 10);
+    let query = {
+        order: [['id', 'DESC']], 
+    };
+    let items = await paginate(req, DataTable, 1, query);
     res.status(200).send(items);
 }
 

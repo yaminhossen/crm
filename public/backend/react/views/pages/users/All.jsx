@@ -1,4 +1,4 @@
- import React, { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import setup from './config/setup';
 import CanvasDetails from './components/management/CanvasDetails';
@@ -15,7 +15,7 @@ function All() {
         get_data();
     }, [data_store.search_key, data_store.show_active_data, data_store.page]);
 
-console.log(data_store.all_data);
+    console.log(data_store.all_data);
 
     return (
         <>
@@ -28,7 +28,7 @@ console.log(data_store.all_data);
                         <thead>
                             <tr>
                                 <th><input type="checkbox" className="form-check-input" /></th>
-                              
+
 
                                 <th className="cursor_n_resize">
                                     Username
@@ -74,7 +74,7 @@ console.log(data_store.all_data);
                                                     {data.email}
                                                 </span>
                                             </td>
-                                            
+
                                             <td>
                                                 <span>
                                                     {data.telegram_name}

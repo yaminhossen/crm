@@ -4,7 +4,7 @@
 GET {{host}}{{routeName}} HTTP/1.1
 
 ###
-GET http://localhost:8082/{{routeName}}/details/2 HTTP/1.1
+GET http://localhost:8082/api/{{routeName}}/details/2 HTTP/1.1
 
 
 ###

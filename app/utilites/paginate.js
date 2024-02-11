@@ -4,15 +4,17 @@
  * @param {Number} page 
  * @param {Number} pageSize 
  * @param {Sequelize} model 
+ * @param {Object} query 
  * @returns 
  */
-async function getDataWithPagination(req, page, pageSize, model) {
+async function getDataWithPagination(req, page, pageSize, model, query) {
     const offset = (page - 1) * pageSize;
     const limit = pageSize;
 
     const users = await model.findAndCountAll({
         offset,
         limit,
+        query,
     });
 
     const totalPages = Math.ceil(users.count / pageSize);
@@ -50,7 +52,7 @@ function generatePaginationLinks(baseUrl, currentPage, totalPages) {
     // Previous page link
     links.push({
         url: currentPage > 1 ? `${baseUrl}?page=${currentPage - 1}` : null,
-        label: "&laquo; Previous",
+        label: "<i class='fa fa-angle-left'></i>",
         active: false
     });
 
@@ -66,7 +68,7 @@ function generatePaginationLinks(baseUrl, currentPage, totalPages) {
     // Next page link
     links.push({
         url: currentPage < totalPages ? `${baseUrl}?page=${currentPage + 1}` : null,
-        label: "Next &raquo;",
+        label: "<i class='fa fa-angle-right'></i>",
         active: false
     });
 
@@ -81,13 +83,14 @@ module.exports.generatePaginationLinks = generatePaginationLinks;
  * @param {Number} page 
  * @param {Number} pageSize 
  * @param {Sequelize} model 
+ * @param {Object} query 
  * @returns
  * ```js
     await paginate(req, 1, 10, User);
  */
-module.exports.paginate = async(req, model = null, pageSize = 10) => {
+module.exports.paginate = async(req, model = null, pageSize = 10, query) => {
     if(model){
-        let response = await getDataWithPagination(req, req.query.page || 1, pageSize, model);
+        let response = await getDataWithPagination(req, req.query.page || 1, pageSize, model, query);
         return response;
     }
 
