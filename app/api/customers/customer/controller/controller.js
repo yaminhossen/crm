@@ -6,7 +6,7 @@ const db = require('../../../db')
 const Customer_DataTable = db.customers
 const Contact_number_Datatable = db.customer_contact_numbers
 const Group_customer_Datatable = db.customer_group_customers
-const Variant_customer_Datatable = db.customer_variant_customer
+const Variant_customer_Datatable = db.customer_variant_customers
 const Calender_event_Datatable = db.calender_events
 const Relevent_document_Datatable = db.customer_relevent_documents
 

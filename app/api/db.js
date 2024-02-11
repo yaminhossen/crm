@@ -100,6 +100,21 @@ db.task_variants.hasMany(db.task_variant_values, {
     foreignKey: 'task_variant_id'
 });
 
+// customer variant relation
+
+db.customers.belongsToMany(db.customer_variants, {
+    through: db.customer_variant_customers,
+    foreignKey: 'customer_id'
+});
+db.customer_variants.belongsToMany(db.customers, {
+    through: db.customer_variant_customers,
+    foreignKey: 'variant_id'
+});
+db.customer_variants.hasMany(db.customer_variant_values, {
+    foreignKey: 'variant_id'
+});
+
+
 // contact relation
 
 db.contact_histories.belongsTo(db.crm_contact_numbers, {
