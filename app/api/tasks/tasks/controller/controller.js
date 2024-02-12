@@ -7,7 +7,7 @@ const db = require('../../../db')
 const DataTable = db.tasks
 const TaskUsers = db.task_users
 const TaskVariants= db.task_variants
-const TaskVariantTasks = db.task_variant_tasks
+const TaskVariantValues = db.task_variant_values
 const Users = db.users
 
 // main works

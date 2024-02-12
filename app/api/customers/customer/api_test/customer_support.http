@@ -8,6 +8,10 @@ GET {{host}}{{routeName}}/details/1 HTTP/1.1
 
 
 ###
+GET {{host}}{{routeName}}/variant/details/1 HTTP/1.1
+
+
+###
 DELETE {{host}}{{routeName}}/delete/8 HTTP/1.1
 
 ###

@@ -10,6 +10,8 @@ const Group_customer_Datatable = db.customer_group_customers
 const Variant_customer_Datatable = db.customer_variant_customers
 const Calender_event_Datatable = db.calender_events
 const Relevent_document_Datatable = db.customer_relevent_documents
+const variant_dataTable = db.customer_variants
+const variant_value_dataTable = db.customer_variant_values
 
 // main works
 
@@ -63,6 +65,26 @@ const get = async (req, res) => {
     res.status(200).json({customer,contact_number,group_customer,variant_customer,calender_event,relevent_document})
 }
 
+
+// 3. get single item
+
+const getVariantCustomer = async (req, res) => {
+    let id = req.params.id
+    let item = await Customer_DataTable.findOne({ 
+        where: { 
+            id: id 
+        }, 
+        include: [
+            {
+                model: variant_dataTable,
+                include: [variant_value_dataTable]
+            }
+        ]
+    })
+    res.status(200).send(item)
+}
+
+
 // 4. update items
 
 const update = async (req, res) => {
@@ -98,5 +120,6 @@ module.exports = {
     update,
     destroy,
     getPublisheditem,
-    PaginateData
+    PaginateData,
+    getVariantCustomer
 }

@@ -4,7 +4,7 @@
 GET {{host}}{{routeName}} HTTP/1.1
 
 ###
-GET {{host}}{{routeName}}/details/3 HTTP/1.1
+GET {{host}}{{routeName}}/details/1 HTTP/1.1
 
 
 ###
