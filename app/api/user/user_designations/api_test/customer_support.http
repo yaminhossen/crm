@@ -1,22 +1,23 @@
 @routeName = user-designation
+@host = http://localhost:8082/api/
 
-GET http://localhost:8082/{{routeName}} HTTP/1.1
-
-###
-GET http://localhost:8082/{{routeName}}/details/1 HTTP/1.1
-
+GET {{host}}{{routeName}} HTTP/1.1
 
 ###
-GET http://localhost:8082/user/2/designation HTTP/1.1
-
-
+GET {{host}}{{routeName}}/details/1 HTTP/1.1
 
 
 ###
-DELETE http://localhost:8082/{{routeName}}/delete/4 HTTP/1.1
+GET {{host}}user/2/designation HTTP/1.1
+
+
+
 
 ###
-POST http://localhost:8082/{{routeName}}/store HTTP/1.1
+DELETE {{host}}{{routeName}}/delete/4 HTTP/1.1
+
+###
+POST {{host}}{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {

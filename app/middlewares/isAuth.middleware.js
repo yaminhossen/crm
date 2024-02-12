@@ -19,7 +19,7 @@ const isAuth = async (req, res, next) => {
 		if(/^[^.]*$/.test(req.originalUrl)){
 			req.session.prev_auth_url = req.originalUrl;
 		}
-		res.redirect("/login");
+		res.redirect("/api/login");
 	}
 };
 

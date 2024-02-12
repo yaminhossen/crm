@@ -1,20 +1,21 @@
 @routeName = customer-support-ticket
+@host = http://localhost:8082/api/
 
-GET http://localhost:8082/{{routeName}} HTTP/1.1
-
-###
-GET http://localhost:8082/{{routeName}}/details/4 HTTP/1.1
-
+GET {{host}}{{routeName}} HTTP/1.1
 
 ###
-GET http://localhost:8082/user/1/support-ticket HTTP/1.1
+GET {{host}}{{routeName}}/details/4 HTTP/1.1
 
 
 ###
-DELETE http://localhost:8082/{{routeName}}/delete/2 HTTP/1.1
+GET {{host}}user/1/support-ticket HTTP/1.1
+
 
 ###
-POST http://localhost:8082/{{routeName}}/store HTTP/1.1
+DELETE {{host}}{{routeName}}/delete/2 HTTP/1.1
+
+###
+POST {{host}}{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
@@ -27,7 +28,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:8082/{{routeName}}/update/3 HTTP/1.1
+POST {{host}}{{routeName}}/update/3 HTTP/1.1
 content-type: application/json
 
 {
