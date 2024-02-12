@@ -2,27 +2,29 @@ const express = require("express");
 const isAuthMiddleware = require("../../app/middlewares/isAuth.middleware");
 const { server_locals } = require("../..");
 // const userModel = require("../../app/models/user.model");
-const userModel = require("../../app/api/user_demo/model/model");
+// const userModel = require("../../app/api/user/model/model");
 const router = express.Router();
 const bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken');
 
+// Database
+const db = require('../../app/api/db')
+
+// model
+const userModel = db.users
+
+
 router
-	.post("/login-submit", async function (req, res) {
-		console.log(req.body);
-		
-		// const { email, password } = req.body;
-		// console.log('pre pass', password);
-		// let user = await userModel.where({ email: email }).findOne();
-		// console.log('last pass', user);
-		
-		let user = false;
-
-		if(!user){
-			return res.status(201).json({ code: 'password match', message: 'your password match', title: 'admin', role: 1 });
-		}
-
-		/* if (user) {
+	.post("/api/login-submit", async function (req, res) {
+		console.log("request form auth routes",req.body);
+		// return;
+		const { email, password } = req.body;
+		console.log('pre pass', password);
+		let user = await userModel.where({ email: email }).findOne();
+		console.log('last pass', user);
+		console.log(user);
+		// return ;
+		if (user) {
 			console.log(user);
 			// console.log(user?.role[0]?.title);
 			// let title = user?.role[0]?.title;
@@ -61,8 +63,9 @@ router
 				return res.status(201).json({ code: 'password match', message: 'your password match', title: title, role: role });
 			}
 			return res.status(401).json({ code: 'password does not match', message: 'your crediential does not match' });
-		} */
-
+		}
+		
+		// return res.redirect("/login");
 		return res.status(401).json({ code: 'user not found', message: 'your crediential does not match' });;
 	})
 	.post("/signup-submit", async function (req, res) {

@@ -24,7 +24,7 @@
                     <div class="bg2"></div>
                     <div class="bg3"></div>
                     <div class="form_content">
-                        <form onsubmit="login()" method="POST" action="/login-submit" autocomplete="false">
+                        <form onsubmit="login()" method="POST" action="/api/login-submit" autocomplete="false">
                             <div class="form_group" id="email_input">
                                 <div class="input_body">
                                     <span class="icon material-symbols-outlined">
@@ -73,26 +73,20 @@
         }
         const login = () => {
             event.preventDefault();
-            axios.post("/login-submit", new FormData(event.currentTarget))
+            axios.post("/api/login-submit", new FormData(event.currentTarget))
                 .then(res => {
                     // {{-- localStorage.token = res.data.access_token; --}}
                     console.log('from form submitddd',res.data.role);
-                    // return;
 
                     if (res?.data?.role === 1) {
                         console.log(location.href);
                         console.log('role', 1);
                         window.toaster( "success");
-                        return location.href = "/dashboard";
+                        return location.href = "/api/dashboard";
 
                     }
-                    // if (res?.data?.title == 'RajiburRahman') {
-                    //     window.toaster( "success");
-                    //     return location.href = "/dashboard";
-
-                    // }
                     else{
-                        return location.href = "/home";
+                        return location.href = "/api/home";
                     }
 
                     console.log(res);

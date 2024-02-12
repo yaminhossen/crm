@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken');
 const isAuth = async (req, res, next) => {
-	console.log(req.cookies);
+	console.log("cookies form middleware",req.cookies);
 	let {token } = req.cookies;
 	if(token){
 		try {
