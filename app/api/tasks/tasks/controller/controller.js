@@ -60,6 +60,7 @@ const get = async (req, res) => {
             },
             {
                 model: TaskVariants,
+                include: [TaskVariantValues]
             }
         ]
     })
