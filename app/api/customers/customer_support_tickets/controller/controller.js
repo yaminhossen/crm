@@ -1,3 +1,4 @@
+const { paginate } = require('../../../../utilites/paginate')
 const db = require('../../../db')
 
 // const db = db
@@ -31,6 +32,16 @@ const All = async (req, res) => {
     
     let items = await support_ticket_table.findAll({})
     res.status(200).send(items)
+}
+
+
+// 2.1 get all data by paginate
+const PaginateData = async (req, res) => {
+    let query = {
+        order: [['id', 'DESC']], 
+    };
+    let items = await paginate(req, support_ticket_table, 10, query);
+    res.status(200).send(items);
 }
 
 // 3. get single item
@@ -86,5 +97,6 @@ module.exports = {
     update,
     destroy,
     getPublisheditem,
-    get_support_ticket
+    get_support_ticket,
+    PaginateData
 }
