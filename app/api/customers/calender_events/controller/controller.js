@@ -39,10 +39,21 @@ const All = async (req, res) => {
 
 // 2.1 get all data by paginate
 const PaginateData = async (req, res) => {
+    const { Op } = require('sequelize');
+    let searchKey = req.query.search_key;
     let query = {
-        order: [['id', 'DESC']], 
+        order: [['id', 'DESC']],
+        where: {
+            [Op.or]: [
+                { event_description: { [Op.like]: `%${searchKey}%` } },
+                { event_type: { [Op.like]: `%${searchKey}%` } },
+                { creator: { [Op.like]: `%${searchKey}%` } },
+                { event_date: { [Op.like]: `%${searchKey}%` } },
+                { customer_id: { [Op.like]: `%${searchKey}%` } },
+            ]
+        }
     };
-    let items = await paginate(req, DataTable, 10, query);
+    let items = await paginate(req, DataTable, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }
 // 3. get single item

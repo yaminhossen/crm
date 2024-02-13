@@ -93,12 +93,12 @@
                     console.log(res.data.access_token);
                 })
                 .catch(err => {
-                    let { code, data } = err.response.data;
-                    window.toaster(code, "error");
-                    console.log(data);
-                    console.log(err);
-                    var parentDiv = document.getElementById('email_input');
-                    parentDiv.insertAdjacentHTML('afterend', `<Div class="form_error text-danger">${err?.response?.data?.code}</Div>`)
+                    // let { code, data } = err.response.data;
+                    // window.toaster(code, "error");
+                    // console.log(data);
+                    // console.log(err);
+                    // var parentDiv = document.getElementById('email_input');
+                    // parentDiv.insertAdjacentHTML('afterend', `<Div class="form_error text-danger">${err?.response?.data?.code}</Div>`)
                 })
         }
     </script>

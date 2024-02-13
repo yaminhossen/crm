@@ -49,7 +49,7 @@ const PaginateData = async (req, res) => {
             ]
         }
     };
-    let items = await paginate(req, DataTable, parseInt(req.query.page_limit), query);
+    let items = await paginate(req, DataTable, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }
 

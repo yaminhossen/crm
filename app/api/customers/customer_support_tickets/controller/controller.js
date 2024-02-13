@@ -37,10 +37,20 @@ const All = async (req, res) => {
 
 // 2.1 get all data by paginate
 const PaginateData = async (req, res) => {
+    const { Op } = require('sequelize');
+    let searchKey = req.query.search_key;
     let query = {
-        order: [['id', 'DESC']], 
+        order: [['id', 'DESC']],
+        where: {
+            [Op.or]: [
+                { subject: { [Op.like]: `%${searchKey}%` } },
+                { description: { [Op.like]: `%${searchKey}%` } },
+                { customer_id: { [Op.like]: `%${searchKey}%` } },
+                { ticket_uuid: { [Op.like]: `%${searchKey}%` } },
+            ]
+        }
     };
-    let items = await paginate(req, support_ticket_table, 10, query);
+    let items = await paginate(req, support_ticket_table, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }
 

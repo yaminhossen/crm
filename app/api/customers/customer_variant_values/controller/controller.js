@@ -34,10 +34,18 @@ const All = async (req, res) => {
 
 // 2.1 get all data by paginate
 const PaginateData = async (req, res) => {
+    const { Op } = require('sequelize');
+    let searchKey = req.query.search_key;
     let query = {
-        order: [['id', 'DESC']], 
+        order: [['id', 'DESC']],
+        where: {
+            [Op.or]: [
+                { title: { [Op.like]: `%${searchKey}%` } },
+                { variant_id: { [Op.like]: `%${searchKey}%` } },
+            ]
+        }
     };
-    let items = await paginate(req, variant_values_datatable, 10, query);
+    let items = await paginate(req, variant_values_datatable, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }
 // 3. get single item
