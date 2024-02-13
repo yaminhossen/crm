@@ -43,7 +43,9 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
-        where: {
+    };
+    if (searchKey) {
+        query.where = {
             [Op.or]: [
                 { note: { [Op.like]: `%${searchKey}%` } },
                 { contact_type: { [Op.like]: `%${searchKey}%` } },
@@ -51,8 +53,8 @@ const PaginateData = async (req, res) => {
                 { customer_id: { [Op.like]: `%${searchKey}%` } },
                 { date: { [Op.like]: `%${searchKey}%` } },
             ]
-        }
-    };
+        };
+    }
     let items = await paginate(req, history_dataTable, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }

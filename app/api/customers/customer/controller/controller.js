@@ -47,15 +47,17 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
-        where: {
+    };
+    if (searchKey) {
+        query.where = {
             [Op.or]: [
                 { full_name: { [Op.like]: `%${searchKey}%` } },
                 { email: { [Op.like]: `%${searchKey}%` } },
                 { contact_number: { [Op.like]: `%${searchKey}%` } },
                 { uuid: { [Op.like]: `%${searchKey}%` } },
             ]
-        }
-    };
+        };
+    }
     let items = await paginate(req, Customer_DataTable, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }
