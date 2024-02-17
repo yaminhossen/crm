@@ -4,7 +4,7 @@
 GET {{host}}{{routeName}} HTTP/1.1
 
 ###
-GET {{host}}{{routeName}}/details/2 HTTP/1.1
+GET {{host}}{{routeName}}/details/22 HTTP/1.1
 
 
 ###
@@ -19,19 +19,24 @@ POST {{host}}{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
+        "user_uid": "alif",
         "user_name": "alif",
-        "password": "1234",
+        "password": "32323",
+        "confirm_password": "111",
         "email": "alif@gmail.com",
         "role": "admin"
 }
 
 ###
-POST {{host}}{{routeName}}/update/1 HTTP/1.1
+POST {{host}}{{routeName}}/update HTTP/1.1
 content-type: application/json
 
 {
-        "user_name": "sagir",
+        "id":22,
+        "user_uid": 26,
+        "user_name": "mahmud yamin",
         "password": "1234",
+        "confirm_password": "1234",
         "email": "sagir@gmail.com",
         "role": "student"
 }

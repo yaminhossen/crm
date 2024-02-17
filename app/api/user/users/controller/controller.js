@@ -15,11 +15,13 @@ const departmentDataTable = db.user_work_departments
 // 1. create item
 
 const store = async (req, res) => {
+    console.log("req body test backend store", req.body);
 
     let info = {
         user_uid: req.body.user_uid,
         user_name: req.body.user_name,
         password: req.body.password,
+        confirm_password: req.body.confirm_password,
         email: req.body.email,
         role: req.body.role
     }
@@ -89,7 +91,9 @@ const get_full_details = async (req, res) => {
 
 const update = async (req, res) => {
 
-    let id = req.params.id
+    let id = req.body.id
+    console.log('req body from the edit controller', req.body.user_name, req.body.id);
+    // let id = req.params.id
     const item = await DataTable.update(req.body, { where: { id: id } })
     res.status(200).send(item)
 }

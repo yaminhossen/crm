@@ -5,6 +5,9 @@ const db = require('../../../db')
 
 // create main model 
 const DataTable = db.user_work_users
+const userDataTable = db.users
+const UserWorkDataTable = db.user_works
+const userWorkDepartDataTable = db.user_work_departments
 
 // main works
 
