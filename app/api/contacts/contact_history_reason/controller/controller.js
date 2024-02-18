@@ -13,7 +13,7 @@ const DataTable = db.contact_history_reasons
 const store = async (req, res) => {
 
     let info = {
-        customer_id: req.body.customer_id,
+        contact_histories_id: req.body.contact_histories_id,
         reason_id: req.body.reason_id
     }
 

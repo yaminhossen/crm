@@ -15,7 +15,7 @@ POST {{host}}{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "customer_id": 3,
+        "contact_histories_id": 3,
         "reason_id": 1
 }
 
@@ -24,6 +24,6 @@ POST {{host}}{{routeName}}/update/2 HTTP/1.1
 content-type: application/json
 
 {
-    "customer_id": 2,
+    "contact_histories_id": 2,
         "reason_id": 2
 }
