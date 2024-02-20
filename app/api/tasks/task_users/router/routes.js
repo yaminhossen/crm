@@ -15,7 +15,7 @@ router
     // .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
     .delete(`/${prefix}/delete/:id`, controllers.destroy)
-    .post(`/${prefix}/update/:id`, controllers.update)
+    .post(`/${prefix}/update`, controllers.update)
 
     .get(`/user/:userid/task`, controllers.gettask)
     // .get(`/user/:userid/task`, controllers.gettask)

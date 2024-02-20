@@ -12,7 +12,12 @@ GET {{host}}{{routeName}}/full-details/2 HTTP/1.1
 
 
 ###
-DELETE {{host}}{{routeName}}/delete/4 HTTP/1.1
+DELETE {{host}}{{routeName}}/delete HTTP/1.1
+content-type: application/json
+
+{
+        "id": 2
+}
 
 ###
 POST {{host}}{{routeName}}/store HTTP/1.1

@@ -17,7 +17,7 @@ router
     .delete(`/${prefix}/delete/:id`, controllers.destroy)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
-    .post(`/${prefix}/update/:id`, controllers.update)
+    .post(`/${prefix}/update`, controllers.update)
     .get(`/user/:userid/department`, controllers.get_department)
     .get(`/${prefix}/details/:id`, controllers.get);
 

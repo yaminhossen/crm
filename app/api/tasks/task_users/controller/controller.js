@@ -72,7 +72,8 @@ const gettask = async (req, res) => {
 
 const update = async (req, res) => {
 
-    let id = req.params.id
+    let id = req.body.id
+    // let id = req.params.id
     const item = await DataTable.update(req.body, { where: { id: id } })
     res.status(200).send(item)
 }
