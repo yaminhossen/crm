@@ -66,7 +66,8 @@ const PaginateData = async (req, res) => {
 
 const get = async (req, res) => {
     
-    let id = req.params.id
+    try {
+        let id = req.params.id
     let customer = await Customer_DataTable.findOne({ where: { id: id }})
     let contact_number = await Contact_number_Datatable.findOne({where: {customer_id: id}})
     let group_customer = await Group_customer_Datatable.findOne({where: {customer_id: id}})
@@ -75,6 +76,9 @@ const get = async (req, res) => {
     let relevent_document = await Relevent_document_Datatable.findOne({where: {customer_id: id}})
 
     res.status(200).json({customer,contact_number,group_customer,variant_customer,calender_event,relevent_document})
+    } catch (error) {
+        
+    }
 }
 
 
@@ -101,7 +105,8 @@ const getVariantCustomer = async (req, res) => {
 
 const update = async (req, res) => {
     
-    let id = req.params.id
+    let id = req.body.id
+    // let id = req.params.id
     const item = await Customer_DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }
