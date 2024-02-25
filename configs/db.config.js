@@ -1,8 +1,8 @@
 module.exports = {
     HOST: 'localhost',
     USER: 'root',
-    PASSWORD: '1234',
-    DB: 'sequelize',
+    PASSWORD: '',
+    DB: 'crm',
     dialect: 'mysql',
 
     pool: {
