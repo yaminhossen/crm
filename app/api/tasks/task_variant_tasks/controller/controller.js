@@ -27,7 +27,7 @@ const store = async (req, res) => {
 
 const All = async (req, res) => {
     
-    let items = await DataTable.findAll({})
+    let items = await DataTable.findAll()
     res.status(200).send(items)
 }
 
@@ -65,7 +65,7 @@ const get = async (req, res) => {
 
 const update = async (req, res) => {
     
-    let id = req.params.id
+    let id = req.body.id
     const item = await DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }

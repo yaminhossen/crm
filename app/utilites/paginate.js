@@ -14,6 +14,9 @@ async function getDataWithPagination(req, page, pageSize, model, query) {
     const users = await model.findAndCountAll({
         offset,
         limit,
+        where: {
+            status: 1 
+        },
         ...query,
     });
 

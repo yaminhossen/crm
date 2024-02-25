@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 1
         },
         priority: {
-            type: DataTypes.ENUM(['high', 'emergency', 'low'])
+            type: DataTypes.ENUM(['high', 'emergency','medium', 'low'])
         },
         assigned_to: {
             type: DataTypes.BIGINT

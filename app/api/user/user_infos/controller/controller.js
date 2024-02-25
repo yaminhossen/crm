@@ -77,20 +77,43 @@ const getinfo = async (req, res) => {
 
 const update = async (req, res) => {
     
-    let id = req.params.id
+    let id = req.body.id
+    // let id = req.params.id
     const item = await DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }
 
+// // 5. delete item
+
+// const destroy = async (req, res) => {
+    
+//     let id = req.params.id
+//     await DataTable.destroy({ where: { id: id }})
+//     res.status(200).send('item is deleted !')
+// }
+
 // 5. delete item
 
 const destroy = async (req, res) => {
-    
-    let id = req.params.id
-    await DataTable.destroy({ where: { id: id }})
-    res.status(200).send('item is deleted !')
-}
 
+    // Find the model data by ID
+    let item = await DataTable.findOne({ where: { id: req.body.id } })
+    // console.log('item', item.status);
+    // res.status(200).send(item)
+
+        item.status = 0;
+
+        // // Save the changes
+        await item.save();
+        data = {
+            status: 'success',
+            data: item,
+            message: "data delete successfully",
+            status_code: 201,
+        };
+        res.status(200).send(data)
+   
+}
 // 6. get published item
 
 const getPublisheditem = async (req, res) => {

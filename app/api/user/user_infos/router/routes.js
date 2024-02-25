@@ -14,10 +14,10 @@ router
     .get(`/${prefix}`, controllers.PaginateData)
     // .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
-    .delete(`/${prefix}/delete/:id`, controllers.destroy)
+    .post(`/${prefix}/delete`, controllers.destroy)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
-    .post(`/${prefix}/update/:id`, controllers.update)
+    .post(`/${prefix}/update`, controllers.update)
     .get(`/user/:userid/info`, controllers.getinfo)
     .get(`/${prefix}/details/:id`, controllers.get);
 
