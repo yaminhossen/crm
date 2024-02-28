@@ -12,6 +12,8 @@ const Calender_event_Datatable = db.calender_events
 const Relevent_document_Datatable = db.customer_relevent_documents
 const variant_dataTable = db.customer_variants
 const variant_value_dataTable = db.customer_variant_values
+const contact_history_dataTable = db.contact_histories
+const contact_history_feedback_dataTable = db.contact_history_feedbacks
 
 // main works
 
@@ -42,10 +44,12 @@ const All = async (req, res) => {
 // 2. get customer items
 
 const GetCustomer = async (req, res) => {
+   try {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
+    console.log("search key", searchKey);
     let query = {
-        order: [['id', 'DESC']],
+        // order: [['id', 'DESC']],
     };
     if (searchKey) {
         query.where = {
@@ -62,7 +66,29 @@ const GetCustomer = async (req, res) => {
         limit: 1,
         ...query,
     });
-    res.status(200).send(customer?.rows)
+    // console.log('customer id', customer?.rows[0]?.dataValues?.id);
+    let cu_id = customer?.rows[0]?.dataValues?.id;
+
+    let Contact_history = await contact_history_dataTable.findOne({where: {customer_id: cu_id}})
+
+    let ch_id = Contact_history.dataValues.id;
+    // console.log("cusotmer his id ", ch_id);
+
+    let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({where: {contact_history_id: ch_id}})
+
+    // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
+    let newUser = customer?.rows
+    let newFeedback = Contact_history_feedback.dataValues
+    // console.log('newFeedback1', newUser);
+    // console.log('newFeedback', newFeedback);
+    res.status(200).send({
+        newUser,
+        newFeedback,
+        Contact_history
+    })
+   } catch (error) {
+    
+   }
 }
 
 
