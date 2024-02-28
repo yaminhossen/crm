@@ -15,7 +15,7 @@ POST {{host}}{{routeName}}/store HTTP/1.1
 content-type: application/json
 
 {
-        "variant_id": "123",
+        "variant_id": 33,
         "title": "Tarek don"
 }
 
@@ -24,6 +24,6 @@ POST {{host}}{{routeName}}/update/1 HTTP/1.1
 content-type: application/json
 
 {
-    "variant_id": "55",
+    "variant_id": 55,
         "title": "Momin don"
 }

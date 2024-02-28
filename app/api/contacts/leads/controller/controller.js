@@ -35,7 +35,7 @@ const All = async (req, res) => {
 }
 
 
-// 2.1 get all data by paginate
+// 2.1 get all the data by paginate
 const PaginateData = async (req, res) => {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
@@ -69,7 +69,8 @@ const get = async (req, res) => {
 
 const update = async (req, res) => {
     
-    let id = req.params.id
+    let id = req.body.id
+    // let id = req.params.id
     const item = await DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }

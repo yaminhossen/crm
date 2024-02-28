@@ -19,7 +19,7 @@ router
     .post(`/${prefix}/delete`, controllers.destroy)
     // .post(`/${prefix}/restore`, controllers.restore)
     // .post(`/${prefix}/destroy`, controllers.destroy)
-    .post(`/${prefix}/update/:id`, controllers.update)
+    .post(`/${prefix}/update`, controllers.update)
     .get(`/${prefix}/details/:id`, controllers.get);
 
 

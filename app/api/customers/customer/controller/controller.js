@@ -75,6 +75,20 @@ const get = async (req, res) => {
     let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
 
     res.status(200).json({ customer, contact_number, group_customer, variant_customer, calender_event, relevent_document })
+    
+    try {
+        let id = req.params.id
+    let customer = await Customer_DataTable.findOne({ where: { id: id }})
+    let contact_number = await Contact_number_Datatable.findOne({where: {customer_id: id}})
+    let group_customer = await Group_customer_Datatable.findOne({where: {customer_id: id}})
+    let variant_customer = await Variant_customer_Datatable.findOne({where: {customer_id: id}})
+    let calender_event = await Calender_event_Datatable.findOne({where: {customer_id: id}})
+    let relevent_document = await Relevent_document_Datatable.findOne({where: {customer_id: id}})
+
+    res.status(200).json({customer,contact_number,group_customer,variant_customer,calender_event,relevent_document})
+    } catch (error) {
+        
+    }
 }
 
 
@@ -100,9 +114,16 @@ const getVariantCustomer = async (req, res) => {
 // 4. update items
 
 const update = async (req, res) => {
+<<<<<<< HEAD
 
     let id = req.params.id
     const item = await Customer_DataTable.update(req.body, { where: { id: id } })
+=======
+    
+    let id = req.body.id
+    // let id = req.params.id
+    const item = await Customer_DataTable.update(req.body, { where: { id: id }})
+>>>>>>> 851bd4e345a5b0fc4f823eaaab83928a370ec00f
     res.status(200).send(item)
 }
 

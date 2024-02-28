@@ -53,19 +53,38 @@ const PaginateData = async (req, res) => {
 // 3. get single item
 
 const get = async (req, res) => {
+<<<<<<< HEAD
 
     let id = req.params.id
     let customer_variant_value = await variant_values_datatable.findOne({ where: { id: id } })
     let customer_variant_customer = await variant_customer_datatables.findOne({ where: { variant_value_id: id } })
     res.status(200).json({ customer_variant_value, customer_variant_customer })
+=======
+    
+   try {
+    let id = req.params.id
+    let customer_variant_value = await variant_values_datatable.findOne({ where: { id: id }})
+    let customer_variant_customer = await variant_customer_datatables.findOne({ where: { variant_value_id: id }})
+    res.status(200).json({customer_variant_value,customer_variant_customer})
+   } catch (error) {
+    
+   }
+>>>>>>> 851bd4e345a5b0fc4f823eaaab83928a370ec00f
 }
 
 // 4. update items
 
 const update = async (req, res) => {
+<<<<<<< HEAD
 
     let id = req.params.id
     const item = await variant_values_datatable.update(req.body, { where: { id: id } })
+=======
+    
+    let id = req.body.id
+    // let id = req.params.id
+    const item = await variant_values_datatable.update(req.body, { where: { id: id }})
+>>>>>>> 851bd4e345a5b0fc4f823eaaab83928a370ec00f
     res.status(200).send(item)
 }
 
