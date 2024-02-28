@@ -89,9 +89,8 @@ const update = async (req, res) => {
 //     res.status(200).send('item is deleted !')
 // }
 
-
+// copy...
 // 5. delete item
-
 const destroy = async (req, res) => {
 
     // Find the model data by ID
@@ -112,6 +111,7 @@ const destroy = async (req, res) => {
         res.status(200).send(data)
    
 }
+
 // 6. get published item
 
 const getPublisheditem = async (req, res) => {

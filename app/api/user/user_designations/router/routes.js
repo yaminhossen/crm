@@ -14,7 +14,10 @@ router
     .get(`/${prefix}`, controllers.PaginateData)
     // .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
+
+   // copy...
     .post(`/${prefix}/delete`, controllers.destroy)
+
     .post(`/${prefix}/update`, controllers.update)
     .get(`/user/:userid/designation`, controllers.get_designation)
     .get(`/${prefix}/details/:id`, controllers.get);
