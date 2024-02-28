@@ -35,7 +35,7 @@ const All = async (req, res) => {
 }
 
 
-// 2.1 get all data by paginate
+// 2.1 get all the data by paginate
 const PaginateData = async (req, res) => {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
