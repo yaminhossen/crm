@@ -39,6 +39,13 @@ const All = async (req, res) => {
     let items = await Customer_DataTable.findAll({})
     res.status(200).send(items)
 }
+// 2. get customer items
+
+const GetCustomer = async (req, res) => {
+    console.log('form get customer controller');
+    let customer = await Customer_DataTable.findOne({ where: { id: 2 }})
+    res.status(200).send(customer)
+}
 
 
 // 2.1 get all data by paginate
@@ -138,5 +145,6 @@ module.exports = {
     destroy,
     getPublisheditem,
     PaginateData,
-    getVariantCustomer
+    getVariantCustomer,
+    GetCustomer
 }

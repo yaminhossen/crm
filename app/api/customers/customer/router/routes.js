@@ -12,6 +12,8 @@ const router = express.Router();
 let prefix = 'customer'
 router
     .get(`/${prefix}`, controllers.PaginateData)
+    .get(`/customer-info`, controllers.GetCustomer)
+    // .get(`/${prefix}`, controllers.All)
     // .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
     .delete(`/${prefix}/delete/:id`, controllers.destroy)
