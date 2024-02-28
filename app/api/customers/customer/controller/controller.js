@@ -42,14 +42,33 @@ const All = async (req, res) => {
 // 2. get customer items
 
 const GetCustomer = async (req, res) => {
-    console.log('form get customer controller');
-    let customer = await Customer_DataTable.findOne({ where: { id: 2 }})
-    res.status(200).send(customer)
+    const { Op } = require('sequelize');
+    let searchKey = req.query.search_key;
+    let query = {
+        order: [['id', 'DESC']],
+    };
+    if (searchKey) {
+        query.where = {
+            [Op.or]: [
+                { contact_number: { [Op.like]: `%${searchKey}%` } },
+            ]
+        };
+    }
+    let customer = await Customer_DataTable.findAndCountAll({
+       
+        where: {
+            status: 1 
+        },
+        limit: 1,
+        ...query,
+    });
+    res.status(200).send(customer?.rows)
 }
 
 
 // 2.1 get all data by paginate
 const PaginateData = async (req, res) => {
+    console.log("customer custoemr");
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
     let query = {
@@ -65,6 +84,7 @@ const PaginateData = async (req, res) => {
             ]
         };
     }
+    console.log('paginate query from controller', query);
     let items = await paginate(req, Customer_DataTable, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }
