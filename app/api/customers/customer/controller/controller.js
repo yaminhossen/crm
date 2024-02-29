@@ -121,16 +121,10 @@ const getVariantCustomer = async (req, res) => {
 // 4. update items
 
 const update = async (req, res) => {
-<<<<<<< HEAD
-
-    let id = req.params.id
-    const item = await Customer_DataTable.update(req.body, { where: { id: id } })
-=======
     
     let id = req.body.id
     // let id = req.params.id
     const item = await Customer_DataTable.update(req.body, { where: { id: id }})
->>>>>>> 851bd4e345a5b0fc4f823eaaab83928a370ec00f
     res.status(200).send(item)
 }
 

@@ -17,8 +17,6 @@ router
     // .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
     .post(`/${prefix}/delete`, controllers.destroy)
-    .post(`/${prefix}/update/:id`, controllers.update)
-    .delete(`/${prefix}/delete/:id`, controllers.destroy)
     .post(`/${prefix}/update`, controllers.update)
     .get(`/${prefix}/variant/details/:id`, controllers.getVariantCustomer)
     .get(`/${prefix}/details/:id`, controllers.get);
