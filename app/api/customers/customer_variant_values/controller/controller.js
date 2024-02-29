@@ -26,7 +26,7 @@ const store = async (req, res) => {
 // 2. get all items
 
 const All = async (req, res) => {
-    
+
     let items = await variant_values_datatable.findAll({})
     res.status(200).send(items)
 }
@@ -47,7 +47,7 @@ const PaginateData = async (req, res) => {
             ]
         };
     }
-    let items = await paginate(req, variant_values_datatable, parseInt(req.query.page_limit||10), query);
+    let items = await paginate(req, variant_values_datatable, parseInt(req.query.page_limit || 10), query);
     res.status(200).send(items);
 }
 // 3. get single item
@@ -76,18 +76,38 @@ const update = async (req, res) => {
 
 // 5. delete item
 
-const destroy = async (req, res) => {
-    
-    let id = req.params.id
-    await variant_values_datatable.destroy({ where: { id: id }})
-    res.status(200).send('item is deleted !')
-}
+// const destroy = async (req, res) => {
 
+//     let id = req.params.id
+//     await variant_values_datatable.destroy({ where: { id: id }})
+//     res.status(200).send('item is deleted !')
+// }
+// 5. delete item
+const destroy = async (req, res) => {
+
+    // Find the model data by ID
+    let item = await variant_values_datatable.findOne({ where: { id: req.body.id } })
+    // console.log('item', item.status);
+    // res.status(200).send(item)
+
+    item.status = 0;
+
+    // // Save the changes
+    await item.save();
+    data = {
+        status: 'success',
+        data: item,
+        message: "data delete successfully",
+        status_code: 201,
+    };
+    res.status(200).send(data)
+
+}
 // 6. get published item
 
 const getPublisheditem = async (req, res) => {
 
-    const items = await variant_values_datatable.findAll({ where: { published: true }})
+    const items = await variant_values_datatable.findAll({ where: { published: true } })
     res.status(200).send(items)
 }
 
