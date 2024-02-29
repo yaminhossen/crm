@@ -10,6 +10,8 @@
 async function getDataWithPagination(req, page, pageSize, model, query) {
     const offset = (page - 1) * pageSize;
     const limit = pageSize;
+    // console.log('pagination query fofrm paginate', query);
+
 
     const users = await model.findAndCountAll({
         offset,
