@@ -6,7 +6,10 @@ const db = require('../../../db')
 // create main model 
 const Customer_DataTable = db.customers
 const Contact_number_Datatable = db.customer_contact_numbers
-const Group_customer_Datatable = db.customer_group_customers
+const group_Datatable = db.customer_groups
+const reason_Datatable = db.contact_reasons
+const user_Datatable = db.users
+const group_customer_Datatable = db.customer_group_customers
 const Variant_customer_Datatable = db.customer_variant_customers
 const Calender_event_Datatable = db.calender_events
 const Relevent_document_Datatable = db.customer_relevent_documents
@@ -41,9 +44,91 @@ const All = async (req, res) => {
     let items = await Customer_DataTable.findAll({})
     res.status(200).send(items)
 }
+
 // 2. get customer items
 
 const GetCustomer = async (req, res) => {
+   try {
+    const { Op } = require('sequelize');
+    let searchKey = req.query.search_key;
+    // console.log("search key", searchKey);
+    let query = {
+        // order: [['id', 'DESC']],
+    };
+    if (searchKey) {
+        query.where = {
+            [Op.or]: [
+                { contact_number: { [Op.like]: `${searchKey}%` } },
+            ]
+        };
+    }
+    let customer = await Customer_DataTable.findOne({
+       
+        where: {
+            status: 1 
+        },
+        // limit: 1,
+        ...query,
+    });
+    // console.log('customer query',query);
+    let cu_id = customer?.dataValues?.id;
+
+    let Contact_history = await contact_history_dataTable.findOne({where: {customer_id: cu_id}})
+
+    let ch_id = Contact_history.dataValues.id;
+    // console.log("cusotmer his id ", ch_id);
+
+    let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({where: {contact_history_id: ch_id}})
+
+    // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
+    let newUser = customer
+    let newFeedback = Contact_history_feedback.dataValues
+    // console.log('newFeedback1', customer);
+    // console.log('newFeedback', newFeedback);
+    let items = await group_Datatable.findAll({})
+    let reasons = await reason_Datatable.findAll({})
+    let variants = await variant_dataTable.findAll({})
+    let variant_values = await variant_value_dataTable.findAll({})
+   
+    let users = 'kkkk'
+    res.status(200).json({
+        newUser,
+        newFeedback,
+        Contact_history,
+        items,
+        reasons,
+        variants,
+        variant_values,
+        users
+        // item
+    })
+   } catch (error) {
+    
+   }
+}
+
+// 3. get single item
+
+const GetUser = async (req, res) => {
+    let users = []
+    try {
+        users = await user_Datatable.findAll({
+            where: {
+                role: 'employee'
+            }
+        })
+
+    } catch (error) {
+        
+    }
+    res.status(200).json({
+        users
+    })
+}
+
+/* // 2. get customer items
+
+const GetCustomer2 = async (req, res) => {
    try {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
@@ -54,21 +139,36 @@ const GetCustomer = async (req, res) => {
     if (searchKey) {
         query.where = {
             [Op.or]: [
-                { contact_number: { [Op.like]: `%${searchKey}%` } },
+                { contact_number: { [Op.like]: `${searchKey}%` } },
             ]
         };
     }
-    let customer = await Customer_DataTable.findAndCountAll({
+    let customer = await Customer_DataTable.findOne({
        
         where: {
             status: 1 
         },
-        limit: 1,
+        // limit: 1,
         ...query,
     });
-    // console.log('customer id', customer?.rows[0]?.dataValues?.id);
-    let cu_id = customer?.rows[0]?.dataValues?.id;
-
+    console.log('customer query',customer);
+    let cu_id = customer?.dataValues?.id;
+    // console.log('customer id', cu_id);
+    // let item = await Customer_DataTable.findOne({ 
+    //     where: { 
+    //         id: cu_id 
+    //     }, 
+    //     include: [
+    //         {
+    //             model: variant_dataTable,
+    //             include: [variant_value_dataTable]
+    //         },
+    //         {
+    //             model: group_Datatable,
+    //             include: [group_customer_Datatable]
+    //         }
+    //     ]
+    // })
     let Contact_history = await contact_history_dataTable.findOne({where: {customer_id: cu_id}})
 
     let ch_id = Contact_history.dataValues.id;
@@ -77,19 +177,20 @@ const GetCustomer = async (req, res) => {
     let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({where: {contact_history_id: ch_id}})
 
     // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
-    let newUser = customer?.rows
+    let newUser = customer
     let newFeedback = Contact_history_feedback.dataValues
-    // console.log('newFeedback1', newUser);
+    console.log('newFeedback1', customer);
     // console.log('newFeedback', newFeedback);
-    res.status(200).send({
+    res.status(200).json({
         newUser,
         newFeedback,
-        Contact_history
+        Contact_history,
+        // item
     })
    } catch (error) {
     
    }
-}
+} */
 
 
 // 2.1 get all data by paginate
@@ -132,6 +233,24 @@ const get = async (req, res) => {
     } catch (error) {
         
     }
+}
+// 3. get2 single item
+
+const get2 = async (req, res) => {
+    let id = req.params.id
+    let item = await Customer_DataTable.findOne({ 
+        where: { 
+            id: id 
+        }, 
+        include: [
+            {
+                model: group_Datatable,
+                include: [group_customer_Datatable]
+            }
+        ]
+    })
+    res.status(200).send(item)
+   
 }
 
 
@@ -192,5 +311,7 @@ module.exports = {
     getPublisheditem,
     PaginateData,
     getVariantCustomer,
-    GetCustomer
+    GetCustomer,
+    get2,
+    GetUser
 }

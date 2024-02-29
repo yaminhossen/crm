@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
         role: {
-            type: DataTypes.ENUM('admin', 'moderator', 'student')
+            type: DataTypes.ENUM('admin', 'moderator','employee', 'student')
         },
         status: {
             type: DataTypes.BOOLEAN,
