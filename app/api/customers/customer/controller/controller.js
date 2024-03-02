@@ -145,20 +145,13 @@ const GetCustomer = async (req, res) => {
     let newFeedback = Contact_history_feedback.dataValues
     // console.log('newFeedback1', customer);
     // console.log('newFeedback', newFeedback);
-    let items = await group_Datatable.findAll({})
-    let reasons = await reason_Datatable.findAll({})
-    let variants = await variant_dataTable.findAll({})
-    let variant_values = await variant_value_dataTable.findAll({})
+   
    
     let users = 'kkkk'
     res.status(200).json({
         newUser,
         newFeedback,
         Contact_history,
-        items,
-        reasons,
-        variants,
-        variant_values,
         users
         // item
     })
@@ -171,18 +164,30 @@ const GetCustomer = async (req, res) => {
 
 const GetUser = async (req, res) => {
     let users = []
+    let items = []
+    let reasons = []
+    let variants = []
+    let variant_values = []
     try {
         users = await user_Datatable.findAll({
             where: {
                 role: 'employee'
             }
-        })
+        });
+        items = await group_Datatable.findAll({});
+        reasons = await reason_Datatable.findAll({});
+        variants = await variant_dataTable.findAll({});
+        variant_values = await variant_value_dataTable.findAll({});
 
     } catch (error) {
         
     }
     res.status(200).json({
-        users
+        users,
+        items,
+        reasons,
+        variants,
+        variant_values,
     })
 }
 
