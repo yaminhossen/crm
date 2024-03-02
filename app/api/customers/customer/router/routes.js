@@ -13,6 +13,7 @@ let prefix = 'customer'
 router
     .get(`/${prefix}`, controllers.PaginateData)
     .get(`/customer-info`, controllers.GetCustomer)
+    .post(`/customer-info/store`, controllers.storeCRM)
     .get(`/all-user`, controllers.GetUser)
     // .get(`/${prefix}`, controllers.All)
     // .get(`/${prefix}`, controllers.All)
