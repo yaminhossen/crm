@@ -42,14 +42,14 @@ const store = async (req, res) => {
 }
 const storeCRM = async (req, res) => {
     let ccn = req.body.customer_contact_number;
-
+    console.log('customer group', req.body);
     for (const element of ccn) {
         let ccnInfo = {
             customer_id: req.body.id,
             details: element,
 
         }
-        const cvnt = await Contact_number_Datatable.create(ccnInfo)
+        // const cvnt = await Contact_number_Datatable.create(ccnInfo)
     }
     let customer_variants = req.body.customer_variants;
     let customer_id = req.body.id;
@@ -61,7 +61,7 @@ const storeCRM = async (req, res) => {
             variant_value_id: customer_variants[key],
             customer_id: customer_id,
         }
-        const cvct = await cvc_dataTable.create(cvcInfo)
+        // const cvct = await cvc_dataTable.create(cvcInfo)
       }
     
     let customer = {
@@ -108,14 +108,14 @@ const storeCRM = async (req, res) => {
 
     }
 
-    const customert = await Customer_DataTable.create(customer)
-    const feedbackt = await contact_history_feedback_dataTable.create(feedback)
-    const leadt = await lead_dataTable.create(lead)
-    const reasont = await contact_reason_dataTable.create(contact_reason)
-    const appointmentt = await contact_appointment_dataTable.create(contact_appointment)
-    const event = await Calender_event_Datatable.create(calender_event)
-    const groupt = await group_Datatable.create(customer_group)
-    const contactt = await contact_history_dataTable.create(contact_type)
+    // const customert = await Customer_DataTable.create(customer)
+    // const feedbackt = await contact_history_feedback_dataTable.create(feedback)
+    // const leadt = await lead_dataTable.create(lead)
+    // const reasont = await contact_reason_dataTable.create(contact_reason)
+    // const appointmentt = await contact_appointment_dataTable.create(contact_appointment)
+    // const event = await Calender_event_Datatable.create(calender_event)
+    // const groupt = await group_Datatable.create(customer_group)
+    // const contactt = await contact_history_dataTable.create(contact_type)
     // res.status(200).send(item)
 
 }
