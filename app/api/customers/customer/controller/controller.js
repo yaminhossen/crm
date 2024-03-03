@@ -138,46 +138,62 @@ const GetCustomer = async (req, res) => {
     let query = {
         // order: [['id', 'DESC']],
     };
-    if (searchKey) {
+    if (searchKey.length) {
         query.where = {
             [Op.or]: [
                 { contact_number: { [Op.like]: `${searchKey}%` } },
             ]
         };
-    }
-    let customer = await Customer_DataTable.findOne({
+        let customer = await Customer_DataTable.findOne({
        
-        where: {
-            status: 1 
-        },
-        // limit: 1,
-        ...query,
-    });
-    // console.log('customer query',query);
-    let cu_id = customer?.dataValues?.id;
-
-    let Contact_history = await contact_history_dataTable.findOne({where: {customer_id: cu_id}})
-
-    let ch_id = Contact_history.dataValues.id;
-    // console.log("cusotmer his id ", ch_id);
-
-    let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({where: {contact_history_id: ch_id}})
-
-    // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
-    let newUser = customer
-    let newFeedback = Contact_history_feedback.dataValues
-    // console.log('newFeedback1', customer);
-    // console.log('newFeedback', newFeedback);
+            where: {
+                status: 1 
+            },
+            // limit: 1,
+            ...query,
+        });
+        // console.log('customer query',query);
+        let cu_id = customer?.dataValues?.id;
+    
+        let Contact_history = await contact_history_dataTable.findOne({where: {customer_id: cu_id}})
+    
+        let ch_id = Contact_history.dataValues.id;
+        // console.log("cusotmer his id ", ch_id);
+    
+        let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({where: {contact_history_id: ch_id}})
+    
+        // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
+        let newUser = customer
+        let newFeedback = Contact_history_feedback.dataValues
+        // console.log('newFeedback1', customer);
+        // console.log('newFeedback', newFeedback);
+       
+       
+        let users = 'kkkk'
+        res.status(200).json({
+            newUser,
+            newFeedback,
+            Contact_history,
+            users
+            // item
+        })
+    }
+    if(searchKey.length == 0){
+       let newUser =[]
+       let newFeedback = []
+       let Contact_history =[]
+       let users = []
+        res.status(200).json({
+            newUser,
+            newFeedback,
+            Contact_history,
+            users
+            // item
+            // item
+        })
+    }
    
-   
-    let users = 'kkkk'
-    res.status(200).json({
-        newUser,
-        newFeedback,
-        Contact_history,
-        users
-        // item
-    })
+  
    } catch (error) {
     
    }
