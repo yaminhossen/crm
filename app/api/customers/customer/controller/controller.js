@@ -20,6 +20,7 @@ const contact_history_feedback_dataTable = db.contact_history_feedbacks
 const lead_dataTable = db.leads
 const contact_reason_dataTable = db.contact_reasons
 const contact_appointment_dataTable = db.contact_appointments
+const cvc_dataTable = db.customer_variant_customers
 
 // main works
 
@@ -40,6 +41,28 @@ const store = async (req, res) => {
 
 }
 const storeCRM = async (req, res) => {
+    let ccn = req.body.customer_contact_number;
+
+    for (const element of ccn) {
+        let ccnInfo = {
+            customer_id: req.body.id,
+            details: element,
+
+        }
+        const cvnt = await Contact_number_Datatable.create(ccnInfo)
+    }
+    let customer_variants = req.body.customer_variants;
+    let customer_id = req.body.id;
+
+    for (let key in customer_variants) {
+        let id = key.split('_')[1]
+        let cvcInfo = {
+            variant_id: id,
+            variant_value_id: customer_variants[key],
+            customer_id: customer_id,
+        }
+        const cvct = await cvc_dataTable.create(cvcInfo)
+      }
     
     let customer = {
         full_name: req.body.full_name,
@@ -162,7 +185,7 @@ const GetCustomer = async (req, res) => {
 
 // 3. get single item
 
-const GetUser = async (req, res) => {
+const GetDependancy = async (req, res) => {
     let users = []
     let items = []
     let reasons = []
@@ -407,6 +430,6 @@ module.exports = {
     getVariantCustomer,
     GetCustomer,
     get2,
-    GetUser,
+    GetDependancy,
     storeCRM,
 }

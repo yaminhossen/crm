@@ -14,7 +14,7 @@ router
     .get(`/${prefix}`, controllers.PaginateData)
     .get(`/customer-info`, controllers.GetCustomer)
     .post(`/customer-info/store`, controllers.storeCRM)
-    .get(`/all-user`, controllers.GetUser)
+    .get(`/crm-dependancy`, controllers.GetDependancy)
     // .get(`/${prefix}`, controllers.All)
     // .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
