@@ -42,7 +42,7 @@ const store = async (req, res) => {
 }
 const storeCRM = async (req, res) => {
     let ccn = req.body.customer_contact_number;
-    console.log('customer group', req.body);
+    // console.log('customer group', req.body.customer_group);
     for (const element of ccn) {
         let ccnInfo = {
             customer_id: req.body.id,
@@ -78,10 +78,16 @@ const storeCRM = async (req, res) => {
         contact_type: req.body.contact_type,
 
     }
-    let customer_group = {
-        customer_group: req.body.customer_group,
+    let customer_group_customer = req.body.customer_group_customer;
+    for (const element of customer_group_customer) {
+        let group = {
+            customer_group_id: element,
+            customer_id: customer_id,
 
+        }
+        const groupt = await group_customer_Datatable.create(group)
     }
+    
     let calender_event = {
         customer_event_date: req.body.customer_event_date,
         customer_event_type: req.body.customer_event_type,
@@ -114,7 +120,7 @@ const storeCRM = async (req, res) => {
     // const reasont = await contact_reason_dataTable.create(contact_reason)
     // const appointmentt = await contact_appointment_dataTable.create(contact_appointment)
     // const event = await Calender_event_Datatable.create(calender_event)
-    // const groupt = await group_Datatable.create(customer_group)
+    // 
     // const contactt = await contact_history_dataTable.create(contact_type)
     // res.status(200).send(item)
 
