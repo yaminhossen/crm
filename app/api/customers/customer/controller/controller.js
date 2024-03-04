@@ -8,6 +8,7 @@ const Customer_DataTable = db.customers
 const Contact_number_Datatable = db.customer_contact_numbers
 const group_Datatable = db.customer_groups
 const reason_Datatable = db.contact_reasons
+const history_reason_Datatable = db.contact_history_reasons
 const user_Datatable = db.users
 const group_customer_Datatable = db.customer_group_customers
 const Variant_customer_Datatable = db.customer_variant_customers
@@ -21,6 +22,7 @@ const lead_dataTable = db.leads
 const contact_reason_dataTable = db.contact_reasons
 const contact_appointment_dataTable = db.contact_appointments
 const cvc_dataTable = db.customer_variant_customers
+const crm_contact_num_dataTable = db.crm_contact_numbers
 
 // main works
 
@@ -42,18 +44,17 @@ const store = async (req, res) => {
 }
 const storeCRM = async (req, res) => {
     let ccn = req.body.customer_contact_number;
-    // console.log('customer group', req.body.customer_group);
     for (const element of ccn) {
         let ccnInfo = {
             customer_id: req.body.id,
             details: element,
-
+            
         }
         // const cvnt = await Contact_number_Datatable.create(ccnInfo)
     }
     let customer_variants = req.body.customer_variants;
     let customer_id = req.body.id;
-
+    
     for (let key in customer_variants) {
         let id = key.split('_')[1]
         let cvcInfo = {
@@ -62,30 +63,57 @@ const storeCRM = async (req, res) => {
             customer_id: customer_id,
         }
         // const cvct = await cvc_dataTable.create(cvcInfo)
-      }
-    
+    }
+    console.log('crm contact number', req.body.crm_contact_number);
+    let contact_type = {
+        contact_type: req.body.contact_type,
+        contact_number_id: req.body.crm_contact_number,
+        customer_id: customer_id,
+        date: req.body.date,
+        note: req.body.contact_notes,
+
+
+    }
+    const contactt = await contact_history_dataTable.create(contact_type)
+    console.log('contact history immediate', );
     let customer = {
         full_name: req.body.full_name,
         contact_number: req.body.contact_number,
 
     }
 
+    // contact history feedback
     let feedback = {
-        feedback: req.body.feedback,
-
+        notes: req.body.feedback,
+        date: req.body.date,
+        feedback_type: req.body.feedback_type,
+        contact_history_id: contactt.dataValues.id,
     }
-    let contact_type = {
-        contact_type: req.body.contact_type,
+    const feedbackt = await contact_history_feedback_dataTable.create(feedback)
 
-    }
-    let customer_group_customer = req.body.customer_group_customer;
-    for (const element of customer_group_customer) {
-        let group = {
-            customer_group_id: element,
-            customer_id: customer_id,
-
+    // contact history reason
+    
+    let contact_reasons = req.body.contact_reason;
+    console.log('customer reason', contact_reasons);
+    for (let key of contact_reasons) {
+        console.log('contact history reaosn id ', key);
+        let history_reason = {
+            reason_id: key,
+            contact_histories_id: contactt.dataValues.id,
         }
-        const groupt = await group_customer_Datatable.create(group)
+        const chrt = await history_reason_Datatable.create(history_reason)
+    }
+
+    let customer_group_customer = req.body.customer_group_customer;
+    if(customer_group_customer.length){
+        for (const element of customer_group_customer) {
+            let group = {
+                customer_group_id: element,
+                customer_id: customer_id,
+    
+            }
+            // const groupt = await group_customer_Datatable.create(group)
+        }
     }
     
     let calender_event = {
@@ -101,7 +129,7 @@ const storeCRM = async (req, res) => {
         appointment_note: req.body.appointment_note,
 
     }
-    let contact_reason = {
+    let appointment_reason = {
         appointment_reason: req.body.appointment_reason,
 
     }
@@ -115,14 +143,14 @@ const storeCRM = async (req, res) => {
     }
 
     // const customert = await Customer_DataTable.create(customer)
-    // const feedbackt = await contact_history_feedback_dataTable.create(feedback)
+    //
     // const leadt = await lead_dataTable.create(lead)
-    // const reasont = await contact_reason_dataTable.create(contact_reason)
+    // const reasont = await contact_reason_dataTable.create(appointment_reason)
     // const appointmentt = await contact_appointment_dataTable.create(contact_appointment)
     // const event = await Calender_event_Datatable.create(calender_event)
     // 
-    // const contactt = await contact_history_dataTable.create(contact_type)
-    // res.status(200).send(item)
+    // 
+    res.status(200).send('ok')
 
 }
 
@@ -213,6 +241,7 @@ const GetDependancy = async (req, res) => {
     let reasons = []
     let variants = []
     let variant_values = []
+    let crm_contact_nums = []
     try {
         users = await user_Datatable.findAll({
             where: {
@@ -223,6 +252,7 @@ const GetDependancy = async (req, res) => {
         reasons = await reason_Datatable.findAll({});
         variants = await variant_dataTable.findAll({});
         variant_values = await variant_value_dataTable.findAll({});
+        crm_contact_nums = await crm_contact_num_dataTable.findAll({});
 
     } catch (error) {
         
@@ -233,6 +263,7 @@ const GetDependancy = async (req, res) => {
         reasons,
         variants,
         variant_values,
+        crm_contact_nums,
     })
 }
 
