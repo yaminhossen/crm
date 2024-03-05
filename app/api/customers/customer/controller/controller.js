@@ -175,7 +175,10 @@ const storeCRM = async (req, res) => {
     let files = req.files;
 
     const upload_files = (file, id) => {
-        let file_name = parseInt(Math.random() * 1000) + id + file.name;
+        let nname = file?.name;
+        let sname = nname.split(' ');
+        let cname = sname.join('_');
+        let file_name = parseInt(Math.random() * 1000) + id + cname;
         const path = appDir + "/public/uploads/posts/" + file_name;
         fs.move(file.path, path, function (err) {
             if (err) return console.error(err)
