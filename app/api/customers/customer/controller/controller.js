@@ -21,6 +21,7 @@ const contact_history_feedback_dataTable = db.contact_history_feedbacks
 const lead_dataTable = db.leads
 const contact_reason_dataTable = db.contact_reasons
 const contact_appointment_dataTable = db.contact_appointments
+const contact_appointment_reason_dataTable = db.contact_appointment_reasons
 const cvc_dataTable = db.customer_variant_customers
 const crm_contact_num_dataTable = db.crm_contact_numbers
 
@@ -44,6 +45,7 @@ const store = async (req, res) => {
 }
 const storeCRM = async (req, res) => {
     let ccn = req.body.customer_contact_number;
+    console.log('assigned to ', req.body.assigned_to);
     for (const element of ccn) {
         let ccnInfo = {
             customer_id: req.body.id,
@@ -74,34 +76,33 @@ const storeCRM = async (req, res) => {
 
 
     }
-    const contactt = await contact_history_dataTable.create(contact_type)
-    console.log('contact history immediate', );
+    // const contactt = await contact_history_dataTable.create(contact_type)
+    console.log('contact history immediate',req.body.contact_number );
     let customer = {
         full_name: req.body.full_name,
         contact_number: req.body.contact_number,
 
     }
 
-    // contact history feedback
+    // contact history feedback complete
     let feedback = {
         notes: req.body.feedback,
         date: req.body.date,
-        feedback_type: req.body.feedback_type,
-        contact_history_id: contactt.dataValues.id,
+        // feedback_type: req.body.feedback_type,
+        // contact_history_id: contactt.dataValues.id,
     }
-    const feedbackt = await contact_history_feedback_dataTable.create(feedback)
+    // const feedbackt = await contact_history_feedback_dataTable.create(feedback)
 
-    // contact history reason
-    
+    // contact history reason complete
     let contact_reasons = req.body.contact_reason;
     console.log('customer reason', contact_reasons);
     for (let key of contact_reasons) {
         console.log('contact history reaosn id ', key);
         let history_reason = {
             reason_id: key,
-            contact_histories_id: contactt.dataValues.id,
+            // contact_histories_id: contactt.dataValues.id,
         }
-        const chrt = await history_reason_Datatable.create(history_reason)
+        // const chrt = await history_reason_Datatable.create(history_reason)
     }
 
     let customer_group_customer = req.body.customer_group_customer;
@@ -116,38 +117,63 @@ const storeCRM = async (req, res) => {
         }
     }
     
+    // calender event complete
     let calender_event = {
-        customer_event_date: req.body.customer_event_date,
-        customer_event_type: req.body.customer_event_type,
-        customer_event_description: req.body.customer_event_description,
-        customer_event_meet_link: req.body.customer_event_meet_link,
+        customer_id: customer_id,
+        event_date: req.body.calender_event_date,
+        event_type: req.body.calender_event_type,
+        event_description: req.body.calender_event_description,
+        meet_link: req.body.calender_event_meet_link,
 
     }
+
+    const event = await Calender_event_Datatable.create(calender_event)
+
+    // contact appointments complete
     let contact_appointment = {
-        appointment_date: req.body.appointment_date,
-        appointment_contact_type: req.body.appointment_contact_type,
-        appointment_note: req.body.appointment_note,
+        date: req.body.appointment_date,
+        contact_type: req.body.appointment_contact_type,
+        note: req.body.appointment_note,
+        customer_id: customer_id,
+        contact_number_id: customer_id,
 
     }
+    // const cappointmentt = await contact_appointment_dataTable.create(contact_appointment)
+
+    
+    // contact appointment reason complete
+    console.log('contact appointment reason', contact_reasons);
+    for (let key of contact_reasons) {
+        console.log('contact history reaosn id ', key);
+        let appointment_reason = {
+            contact_reason_id: key,
+            // contact_appointment_id: cappointmentt.dataValues.id,
+        }
+        // const cart = await contact_appointment_reason_dataTable.create(appointment_reason)
+    }
+
     let appointment_reason = {
         appointment_reason: req.body.appointment_reason,
 
     }
     let lead = {
+        customer_id: customer_id,
         lead_status: req.body.lead_status,
         lead_source: req.body.lead_source,
-        lead_qualification_note: req.body.lead_qualification_note,
+        qualification_notes: req.body.lead_qualification_note,
         follow_up_date: req.body.follow_up_date,
         assigned_to: req.body.assigned_to
 
     }
+    const leadt = await lead_dataTable.create(lead)
+
 
     // const customert = await Customer_DataTable.create(customer)
     //
-    // const leadt = await lead_dataTable.create(lead)
+    // 
     // const reasont = await contact_reason_dataTable.create(appointment_reason)
-    // const appointmentt = await contact_appointment_dataTable.create(contact_appointment)
-    // const event = await Calender_event_Datatable.create(calender_event)
+   
+    //
     // 
     // 
     res.status(200).send('ok')
