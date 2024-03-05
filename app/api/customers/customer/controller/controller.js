@@ -1,5 +1,8 @@
 const { paginate } = require('../../../../utilites/paginate')
 const db = require('../../../db')
+var fs = require('fs-extra')
+const { dirname } = require('path');
+const appDir = dirname(require.main.filename);
 
 // const db = db
 
@@ -45,7 +48,7 @@ const store = async (req, res) => {
 }
 const storeCRM = async (req, res) => {
     let ccn = req.body.customer_contact_number;
-    console.log('assigned to ', req.body.assigned_to);
+    
     for (const element of ccn) {
         let ccnInfo = {
             customer_id: req.body.id,
@@ -127,7 +130,7 @@ const storeCRM = async (req, res) => {
 
     }
 
-    const event = await Calender_event_Datatable.create(calender_event)
+    // const event = await Calender_event_Datatable.create(calender_event)
 
     // contact appointments complete
     let contact_appointment = {
@@ -165,17 +168,37 @@ const storeCRM = async (req, res) => {
         assigned_to: req.body.assigned_to
 
     }
-    const leadt = await lead_dataTable.create(lead)
-
-
-    // const customert = await Customer_DataTable.create(customer)
-    //
-    // 
-    // const reasont = await contact_reason_dataTable.create(appointment_reason)
    
-    //
-    // 
-    // 
+    console.log('document body ', req.body);
+    console.log('document file ', req.files);
+    let files = req.files;
+
+    const upload_files = (file, id) => {
+        let file_name = parseInt(Math.random() * 1000) + id + file.name;
+        const path = appDir + "/public/uploads/posts/" + file_name;
+        fs.move(file.path, path, function (err) {
+            if (err) return console.error(err)
+            console.log("success!")
+        })
+        photo_path = "uploads/posts/" + file_name;
+        return photo_path;
+    }
+
+    var photo_path = "";
+
+        if (files?.docu_1) {
+            photo_path = upload_files(files?.docu_1, customer_id);
+            console.log('form photo_path', photo_path);
+        }
+
+    if(files?.docu_1){
+        let document = {
+            document_path: photo_path,
+            customer_id: customer_id,
+        }
+        const crdt = await Relevent_document_Datatable.create(document)
+    }
+
     res.status(200).send('ok')
 
 }
