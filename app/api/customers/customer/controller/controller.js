@@ -171,6 +171,7 @@ const storeCRM = async (req, res) => {
    
     console.log('document body ', req.body);
     console.log('document file ', req.files);
+    console.log('document file 3 ', req.files?.docu_3);
     let files = req.files;
 
     const upload_files = (file, id) => {
@@ -189,15 +190,38 @@ const storeCRM = async (req, res) => {
         if (files?.docu_1) {
             photo_path = upload_files(files?.docu_1, customer_id);
             console.log('form photo_path', photo_path);
+            if(files?.docu_1?.name){
+                let document = {
+                    document_path: photo_path,
+                    customer_id: customer_id,
+                }
+                const crdt = await Relevent_document_Datatable.create(document)
+            }
+        }
+        if (files?.docu_2) {
+            photo_path = upload_files(files?.docu_2, customer_id);
+            console.log('form photo_path', photo_path);
+            if(files?.docu_2?.name){
+                let document2 = {
+                    document_path: photo_path,
+                    customer_id: customer_id,
+                }
+                const crdt = await Relevent_document_Datatable.create(document2)
+            }
+        }
+        if (files?.docu_3) {
+            photo_path = upload_files(files?.docu_3, customer_id);
+            console.log('form photo_path', photo_path);
+            if(files?.docu_3?.name){
+                let document3 = {
+                    document_path: photo_path,
+                    customer_id: customer_id,
+                }
+                const crdt = await Relevent_document_Datatable.create(document3)
+            }
         }
 
-    if(files?.docu_1){
-        let document = {
-            document_path: photo_path,
-            customer_id: customer_id,
-        }
-        const crdt = await Relevent_document_Datatable.create(document)
-    }
+   
 
     res.status(200).send('ok')
 
