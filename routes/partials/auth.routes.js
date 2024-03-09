@@ -38,6 +38,7 @@ router
 				console.log('data', req?.cookies);
 				var token = await jwt.sign(data, 'yamin1234');
 				// console.log('token form ', token);
+				// localStorage.setItem('token', token)
 				res.cookie('token', token)
 				console.log('data', req?.session);
 				// console.log('res', res);
@@ -53,7 +54,7 @@ router
 						return res.redirect(prevUrl);
 					}
 				}
-				return res.status(201).json({ code: 'password match', message: 'your password match', data});
+				return res.status(201).json({ code: 'password match', message: 'your password match', token: token, data});
 			}
 			return res.status(401).json({ code: 'password does not match', message: 'your crediential does not match' });
 		}
