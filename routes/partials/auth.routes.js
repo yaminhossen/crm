@@ -16,7 +16,7 @@ const userModel = db.users
 router
 // login method
 	.post("/api/login-submit", async function (req, res) {
-		// console.log("request form auth routes",req.body);
+		console.log("token form frontend",req.headers.authorization.split(' ')[1]);
 		const { email, password } = req.body;
 		// console.log('pre pass', password);
 		let user = await userModel.findOne({ where: { email: email } });
@@ -35,14 +35,10 @@ router
 				};
 				req.session.isAuth = true;
 				req.session.user = data;
-				console.log('data', req?.cookies);
+				// console.log('data', res?.cookie);
 				var token = await jwt.sign(data, 'yamin1234');
-				// console.log('token form ', token);
-				// localStorage.setItem('token', token)
-				res.cookie('token', token)
+				// res.cookie('token', token)
 				console.log('data', req?.session);
-				// console.log('res', res);
-				// console.log('prev_auth_url',res);
 				let prevUrl = req.session.prev_auth_url;
 				// console.log('prevurl',prevUrl);
 				console.log('tokenee',token);
