@@ -55,7 +55,7 @@ const storeCRM = async (req, res) => {
             details: element,
             
         }
-        // const cvnt = await Contact_number_Datatable.create(ccnInfo)
+        const cvnt = await Contact_number_Datatable.create(ccnInfo)
     }
     let customer_variants = req.body.customer_variants;
     let customer_id = req.body.id;
@@ -67,9 +67,9 @@ const storeCRM = async (req, res) => {
             variant_value_id: customer_variants[key],
             customer_id: customer_id,
         }
-        // const cvct = await cvc_dataTable.create(cvcInfo)
+        const cvct = await cvc_dataTable.create(cvcInfo)
     }
-    console.log('crm contact number', req.body.crm_contact_number);
+    // console.log('crm contact number', req.body.crm_contact_number);
     let contact_type = {
         contact_type: req.body.contact_type,
         contact_number_id: req.body.crm_contact_number,
@@ -79,8 +79,8 @@ const storeCRM = async (req, res) => {
 
 
     }
-    // const contactt = await contact_history_dataTable.create(contact_type)
-    console.log('contact history immediate',req.body.contact_number );
+    const contactt = await contact_history_dataTable.create(contact_type)
+    // console.log('contact history immediate',req.body.contact_number );
     let customer = {
         full_name: req.body.full_name,
         contact_number: req.body.contact_number,
@@ -91,10 +91,10 @@ const storeCRM = async (req, res) => {
     let feedback = {
         notes: req.body.feedback,
         date: req.body.date,
-        // feedback_type: req.body.feedback_type,
-        // contact_history_id: contactt.dataValues.id,
+        feedback_type: req.body.feedback_type,
+        contact_history_id: contactt.dataValues.id,
     }
-    // const feedbackt = await contact_history_feedback_dataTable.create(feedback)
+    const feedbackt = await contact_history_feedback_dataTable.create(feedback)
 
     // contact history reason complete
     let contact_reasons = req.body.contact_reason;
@@ -103,9 +103,9 @@ const storeCRM = async (req, res) => {
         console.log('contact history reaosn id ', key);
         let history_reason = {
             reason_id: key,
-            // contact_histories_id: contactt.dataValues.id,
+            contact_histories_id: contactt.dataValues.id,
         }
-        // const chrt = await history_reason_Datatable.create(history_reason)
+        const chrt = await history_reason_Datatable.create(history_reason)
     }
 
     let customer_group_customer = req.body.customer_group_customer;
@@ -116,7 +116,7 @@ const storeCRM = async (req, res) => {
                 customer_id: customer_id,
     
             }
-            // const groupt = await group_customer_Datatable.create(group)
+            const groupt = await group_customer_Datatable.create(group)
         }
     }
     
@@ -130,7 +130,7 @@ const storeCRM = async (req, res) => {
 
     }
 
-    // const event = await Calender_event_Datatable.create(calender_event)
+    const event = await Calender_event_Datatable.create(calender_event)
 
     // contact appointments complete
     let contact_appointment = {
@@ -141,7 +141,7 @@ const storeCRM = async (req, res) => {
         contact_number_id: customer_id,
 
     }
-    // const cappointmentt = await contact_appointment_dataTable.create(contact_appointment)
+    const cappointmentt = await contact_appointment_dataTable.create(contact_appointment)
 
     
     // contact appointment reason complete
@@ -150,15 +150,15 @@ const storeCRM = async (req, res) => {
         console.log('contact history reaosn id ', key);
         let appointment_reason = {
             contact_reason_id: key,
-            // contact_appointment_id: cappointmentt.dataValues.id,
+            contact_appointment_id: cappointmentt.dataValues.id,
         }
-        // const cart = await contact_appointment_reason_dataTable.create(appointment_reason)
+        const cart = await contact_appointment_reason_dataTable.create(appointment_reason)
     }
 
-    let appointment_reason = {
-        appointment_reason: req.body.appointment_reason,
+    // let appointment_reason = {
+    //     appointment_reason: req.body.appointment_reason,
 
-    }
+    // }
     let lead = {
         customer_id: customer_id,
         lead_status: req.body.lead_status,

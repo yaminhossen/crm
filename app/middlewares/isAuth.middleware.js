@@ -4,7 +4,7 @@ const isAuth = async (req, res, next) => {
 	let {token } = req.cookies;
 	if(token){
 		try {
-			let data = await jwt.verify(token,'91eb159c-a766-48c3-b143-849170dbceb8');
+			let data = await jwt.verify(token, '91eb159c-a766-48c3-b143-849170dbceb8');
 			req.session.user = data;
 			req.session.isAuth = true
 		} catch (error) {

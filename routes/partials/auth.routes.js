@@ -5,6 +5,7 @@ const { server_locals } = require("../..");
 const router = express.Router();
 const bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 // Database
 const db = require('../../app/api/db')
@@ -19,6 +20,7 @@ router
 		console.log("token form frontend",req.headers.authorization.split(' ')[1]);
 		const { email, password } = req.body;
 		// console.log('pre pass', password);
+		let token_salt = crypto.randomBytes(64).toString("hex").substring(0, 20);
 		let user = await userModel.findOne({ where: { email: email } });
 		// console.log('last pass', user);
 		// console.log('found user',user);
@@ -27,11 +29,14 @@ router
 			let passMatch = await bcrypt.compare(password, user?.password);
 			// return;
 			if (passMatch) {
+				user.token_salt = token_salt;
+				user.save();
 				let data = {
 					username: user?.dataValues?.user_name,
 					role: user?.dataValues?.role,
 					id: user?.dataValues?.id,
 					email: user?.dataValues?.email,
+					token_salt,
 				};
 				req.session.isAuth = true;
 				req.session.user = data;
@@ -110,10 +115,9 @@ router
 	// .use(isAuthMiddleware())
 
 	// logout method
-	.post("/logout", function (req, res) {
-		console.log("logoutlogo9ut");
-		req.session.isAuth = false;
-		return res.redirect("/");
-	});
+	// .post("/api/logout", function (req, res) {
+	// 	console.log('req user',req);
+	// 	// req.session.isAuth = false;
+	// });
 
 module.exports = () => router;

@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
         status: {
             type: DataTypes.BOOLEAN,
             defaultValue: 1
+        },
+        token_salt: {
+            type: DataTypes.STRING,
         }
     })
 
