@@ -69,7 +69,7 @@ const storeCRM = async (req, res) => {
         }
         const cvct = await cvc_dataTable.create(cvcInfo)
     }
-    // console.log('crm contact number', req.body.crm_contact_number);
+    
     let contact_type = {
         contact_type: req.body.contact_type,
         contact_number_id: req.body.crm_contact_number,
