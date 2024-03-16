@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
         date: {
             type: DataTypes.DATE
         },
+        next_contact_date: {
+            type: DataTypes.DATE
+        },
         contact_type: {
             type: DataTypes.STRING
         },

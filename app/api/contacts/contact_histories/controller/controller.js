@@ -18,6 +18,7 @@ const store = async (req, res) => {
         contact_number_id: req.body.contact_number_id,
         customer_id: req.body.customer_id,
         date: req.body.date,
+        next_contact_date: req.body.next_contact_date,
         contact_type: req.body.contact_type,
         note: req.body.note,
         creator: req.body.creator
