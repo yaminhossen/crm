@@ -25,6 +25,7 @@ const store = async (req, res) => {
         email: req.body.email,
         role: req.body.role
     }
+    console.log('info form user', info);
 
     const item = await DataTable.create(info)
     res.status(200).send(item)

@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
         password: {
             type: DataTypes.STRING
         },
-        // confirm_password: {
-        //     type: DataTypes.STRING
-        // },
+        confirm_password: {
+            type: DataTypes.STRING
+        },
         email: {
             type: DataTypes.STRING
         },
