@@ -4,6 +4,7 @@ const user_demo_routes = require("../app/api/user_demo/router/routes");
 const product_routes = require("../app/api/product/router/routes");
 const customer_support_tickets = require("../app/api/customers/customer_support_tickets/router/routes");
 const customers = require("../app/api/customers/customer/router/routes");
+const at_a_glance = require("../app/api/customers/at_a_glance/router/routes");
 const calender_events = require("../app/api/customers/calender_events/router/routes");
 const customer_contact_numbers = require("../app/api/customers/customer_contact_numbers/router/routes");
 const customer_group_customers = require("../app/api/customers/customer_group_customers/router/routes");
@@ -60,6 +61,7 @@ router.use(customer_variant_customer());
 router.use(customer_variant_values());
 router.use(customer_variants());
 router.use(customer_groups());
+router.use(at_a_glance());
 
 // contact routes
 router.use(contact_appointment_reasons());

@@ -39,7 +39,10 @@ const store = async (req, res) => {
         full_name: req.body.full_name,
         email: req.body.email,
         contact_number: req.body.contact_number,
-        address: req.body.address
+        address: req.body.address,
+        is_admitted: req.body.is_admitted,
+        admission_date: req.body.admission_date,
+        department: req.body.department,
     }
 
     const item = await Customer_DataTable.create(info)
@@ -439,12 +442,12 @@ const get = async (req, res) => {
     let id = req.params.id
     let customer = await Customer_DataTable.findOne({ where: { id: id } })
     let contact_number = await Contact_number_Datatable.findOne({ where: { customer_id: id } })
-    let group_customer = await Group_customer_Datatable.findOne({ where: { customer_id: id } })
+    // let group_customer = await Group_customer_Datatable.findOne({ where: { customer_id: id } })
     let variant_customer = await Variant_customer_Datatable.findOne({ where: { customer_id: id } })
     let calender_event = await Calender_event_Datatable.findOne({ where: { customer_id: id } })
     let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
 
-    res.status(200).json({ customer, contact_number, group_customer, variant_customer, calender_event, relevent_document })
+    res.status(200).json({ customer, contact_number, variant_customer, calender_event, relevent_document })
     
     try {
         let id = req.params.id

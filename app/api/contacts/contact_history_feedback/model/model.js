@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE
         },
         feedback_type: {
-            type: DataTypes.STRING(200)
+            type: DataTypes.ENUM(['agree', 'disagree','well wisher', 'runnig student', 'old student','wrong number','contact later','next batch'])
         },
         notes: {
             type: DataTypes.STRING(150)

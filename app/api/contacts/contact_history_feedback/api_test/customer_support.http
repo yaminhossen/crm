@@ -13,21 +13,26 @@ DELETE {{host}}{{routeName}}/delete/4 HTTP/1.1
 ###
 POST {{host}}{{routeName}}/store HTTP/1.1
 content-type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlhbWluIiwicm9sZSI6ImVtcGxveWVlIiwiaWQiOjEyLCJlbWFpbCI6Im1tbUBnbWFpbC5jb20iLCJ0b2tlbl9zYWx0IjoiMDgxOWExZTYxMTc3ZWM5Y2UzZWYiLCJpYXQiOjE3MTA3Mzc4Nzh9.hjzvfh9QExOxe4syZhmvZKf-S1cBtWZ2HTHdOLNL9h4
 
 {
         "contact_history_id": 3,
         "date": "2022-10-12",
-        "feedback_type": "product",
+        "feedback_type": "agree",
         "notes": "this is ok"
 }
 
 ###
-POST {{host}}{{routeName}}/update/1 HTTP/1.1
+POST {{host}}{{routeName}}/update HTTP/1.1
 content-type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlhbWluIiwicm9sZSI6ImVtcGxveWVlIiwiaWQiOjEyLCJlbWFpbCI6Im1tbUBnbWFpbC5jb20iLCJ0b2tlbl9zYWx0IjoiMDgxOWExZTYxMTc3ZWM5Y2UzZWYiLCJpYXQiOjE3MTA3Mzc4Nzh9.hjzvfh9QExOxe4syZhmvZKf-S1cBtWZ2HTHdOLNL9h4
 
 {
+    "id": 3,
     "contact_history_id": 3,
         "date": "2022-10-12",
-        "feedback_type": "student",
-        "notes": "this is ok"
+        "feedback_type": "disagree",
+        "notes": "this is not ok"
 }

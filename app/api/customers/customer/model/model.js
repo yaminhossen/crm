@@ -19,7 +19,17 @@ module.exports = (sequelize, DataTypes) => {
         status: {
             type: DataTypes.BOOLEAN,
             defaultValue: 1
-        }
+        },
+        is_admitted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: 1
+        },
+        admission_date: {
+            type: DataTypes.DATE,
+        },
+        department: {
+            type: DataTypes.STRING(40),
+        },
     })
 
     return Customer
