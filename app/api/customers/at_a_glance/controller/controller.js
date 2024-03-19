@@ -75,8 +75,8 @@ const findTotalInterestedCustomers = async () => {
 };
 
 // Function to find all customers
-const findTotalAdmittedCustomers = async () => {
-   
+const findTotalAdmittedCustomers = async (req, res) => {
+    const targetDate = req.body.month;
     try {
         const result = await Customer_DataTable.findAll({
           attributes: [
@@ -87,7 +87,9 @@ const findTotalAdmittedCustomers = async () => {
           where: {
             is_admitted: true,
             admission_date: {
-              [Op.not]: null // Ensure admission_date is not null
+              [Op.not]: null, // Ensure admission_date is not null
+              [Op.gte]: moment(targetDate).startOf('month').toDate(), // Start of the month
+              [Op.lt]: moment(targetDate).endOf('month').toDate() // End of the month
             }
           },
           group: [
@@ -104,27 +106,30 @@ const findTotalAdmittedCustomers = async () => {
 };
 
 // Function to find all customers
-const rejectCustomerPerMonth = async () => {
-   
+const rejectCustomerPerMonth = async (req, res) => {
+    const targetDate = req.body.month;
     try {
         const result = await Contact_history_feedback_DataTable.findAll({
-          attributes: [
-            [db.Sequelize.fn('YEAR', db.Sequelize.col('date')), 'year'],
-            [db.Sequelize.fn('MONTH', db.Sequelize.col('date')), 'month'],
-            [db.Sequelize.fn('COUNT', db.Sequelize.col('*')), 'count']
-          ],
-          where: {
-            feedback_type: 'disagree',
-            date: {
-              [Op.not]: null // Ensure date is not null
-            }
-          },
-          group: [
-            db.Sequelize.fn('YEAR', db.Sequelize.col('date')),
-            db.Sequelize.fn('MONTH', db.Sequelize.col('date'))
-          ]
+            attributes: [
+                [db.Sequelize.fn('YEAR', db.Sequelize.col('date')), 'year'],
+                [db.Sequelize.fn('MONTH', db.Sequelize.col('date')), 'month'],
+                [db.Sequelize.fn('COUNT', db.Sequelize.col('*')), 'count']
+            ],
+            where: {
+                feedback_type: 'disagree',
+                date: {
+                    [Op.not]: null, // Ensure date is not null
+                    [Op.gte]: moment(targetDate).startOf('month').toDate(), // Start of the month
+                    [Op.lt]: moment(targetDate).endOf('month').toDate() // End of the month
+                }
+            },
+            group: [
+                db.Sequelize.fn('YEAR', db.Sequelize.col('date')),
+                db.Sequelize.fn('MONTH', db.Sequelize.col('date'))
+            ]
         });
-        console.log('per monthe result',result);
+
+        console.log(`Rejected customers for the month of ${moment(targetDate).format('MMMM YYYY')}:`, result);
         // return result;
     } catch (error) {
         console.error('Error:', error);

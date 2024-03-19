@@ -16,9 +16,9 @@ router
     .get(`/${prefix}/all-customer`, controllers.findAllCustomers)
     .get(`/${prefix}/interested-customer`, controllers.findTotalInterestedCustomers)
     .get(`/${prefix}/pending-customer`, controllers.findPendingCustomers)
-    .get(`/${prefix}/admitted-customer`, controllers.findTotalAdmittedCustomers)
+    .post(`/${prefix}/admitted-customer`, controllers.findTotalAdmittedCustomers)
     .get(`/${prefix}/upcoming-contact-list`, controllers.upComingContactList)
-    .get(`/${prefix}/reject-customer-per-month`, controllers.rejectCustomerPerMonth)
+    .post(`/${prefix}/reject-customer-per-month`, controllers.rejectCustomerPerMonth)
     .post(`/${prefix}/store`, controllers.store)
 
 
