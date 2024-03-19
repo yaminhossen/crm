@@ -3,6 +3,7 @@ var jwt = require('jsonwebtoken');
 
 const DataTable = db.users
 const isAuth = async (req, res, next) => {
+    console.log('req header', req.headers?.authorization);
     let token = req.headers?.authorization?.split(' ');
     if (token && token[1]) {
         token = token[1];

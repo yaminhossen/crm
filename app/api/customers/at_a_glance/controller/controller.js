@@ -49,14 +49,14 @@ const getUsersPerMonth = async () => {
 
 
 // Function to find all customers
-const findAllCustomers = async () => {
+const findAllCustomers = async (req, res) => {
     try {
         const customers = await Customer_DataTable.count();
         console.log('all customer', customers);
-        // return customers;
+        res.status(200).json({ count: customers });
     } catch (error) {
         console.error('Error:', error);
-        throw error;
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
@@ -67,10 +67,10 @@ const findTotalInterestedCustomers = async () => {
             feedback_type: 'agree'
         }});
         console.log('all interested customer', customers);
-        // return customers;
+        // res.status(200).send(customers)
     } catch (error) {
         console.error('Error:', error);
-        throw error;
+        // res.status(401).send(error)
     }
 };
 
