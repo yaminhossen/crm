@@ -103,6 +103,35 @@ const findTotalAdmittedCustomers = async () => {
     }
 };
 
+// Function to find all customers
+const rejectCustomerPerMonth = async () => {
+   
+    try {
+        const result = await Contact_history_feedback_DataTable.findAll({
+          attributes: [
+            [db.Sequelize.fn('YEAR', db.Sequelize.col('date')), 'year'],
+            [db.Sequelize.fn('MONTH', db.Sequelize.col('date')), 'month'],
+            [db.Sequelize.fn('COUNT', db.Sequelize.col('*')), 'count']
+          ],
+          where: {
+            feedback_type: 'disagree',
+            date: {
+              [Op.not]: null // Ensure date is not null
+            }
+          },
+          group: [
+            db.Sequelize.fn('YEAR', db.Sequelize.col('date')),
+            db.Sequelize.fn('MONTH', db.Sequelize.col('date'))
+          ]
+        });
+        console.log('per monthe result',result);
+        // return result;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
+
 
 
 // Function to find total pending customers with next_contact_date after the current day
@@ -130,6 +159,32 @@ const findPendingCustomers = async () => {
 };
 
 
+// Function to find total pending customers with next_contact_date after the current day
+const upComingContactList = async () => {
+    try {
+        // Get the current date
+        const currentDate = moment().startOf('day');
+
+        // Find customers with next_contact_date after the current date
+        const customers = await Contact_history_DataTable.findAll({
+            where: {
+                next_contact_date: {
+                    [Op.not]: null, // Ensure next_contact_date is not null
+                    [Op.gte]: currentDate.toDate() // Check if next_contact_date is after or equal to the current date
+                }
+            },
+            limit: 5 // Limit the results to 5
+        });
+
+        console.log('Total pending customers with next contact date after or on the current day:', customers);
+        // return customers;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
+
+
 
 module.exports = {
     store,
@@ -138,4 +193,6 @@ module.exports = {
     findPendingCustomers,
     findTotalInterestedCustomers,
     findTotalAdmittedCustomers,
+    upComingContactList,
+    rejectCustomerPerMonth,
 }
