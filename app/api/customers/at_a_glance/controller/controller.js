@@ -8,6 +8,7 @@ const moment = require('moment');
 const Customer_DataTable = db.customers
 const Contact_history_DataTable = db.contact_histories
 const Contact_history_feedback_DataTable = db.contact_history_feedbacks
+const Customer_contact_number_DataTable = db.customer_contact_numbers
 
 // main works
 
@@ -178,6 +179,11 @@ const upComingContactList = async (req, res) => {
                     [Op.gte]: currentDate.toDate() // Check if next_contact_date is after or equal to the current date
                 }
             },
+            include: [
+                {
+                    model: Customer_contact_number_DataTable
+                }
+            ],
             limit: 5 // Limit the results to 5
         });
 
@@ -185,7 +191,7 @@ const upComingContactList = async (req, res) => {
         res.status(200).json(customers);
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
 };
 

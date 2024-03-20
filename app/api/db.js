@@ -125,12 +125,20 @@ db.customer_groups.hasMany(db.customer_group_customers, {
     foreignKey: 'customer_group_id'
 });
 
+db.contact_histories.belongsTo(db.customer_contact_numbers,{
+    foreignKey: 'customer_id'
+})
+
+db.customer_contact_numbers.belongsTo(db.contact_histories,{
+    foreignKey: 'customer_id'
+})
 
 // contact relation
 
 db.contact_histories.belongsTo(db.crm_contact_numbers, {
     foreignKey: 'contact_number_id'
 });
+
 db.contact_histories.hasMany(db.contact_history_feedbacks, {
     foreignKey: 'contact_history_id'
 });
@@ -150,6 +158,10 @@ db.contact_reasons.belongsToMany(db.contact_appointments,{
     through: db.contact_appointment_reasons,
     foreignKey: 'contact_reason_id',
 })
+
+
+
+
 // db.sequelize.sync({ force: false })
 //     .then(() => {
 //         console.log('yes sequelize re-sync done!');
