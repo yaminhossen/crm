@@ -61,16 +61,16 @@ const findAllCustomers = async (req, res) => {
 };
 
 // Function to find all customers
-const findTotalInterestedCustomers = async () => {
+const findTotalInterestedCustomers = async (req, res) => {
     try {
         const customers = await Contact_history_feedback_DataTable.count({ where: { 
             feedback_type: 'agree'
         }});
         console.log('all interested customer', customers);
-        // res.status(200).send(customers)
+        res.status(200).json({ count: customers });
     } catch (error) {
         console.error('Error:', error);
-        // res.status(401).send(error)
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
@@ -140,7 +140,7 @@ const rejectCustomerPerMonth = async (req, res) => {
 
 
 // Function to find total pending customers with next_contact_date after the current day
-const findPendingCustomers = async () => {
+const findPendingCustomers = async (req, res) => {
     try {
         // Get the current date
         const currentDate = moment().startOf('day');
@@ -156,16 +156,16 @@ const findPendingCustomers = async () => {
         });
 
         console.log('Total pending customers with next contact date after or on the current day:', customers);
-        // return customers;
+        res.status(200).json({ count: customers });
     } catch (error) {
         console.error('Error:', error);
-        throw error;
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
 
 // Function to find total pending customers with next_contact_date after the current day
-const upComingContactList = async () => {
+const upComingContactList = async (req, res) => {
     try {
         // Get the current date
         const currentDate = moment().startOf('day');
@@ -182,10 +182,10 @@ const upComingContactList = async () => {
         });
 
         console.log('Total pending customers with next contact date after or on the current day:', customers);
-        // return customers;
+        res.status(200).json(customers);
     } catch (error) {
         console.error('Error:', error);
-        throw error;
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
