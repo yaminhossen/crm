@@ -244,87 +244,50 @@ const All = async (req, res) => {
 // 2. get customer items
 
 const GetCustomer = async (req, res) => {
+    const { Op } = require('sequelize');
+    let searchKey = req.query.search_key;
+    let newUser = []
+    let newFeedback = []
+    let contact_history = []
+
     try {
-        const { Op } = require('sequelize');
-        let searchKey = req.query.search_key;
-        // console.log("search key", searchKey);
-        let query = {
-            // order: [['id', 'DESC']],
-        };
         if (searchKey.length) {
-            // query.where = {
-            //     [Op.or]: [
-            //         { contact_number: { [Op.like]: `${searchKey}%` } },
-            //     ]
-            // };
-            // let customer = await Customer_DataTable.findOne({
-
-            //     where: {
-            //         status: 1
-            //     },
-            //     // limit: 1,
-            //     ...query,
-            // });
-
-            // new ds
-
-            // Define your query object
             const query = {
                 where: {
-                    status: 1, // Condition for pending status
-                    contact_number: { 
-                        [Op.like]: `${searchKey}%` // Condition for contact number search
+                    status: 1,
+                    contact_number: {
+                        [Op.like]: `%${searchKey}%`
                     }
                 },
-                // Include other options like limit if needed
             };
 
-            // Perform the query
-            let customer = await Customer_DataTable.findOne(query);
-            // console.log('customer query',query);
-            let cu_id = customer?.dataValues?.id;
-
-            let Contact_history = await contact_history_dataTable.findOne({ where: { customer_id: cu_id } })
-
-            let ch_id = Contact_history.dataValues.id;
-            // console.log("cusotmer his id ", ch_id);
-
-            let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({ where: { contact_history_id: ch_id } })
-
-            // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
-            let newUser = customer
-            let newFeedback = Contact_history_feedback.dataValues
-            // console.log('newFeedback1', customer);
-            // console.log('newFeedback', newFeedback);
-
-
-            let users = 'kkkk'
-            res.status(200).json({
-                newUser,
-                newFeedback,
-                Contact_history,
-                users
-                // item
-            })
-        }
-        if (searchKey.length == 0) {
-            let newUser = []
-            let newFeedback = []
-            let Contact_history = []
-            let users = []
-            res.status(200).json({
-                newUser,
-                newFeedback,
-                Contact_history,
-                users
-                // item
-                // item
-            })
+            let customer = await Customer_DataTable.findOne(query)
+            
+            if(customer){
+                let cu_id = customer.id;
+                contact_history = await contact_history_dataTable.findOne({ where: { customer_id: cu_id } })
+                let ch_id = contact_history.id;
+                let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({ 
+                    where: { contact_history_id: ch_id },
+                    order: [
+                        ['id', 'DESC']
+                    ]
+                })
+                newUser = customer
+                newFeedback = Contact_history_feedback
+            }
         }
 
+        return res.status(200).json({
+            newUser,
+            newFeedback,
+            contact_history,
+        })
 
     } catch (error) {
-
+        return res.status(404).json({
+            "error": error.message
+        })
     }
 }
 
