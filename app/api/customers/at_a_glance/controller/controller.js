@@ -174,6 +174,7 @@ const upComingContactList = async (req, res) => {
         // Find customers with next_contact_date after the current date
         const customers = await Contact_history_DataTable.findAll({
             where: {
+                status: 1,
                 next_contact_date: {
                     [Op.not]: null, // Ensure next_contact_date is not null
                     [Op.gte]: currentDate.toDate() // Check if next_contact_date is after or equal to the current date
@@ -184,7 +185,7 @@ const upComingContactList = async (req, res) => {
                     model: Customer_contact_number_DataTable
                 }
             ],
-            limit: 5 // Limit the results to 5
+            limit: 100 // Limit the results to 5
         });
 
         console.log('Total pending customers with next contact date after or on the current day:', customers);

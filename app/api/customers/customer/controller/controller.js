@@ -51,18 +51,18 @@ const store = async (req, res) => {
 }
 const storeCRM = async (req, res) => {
     let ccn = req.body.customer_contact_number;
-    
+
     for (const element of ccn) {
         let ccnInfo = {
             customer_id: req.body.id,
             details: element,
-            
+
         }
         const cvnt = await Contact_number_Datatable.create(ccnInfo)
     }
     let customer_variants = req.body.customer_variants;
     let customer_id = req.body.id;
-    
+
     for (let key in customer_variants) {
         let id = key.split('_')[1]
         let cvcInfo = {
@@ -72,7 +72,7 @@ const storeCRM = async (req, res) => {
         }
         const cvct = await cvc_dataTable.create(cvcInfo)
     }
-    
+
     let contact_type = {
         contact_type: req.body.contact_type,
         contact_number_id: req.body.crm_contact_number,
@@ -112,17 +112,17 @@ const storeCRM = async (req, res) => {
     }
 
     let customer_group_customer = req.body.customer_group_customer;
-    if(customer_group_customer.length){
+    if (customer_group_customer.length) {
         for (const element of customer_group_customer) {
             let group = {
                 customer_group_id: element,
                 customer_id: customer_id,
-    
+
             }
             const groupt = await group_customer_Datatable.create(group)
         }
     }
-    
+
     // calender event complete
     let calender_event = {
         customer_id: customer_id,
@@ -146,7 +146,7 @@ const storeCRM = async (req, res) => {
     }
     const cappointmentt = await contact_appointment_dataTable.create(contact_appointment)
 
-    
+
     // contact appointment reason complete
     console.log('contact appointment reason', contact_reasons);
     for (let key of contact_reasons) {
@@ -171,7 +171,7 @@ const storeCRM = async (req, res) => {
         assigned_to: req.body.assigned_to
 
     }
-   
+
     console.log('document body ', req.body);
     console.log('document file ', req.files);
     console.log('document file 3 ', req.files?.docu_3);
@@ -193,41 +193,41 @@ const storeCRM = async (req, res) => {
 
     var photo_path = "";
 
-        if (files?.docu_1) {
-            photo_path = upload_files(files?.docu_1, customer_id);
-            console.log('form photo_path', photo_path);
-            if(files?.docu_1?.name){
-                let document = {
-                    document_path: photo_path,
-                    customer_id: customer_id,
-                }
-                const crdt = await Relevent_document_Datatable.create(document)
+    if (files?.docu_1) {
+        photo_path = upload_files(files?.docu_1, customer_id);
+        console.log('form photo_path', photo_path);
+        if (files?.docu_1?.name) {
+            let document = {
+                document_path: photo_path,
+                customer_id: customer_id,
             }
+            const crdt = await Relevent_document_Datatable.create(document)
         }
-        if (files?.docu_2) {
-            photo_path = upload_files(files?.docu_2, customer_id);
-            console.log('form photo_path', photo_path);
-            if(files?.docu_2?.name){
-                let document2 = {
-                    document_path: photo_path,
-                    customer_id: customer_id,
-                }
-                const crdt = await Relevent_document_Datatable.create(document2)
+    }
+    if (files?.docu_2) {
+        photo_path = upload_files(files?.docu_2, customer_id);
+        console.log('form photo_path', photo_path);
+        if (files?.docu_2?.name) {
+            let document2 = {
+                document_path: photo_path,
+                customer_id: customer_id,
             }
+            const crdt = await Relevent_document_Datatable.create(document2)
         }
-        if (files?.docu_3) {
-            photo_path = upload_files(files?.docu_3, customer_id);
-            console.log('form photo_path', photo_path);
-            if(files?.docu_3?.name){
-                let document3 = {
-                    document_path: photo_path,
-                    customer_id: customer_id,
-                }
-                const crdt = await Relevent_document_Datatable.create(document3)
+    }
+    if (files?.docu_3) {
+        photo_path = upload_files(files?.docu_3, customer_id);
+        console.log('form photo_path', photo_path);
+        if (files?.docu_3?.name) {
+            let document3 = {
+                document_path: photo_path,
+                customer_id: customer_id,
             }
+            const crdt = await Relevent_document_Datatable.create(document3)
         }
+    }
 
-   
+
 
     res.status(200).send('ok')
 
@@ -244,72 +244,88 @@ const All = async (req, res) => {
 // 2. get customer items
 
 const GetCustomer = async (req, res) => {
-   try {
-    const { Op } = require('sequelize');
-    let searchKey = req.query.search_key;
-    // console.log("search key", searchKey);
-    let query = {
-        // order: [['id', 'DESC']],
-    };
-    if (searchKey.length) {
-        query.where = {
-            [Op.or]: [
-                { contact_number: { [Op.like]: `${searchKey}%` } },
-            ]
+    try {
+        const { Op } = require('sequelize');
+        let searchKey = req.query.search_key;
+        // console.log("search key", searchKey);
+        let query = {
+            // order: [['id', 'DESC']],
         };
-        let customer = await Customer_DataTable.findOne({
-       
-            where: {
-                status: 1 
-            },
-            // limit: 1,
-            ...query,
-        });
-        // console.log('customer query',query);
-        let cu_id = customer?.dataValues?.id;
-    
-        let Contact_history = await contact_history_dataTable.findOne({where: {customer_id: cu_id}})
-    
-        let ch_id = Contact_history.dataValues.id;
-        // console.log("cusotmer his id ", ch_id);
-    
-        let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({where: {contact_history_id: ch_id}})
-    
-        // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
-        let newUser = customer
-        let newFeedback = Contact_history_feedback.dataValues
-        // console.log('newFeedback1', customer);
-        // console.log('newFeedback', newFeedback);
-       
-       
-        let users = 'kkkk'
-        res.status(200).json({
-            newUser,
-            newFeedback,
-            Contact_history,
-            users
-            // item
-        })
+        if (searchKey.length) {
+            // query.where = {
+            //     [Op.or]: [
+            //         { contact_number: { [Op.like]: `${searchKey}%` } },
+            //     ]
+            // };
+            // let customer = await Customer_DataTable.findOne({
+
+            //     where: {
+            //         status: 1
+            //     },
+            //     // limit: 1,
+            //     ...query,
+            // });
+
+            // new ds
+
+            // Define your query object
+            const query = {
+                where: {
+                    status: 1, // Condition for pending status
+                    contact_number: { 
+                        [Op.like]: `${searchKey}%` // Condition for contact number search
+                    }
+                },
+                // Include other options like limit if needed
+            };
+
+            // Perform the query
+            let customer = await Customer_DataTable.findOne(query);
+            // console.log('customer query',query);
+            let cu_id = customer?.dataValues?.id;
+
+            let Contact_history = await contact_history_dataTable.findOne({ where: { customer_id: cu_id } })
+
+            let ch_id = Contact_history.dataValues.id;
+            // console.log("cusotmer his id ", ch_id);
+
+            let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({ where: { contact_history_id: ch_id } })
+
+            // console.log("cusotmer his feedback id ", Contact_history_feedback.dataValues);
+            let newUser = customer
+            let newFeedback = Contact_history_feedback.dataValues
+            // console.log('newFeedback1', customer);
+            // console.log('newFeedback', newFeedback);
+
+
+            let users = 'kkkk'
+            res.status(200).json({
+                newUser,
+                newFeedback,
+                Contact_history,
+                users
+                // item
+            })
+        }
+        if (searchKey.length == 0) {
+            let newUser = []
+            let newFeedback = []
+            let Contact_history = []
+            let users = []
+            res.status(200).json({
+                newUser,
+                newFeedback,
+                Contact_history,
+                users
+                // item
+                // item
+            })
+        }
+
+
+    } catch (error) {
+
     }
-    if(searchKey.length == 0){
-       let newUser =[]
-       let newFeedback = []
-       let Contact_history =[]
-       let users = []
-        res.status(200).json({
-            newUser,
-            newFeedback,
-            Contact_history,
-            users
-            // item
-            // item
-        })
-    }
-   
-  
-   } catch (error) {
-    
-   }
 }
 
 // 3. get single item
@@ -334,7 +350,7 @@ const GetDependancy = async (req, res) => {
         crm_contact_nums = await crm_contact_num_dataTable.findAll({});
 
     } catch (error) {
-        
+
     }
     res.status(200).json({
         users,
@@ -448,29 +464,29 @@ const get = async (req, res) => {
     let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
 
     res.status(200).json({ customer, contact_number, variant_customer, calender_event, relevent_document })
-    
+
     try {
         let id = req.params.id
-    let customer = await Customer_DataTable.findOne({ where: { id: id }})
-    let contact_number = await Contact_number_Datatable.findOne({where: {customer_id: id}})
-    let group_customer = await Group_customer_Datatable.findOne({where: {customer_id: id}})
-    let variant_customer = await Variant_customer_Datatable.findOne({where: {customer_id: id}})
-    let calender_event = await Calender_event_Datatable.findOne({where: {customer_id: id}})
-    let relevent_document = await Relevent_document_Datatable.findOne({where: {customer_id: id}})
+        let customer = await Customer_DataTable.findOne({ where: { id: id } })
+        let contact_number = await Contact_number_Datatable.findOne({ where: { customer_id: id } })
+        let group_customer = await Group_customer_Datatable.findOne({ where: { customer_id: id } })
+        let variant_customer = await Variant_customer_Datatable.findOne({ where: { customer_id: id } })
+        let calender_event = await Calender_event_Datatable.findOne({ where: { customer_id: id } })
+        let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
 
-    res.status(200).json({customer,contact_number,group_customer,variant_customer,calender_event,relevent_document})
+        res.status(200).json({ customer, contact_number, group_customer, variant_customer, calender_event, relevent_document })
     } catch (error) {
-        
+
     }
 }
 // 3. get2 single item
 
 const get2 = async (req, res) => {
     let id = req.params.id
-    let item = await Customer_DataTable.findOne({ 
-        where: { 
-            id: id 
-        }, 
+    let item = await Customer_DataTable.findOne({
+        where: {
+            id: id
+        },
         include: [
             {
                 model: group_Datatable,
@@ -479,7 +495,7 @@ const get2 = async (req, res) => {
         ]
     })
     res.status(200).send(item)
-   
+
 }
 
 
@@ -505,10 +521,10 @@ const getVariantCustomer = async (req, res) => {
 // 4. update items
 
 const update = async (req, res) => {
-    
+
     let id = req.body.id
     // let id = req.params.id
-    const item = await Customer_DataTable.update(req.body, { where: { id: id }})
+    const item = await Customer_DataTable.update(req.body, { where: { id: id } })
     res.status(200).send(item)
 }
 
