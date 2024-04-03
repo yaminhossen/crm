@@ -185,7 +185,7 @@ const upComingContactList = async (req, res) => {
                     model: Customer_contact_number_DataTable
                 }
             ],
-            limit: 100 // Limit the results to 5
+            limit: 5 // Limit the results to 5
         });
 
         console.log('Total pending customers with next contact date after or on the current day:', customers);

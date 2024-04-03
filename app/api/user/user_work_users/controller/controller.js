@@ -40,6 +40,17 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
+        include: [
+            {
+                model: userDataTable
+            },
+            {
+                model: UserWorkDataTable
+            },
+            {
+                model: userWorkDepartDataTable
+            },
+        ]
     };
     if (searchKey) {
         query.where = {
@@ -50,6 +61,7 @@ const PaginateData = async (req, res) => {
             ]
         };
     }
+   
     let items = await paginate(req, DataTable, parseInt(req.query.page_limit||10), query);
     res.status(200).send(items);
 }

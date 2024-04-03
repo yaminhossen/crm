@@ -19,6 +19,7 @@ async function getDataWithPagination(req, page, pageSize, model, query) {
         where: {
             status: 1 
         },
+        
         ...query,
     });
 

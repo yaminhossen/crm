@@ -76,6 +76,18 @@ db.task_variant_values = require('./tasks/task_variant_values/model/model.js')(s
 db.task_variant_tasks = require('./tasks/task_variant_tasks/model/model.js')(sequelize, DataTypes)
 
 /** relations */
+
+// user relation
+db.user_work_users.belongsTo(db.users, {
+    foreignKey: 'user_id'
+});
+db.user_work_users.belongsTo(db.user_works, {
+    foreignKey: 'work_id'
+});
+db.user_work_users.belongsTo(db.user_work_departments, {
+    foreignKey: 'department_id',
+});
+
 // task related relation
 
 db.task_users.belongsTo(db.tasks, {

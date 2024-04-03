@@ -2,6 +2,8 @@
 @host = http://localhost:8082/api/
 
 GET {{host}}{{routeName}} HTTP/1.1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlhbWluIiwicm9sZSI6ImVtcGxveWVlIiwiaWQiOjEyLCJlbWFpbCI6Im1tbUBnbWFpbC5jb20iLCJ0b2tlbl9zYWx0IjoiNDZhYTY2MGRkNWI1YzllNzEyMzAiLCJpYXQiOjE3MTIxMzQxMDR9.OkfUC3L1WY5LQ0zvsn3lAA3UXh1TrJrasQf5mOHWhW4
 
 ###
 GET {{host}}{{routeName}}/details/2 HTTP/1.1
