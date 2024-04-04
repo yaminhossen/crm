@@ -103,6 +103,10 @@ const update = async (req, res) => {
         end_time: req.body.end_time
     }
     const item = await Tasks.update(newTask1, { where: { id: task_id } })
+    let newUserId = {
+        user_id: req.body.user_id
+    }
+    const item2 = await DataTable.update(newUserId, { where: { id: id } })
     // const item2 = await DataTable.update(req.body, { where: { id: id } })
     res.status(200).send(item)
 }
