@@ -12,7 +12,7 @@ const router = express.Router();
 let prefix = 'task-user'
 router
     .get(`/${prefix}`, controllers.PaginateData)
-    // .get(`/${prefix}`, controllers.All)
+    .get(`/${prefix}/all`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
     .post(`/${prefix}/delete`, controllers.destroy)
     .post(`/${prefix}/update`, controllers.update)

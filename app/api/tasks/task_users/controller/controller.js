@@ -13,18 +13,33 @@ const Users = db.users
 // 1. create item
 
 const store = async (req, res) => {
-    let info = {
-        user_id: req.body.user_id,
-        task_id: req.body.task_id
+    // console.log('user_id: req.body.user_id');
+    let newtask = {
+        title: req.body.task_title,
+        description: req.body.task_description,
+        end_time: req.body.end_time
     }
-    const item = await DataTable.create(info)
-    res.status(200).send(item)
+    const task = await Tasks.create(newtask)
+    let taskUser = {
+        user_id: req.body.user_id,
+        task_id: task.id
+    }
+
+    const task_user = await DataTable.create(taskUser)
+    console.log('new task', task.id);
+    res.status(200).send(task)
 }
 
 // 2. get all items
 
 const All = async (req, res) => {
-    let items = await DataTable.findAll({})
+    let items = await Users.findAll({
+        where: {
+            status: true,
+            role: 'employee'
+        },
+    })
+    console.log('user items', items);
     res.status(200).send(items)
 }
 
@@ -34,6 +49,14 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
+        include: [
+            {
+                model: Tasks
+            },
+            {
+                model: Users
+            },
+        ]
     };
     if (searchKey) {
         query.where = {
@@ -51,7 +74,7 @@ const PaginateData = async (req, res) => {
 
 const get = async (req, res) => {
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id } })
+    let item = await DataTable.findOne({ where: { id: id },include: [Tasks, Users] })
     res.status(200).send(item)
 }
 
@@ -73,8 +96,14 @@ const gettask = async (req, res) => {
 const update = async (req, res) => {
 
     let id = req.body.id
-    // let id = req.params.id
-    const item = await DataTable.update(req.body, { where: { id: id } })
+    let task_id = req.body.task_id
+    let newTask1 = {
+        title: req.body.task_title,
+        description: req.body.task_description,
+        end_time: req.body.end_time
+    }
+    const item = await Tasks.update(newTask1, { where: { id: task_id } })
+    // const item2 = await DataTable.update(req.body, { where: { id: id } })
     res.status(200).send(item)
 }
 
