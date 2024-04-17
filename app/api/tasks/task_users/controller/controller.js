@@ -74,9 +74,28 @@ const PaginateData = async (req, res) => {
 
 const get = async (req, res) => {
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id },include: [Tasks, Users] })
+    let query = {
+        where: { user_id: id },
+        order: [['createdAt', 'DESC']],
+        include: [
+            {
+                model: Tasks
+            },
+            {
+                model: Users
+            },
+        ]
+    };
+    
+    let item = await paginate(req, DataTable, parseInt(req.query.page_limit||30), query)
     res.status(200).send(item)
 }
+
+// const get = async (req, res) => {
+//     let id = req.params.id
+//     let item = await DataTable.findAll({ where: { user_id: id },order: [['createdAt', 'DESC']],include: [Tasks, Users] })
+//     res.status(200).send(item)
+// }
 
 // 3. get user task item
 
