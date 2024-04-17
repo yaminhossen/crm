@@ -74,6 +74,7 @@ const PaginateData = async (req, res) => {
 
 const get = async (req, res) => {
     let id = req.params.id
+    console.log('pagelimit', parseInt(req.query.page_limit));
     let query = {
         where: { user_id: id },
         order: [['createdAt', 'DESC']],
@@ -87,7 +88,7 @@ const get = async (req, res) => {
         ]
     };
     
-    let item = await paginate(req, DataTable, parseInt(req.query.page_limit||30), query)
+    let item = await paginate(req, DataTable, parseInt(req.query.page_limit||1), query)
     res.status(200).send(item)
 }
 
