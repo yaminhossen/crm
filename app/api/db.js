@@ -108,9 +108,15 @@ db.task_variants.belongsToMany(db.tasks, {
     through: db.task_variant_tasks,
     foreignKey: 'variant_id'
 });
-db.task_variants.hasMany(db.task_variant_values, {
-    foreignKey: 'task_variant_id'
+db.tasks.belongsToMany(db.task_variant_values, {
+    through: db.task_variant_tasks,
+    foreignKey: 'task_id'
 });
+db.task_variant_values.belongsToMany(db.tasks, {
+    through: db.task_variant_tasks,
+    foreignKey: 'task_variant_value_id'
+});
+
 
 // customer variant relation
 
@@ -122,6 +128,9 @@ db.customer_variants.belongsToMany(db.customers, {
     through: db.customer_variant_customers,
     foreignKey: 'variant_id'
 });
+db.customer_variants.hasMany(db.customer_variant_values, {
+    foreignKey: 'variant_id'
+});
 db.customers.belongsToMany(db.customer_groups, {
     through: db.customer_group_customers,
     foreignKey: 'customer_id'
@@ -130,9 +139,7 @@ db.customer_groups.belongsToMany(db.customers, {
     through: db.customer_group_customers,
     foreignKey: 'customer_group_id'
 });
-db.customer_variants.hasMany(db.customer_variant_values, {
-    foreignKey: 'variant_id'
-});
+
 db.customer_groups.hasMany(db.customer_group_customers, {
     foreignKey: 'customer_group_id'
 });

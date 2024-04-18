@@ -7,6 +7,9 @@ const db = require('../../../db')
 const DataTable = db.task_users
 const Tasks = db.tasks
 const Users = db.users
+const Task_variant = db.task_variants
+const Task_variant_task = db.task_variant_tasks
+const Task_variant_value = db.task_variant_values
 
 // main works
 
@@ -80,7 +83,8 @@ const get = async (req, res) => {
         order: [['createdAt', 'DESC']],
         include: [
             {
-                model: Tasks
+                model: Tasks,
+                include: [Task_variant_value]
             },
             {
                 model: Users
@@ -89,6 +93,16 @@ const get = async (req, res) => {
     };
     
     let item = await paginate(req, DataTable, parseInt(req.query.page_limit||1), query)
+    // let item2 = await db.task_variant_tasks.findOne({
+    //     where: {
+    //         task_id: id
+    //     }
+    // })
+    // let item3 = await db.task_variant_values.findOne({
+    //     where: {
+    //         task_variant_id: item2.task_variant_value_id
+    //     }
+    // })
     res.status(200).send(item)
 }
 
