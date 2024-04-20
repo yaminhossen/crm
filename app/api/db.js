@@ -169,6 +169,15 @@ db.contact_histories.belongsTo(db.customer_contact_numbers,{
 db.customer_contact_numbers.belongsTo(db.contact_histories,{
     foreignKey: 'customer_id'
 })
+db.customer_contact_numbers.belongsTo(db.customers,{
+    foreignKey: 'customer_id'
+})
+db.customer_group_customers.belongsTo(db.customer_groups,{
+    foreignKey: 'customer_group_id'
+})
+db.customer_group_customers.belongsTo(db.customers,{
+    foreignKey: 'customer_id'
+})
 
 // contact relation
 
