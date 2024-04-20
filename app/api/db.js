@@ -146,6 +146,9 @@ db.customer_variants.hasMany(db.customer_variant_values, {
 db.customer_support_tickets.belongsTo(db.customers, {
     foreignKey: 'customer_id'
 });
+db.calender_events.belongsTo(db.customers, {
+    foreignKey: 'customer_id'
+});
 db.customers.belongsToMany(db.customer_groups, {
     through: db.customer_group_customers,
     foreignKey: 'customer_id'
