@@ -96,6 +96,15 @@ db.task_users.belongsTo(db.tasks, {
 db.task_users.belongsTo(db.users, {
     foreignKey: 'user_id'
 });
+db.task_variant_tasks.belongsTo(db.tasks, {
+    foreignKey: 'task_id'
+});
+db.task_variant_tasks.belongsTo(db.task_variants, {
+    foreignKey: 'variant_id'
+});
+db.task_variant_tasks.belongsTo(db.task_variant_values, {
+    foreignKey: 'task_variant_value_id'
+});
 db.tasks.hasMany(db.task_users, {
     foreignKey: 'task_id',
 });
