@@ -5,6 +5,7 @@ const db = require('../../../db')
 
 // create main model 
 const DataTable = db.task_variant_values
+const Task_variant = db.task_variants
 
 // main works
 
@@ -37,6 +38,11 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
+        include: [
+            {
+                model: Task_variant
+            },
+        ]
     };
     if (searchKey) {
         query.where = {

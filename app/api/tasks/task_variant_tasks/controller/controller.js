@@ -73,7 +73,20 @@ const PaginateData = async (req, res) => {
 const get = async (req, res) => {
     
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
+    let item = await DataTable.findOne({ 
+        where: { id: id },
+        include: [
+            {
+                model: Tasks
+            },
+            {
+                model: Task_variant
+            },
+            {
+                model: Task_variant_value
+            },
+        ]
+    })
     res.status(200).send(item)
 }
 
