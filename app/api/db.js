@@ -190,6 +190,9 @@ db.customer_variant_customers.belongsTo(db.customer_variant_values,{
 db.customer_variant_customers.belongsTo(db.customer_variants,{
     foreignKey: 'variant_id'
 })
+db.customer_variant_values.belongsTo(db.customer_variants,{
+    foreignKey: 'variant_id'
+})
 
 // contact relation
 
@@ -216,7 +219,12 @@ db.contact_reasons.belongsToMany(db.contact_appointments,{
     through: db.contact_appointment_reasons,
     foreignKey: 'contact_reason_id',
 })
-
+db.contact_appointment_reasons.belongsTo(db.contact_reasons, {
+    foreignKey: 'contact_reason_id'
+});
+db.contact_appointment_reasons.belongsTo(db.contact_appointments, {
+    foreignKey: 'contact_appointment_id'
+});
 
 
 
