@@ -178,6 +178,18 @@ db.customer_group_customers.belongsTo(db.customer_groups,{
 db.customer_group_customers.belongsTo(db.customers,{
     foreignKey: 'customer_id'
 })
+db.customer_relevent_documents.belongsTo(db.customers,{
+    foreignKey: 'customer_id'
+})
+db.customer_variant_customers.belongsTo(db.customers,{
+    foreignKey: 'customer_id'
+})
+db.customer_variant_customers.belongsTo(db.customer_variant_values,{
+    foreignKey: 'variant_value_id'
+})
+db.customer_variant_customers.belongsTo(db.customer_variants,{
+    foreignKey: 'variant_id'
+})
 
 // contact relation
 
