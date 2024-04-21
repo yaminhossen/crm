@@ -8,6 +8,8 @@ const history_dataTable = db.contact_histories
 const crm_contact_dataTable = db.crm_contact_numbers
 const history_feedback_dataTable = db.contact_history_feedbacks
 const history_reason_dataTable = db.contact_reasons
+const Customer_dataTable = db.customers
+const CRM_contact_number_dataTable = db.crm_contact_numbers
 // main works
 
 // 1. create item
@@ -44,6 +46,14 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
+        include: [
+            {
+                model: Customer_dataTable
+            },
+            {
+                model: CRM_contact_number_dataTable
+            },
+        ]
     };
     if (searchKey) {
         query.where = {

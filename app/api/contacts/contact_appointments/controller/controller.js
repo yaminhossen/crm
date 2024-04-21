@@ -6,7 +6,8 @@ const db = require('../../../db')
 // create main model 
 const appointment_dataTable = db.contact_appointments
 const reason_dataTable = db.contact_reasons
-const appointment_reason_dataTable = db.contact_appointment_reasons
+const Customer_dataTable = db.customers
+const CRM_contact_number_dataTable = db.crm_contact_numbers
 
 // main works
 
@@ -43,6 +44,14 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
+        include: [
+            {
+                model: Customer_dataTable
+            },
+            {
+                model: CRM_contact_number_dataTable
+            },
+        ]
     };
     if (searchKey) {
         query.where = {

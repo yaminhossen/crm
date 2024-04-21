@@ -225,6 +225,18 @@ db.contact_appointment_reasons.belongsTo(db.contact_reasons, {
 db.contact_appointment_reasons.belongsTo(db.contact_appointments, {
     foreignKey: 'contact_appointment_id'
 });
+db.contact_appointments.belongsTo(db.customers, {
+    foreignKey: 'customer_id'
+});
+db.contact_appointments.belongsTo(db.crm_contact_numbers, {
+    foreignKey: 'contact_number_id'
+});
+db.contact_histories.belongsTo(db.customers, {
+    foreignKey: 'customer_id'
+});
+db.contact_histories.belongsTo(db.crm_contact_numbers, {
+    foreignKey: 'contact_number_id'
+});
 
 
 
