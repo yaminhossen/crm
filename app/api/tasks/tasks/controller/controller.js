@@ -64,14 +64,14 @@ const get = async (req, res) => {
             id: id 
         }, 
         include: [
-            {
-                model: TaskUsers,
-                include: [Users]
-            },
-            {
-                model: TaskVariants,
-                include: [TaskVariantValues]
-            }
+            // {
+            //     model: TaskUsers,
+            //     include: [Users]
+            // },
+            // {
+            //     model: TaskVariants,
+            //     include: [TaskVariantValues]
+            // }
         ]
     })
     res.status(200).send(item)

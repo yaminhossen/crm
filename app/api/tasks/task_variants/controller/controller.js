@@ -57,9 +57,9 @@ const get = async (req, res) => {
     let item = await DataTable.findOne({
          where: { id: id },
          include: [
-            {
-                model: variantValueDataTable
-            }
+            // {
+            //     model: variantValueDataTable
+            // }
         ]
         })
     res.status(200).send(item)

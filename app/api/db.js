@@ -249,6 +249,9 @@ db.contact_history_reasons.belongsTo(db.contact_reasons, {
 db.leads.belongsTo(db.customers, {
     foreignKey: 'customer_id'
 });
+db.user_infos.belongsTo(db.users, {
+    foreignKey: 'user_id'
+});
 
 
 
