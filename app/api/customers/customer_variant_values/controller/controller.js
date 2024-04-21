@@ -59,15 +59,25 @@ const PaginateData = async (req, res) => {
 // 3. get single item
 
 const get = async (req, res) => {
+    let id = req.params.id
+    let item = await variant_values_datatable.findOne({ 
+        where: { id: id },
+        include: [
+            {
+                model: Variant_dataTable
+            },
+        ]
+    })
+    res.status(200).send(item)
     
-   try {
+   /* try {
     let id = req.params.id
     let customer_variant_value = await variant_values_datatable.findOne({ where: { id: id }})
     let customer_variant_customer = await variant_customer_datatables.findOne({ where: { variant_value_id: id }})
     res.status(200).json({customer_variant_value,customer_variant_customer})
    } catch (error) {
     
-   }
+   } */
 }
 
 // 4. update items

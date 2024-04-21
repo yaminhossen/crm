@@ -80,15 +80,23 @@ const get = async (req, res) => {
         },
         include: [
             {
-                model: crm_contact_dataTable,
+                model: Customer_dataTable
             },
             {
-                model: history_feedback_dataTable,
+                model: CRM_contact_number_dataTable
             },
-            {
-                model: history_reason_dataTable,
-            }
         ]
+        // include: [
+        //     {
+        //         model: crm_contact_dataTable,
+        //     },
+        //     {
+        //         model: history_feedback_dataTable,
+        //     },
+        //     {
+        //         model: history_reason_dataTable,
+        //     }
+        // ]
     })
     res.status(200).send(item)
 }

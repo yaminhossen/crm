@@ -427,7 +427,7 @@ const get = async (req, res) => {
     let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
 
     res.status(200).json({ customer, contact_number, variant_customer, calender_event, relevent_document })
-
+/* 
     try {
         let id = req.params.id
         let customer = await Customer_DataTable.findOne({ where: { id: id } })
@@ -440,7 +440,7 @@ const get = async (req, res) => {
         res.status(200).json({ customer, contact_number, group_customer, variant_customer, calender_event, relevent_document })
     } catch (error) {
 
-    }
+    } */
 }
 // 3. get2 single item
 

@@ -78,9 +78,17 @@ const get = async (req, res) => {
         },
         include: [
             {
-                model: reason_dataTable,
-            }
+                model: Customer_dataTable
+            },
+            {
+                model: CRM_contact_number_dataTable
+            },
         ]
+        // include: [
+        //     {
+        //         model: reason_dataTable,
+        //     }
+        // ]
     })
     res.status(200).send(item)
 }
