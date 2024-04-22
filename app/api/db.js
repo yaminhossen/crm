@@ -252,6 +252,9 @@ db.leads.belongsTo(db.customers, {
 db.user_infos.belongsTo(db.users, {
     foreignKey: 'user_id'
 });
+db.user_work_departments.belongsTo(db.user_works, {
+    foreignKey: 'work_id'
+});
 
 
 

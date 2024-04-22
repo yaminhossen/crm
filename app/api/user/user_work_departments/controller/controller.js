@@ -6,6 +6,7 @@ const db = require('../../../db')
 // create main model 
 const DataTable = db.user_work_departments
 const userWorkUserDataTable = db.user_work_users
+const User_work_dataTable = db.user_works
 
 // main works
 
@@ -37,6 +38,11 @@ const PaginateData = async (req, res) => {
     let searchKey = req.query.search_key;
     let query = {
         order: [['id', 'DESC']],
+        include: [
+            {
+                model: User_work_dataTable
+            },
+        ]
     };
     if (searchKey) {
         query.where = {
@@ -55,7 +61,14 @@ const PaginateData = async (req, res) => {
 const get = async (req, res) => {
     
     let id = req.params.id
-    let item = await DataTable.findOne({ where: { id: id }})
+    let item = await DataTable.findOne({ 
+        where: { id: id },
+        include: [
+            {
+                model: User_work_dataTable
+            },
+        ]
+    })
     res.status(200).send(item)
 }
 
