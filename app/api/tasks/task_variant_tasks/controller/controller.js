@@ -42,6 +42,7 @@ const PaginateData = async (req, res) => {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
     let query = {
+        attributes: ['*',['id','rid']],
         order: [['id', 'DESC']],
         include: [
             {
@@ -95,6 +96,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     
     let id = req.body.id
+    console.log("body", req.body);
     const item = await DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }

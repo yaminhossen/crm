@@ -18,7 +18,7 @@ const store = async (req, res) => {
         work_id: req.body.work_id,
         title: req.body.title
     }
-
+    console.log('body', req.body);
     const item = await DataTable.create(info)
     res.status(200).send(item)
 
@@ -89,6 +89,7 @@ const update = async (req, res) => {
     
     // let id = req.params.id
     let id = req.body.id
+    console.log('req body', req.body);
     const item = await DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }
