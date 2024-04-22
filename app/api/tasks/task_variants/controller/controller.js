@@ -71,6 +71,7 @@ const update = async (req, res) => {
     
     let id = req.body.id
     // let id = req.params.id
+    // console.log("body", req.body);
     const item = await DataTable.update(req.body, { where: { id: id }})
     res.status(200).send(item)
 }

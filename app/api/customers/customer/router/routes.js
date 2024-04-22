@@ -15,7 +15,7 @@ router
     .get(`/customer-info`, controllers.GetCustomer)
     .post(`/customer-info/store`, controllers.storeCRM)
     .get(`/crm-dependancy`, controllers.GetDependancy)
-    // .get(`/${prefix}`, controllers.All)
+    .get(`/${prefix}/only`, controllers.All)
     // .get(`/${prefix}`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
     .post(`/${prefix}/delete`, controllers.destroy)

@@ -35,7 +35,7 @@ const store = async (req, res) => {
 // 2. get all items
 
 const All = async (req, res) => {
-    let items = await DataTable.findAll({})
+    let items = await DataTable.findAll({ where: { role: 'employee' } })
     res.status(200).send(items)
 }
 

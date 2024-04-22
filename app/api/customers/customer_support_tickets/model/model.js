@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             
         },
         ticket_uuid: {
-            type: DataTypes.STRING(50)
+            type: DataTypes.STRING(150)
         },
         subject: {
             type: DataTypes.TEXT

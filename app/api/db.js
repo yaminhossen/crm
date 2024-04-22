@@ -255,6 +255,9 @@ db.user_infos.belongsTo(db.users, {
 db.user_work_departments.belongsTo(db.user_works, {
     foreignKey: 'work_id'
 });
+db.user_Designations.belongsTo(db.users, {
+    foreignKey: 'user_id'
+});
 
 
 

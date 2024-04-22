@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const { paginate } = require('../../../../utilites/paginate')
 const db = require('../../../db')
 
@@ -12,10 +13,11 @@ const Customer_DataTable = db.customers
 // 1. create item
 
 const store = async (req, res) => {
-
+    let t_uuid = uuidv4();
+    console.log('unique id', t_uuid);
     let info = {
         customer_id: req.body.customer_id,
-        ticket_uuid: req.body.ticket_uuid,
+        ticket_uuid: t_uuid,
         subject: req.body.subject,
         description: req.body.description,
         priority: req.body.priority,
