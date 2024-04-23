@@ -39,6 +39,7 @@ const PaginateData = async (req, res) => {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
     let query = {
+        attributes: ['*',['id','rid']],
         order: [['id', 'DESC']],
         include: [
             {
