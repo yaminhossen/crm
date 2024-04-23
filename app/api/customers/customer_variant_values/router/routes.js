@@ -12,7 +12,7 @@ const router = express.Router();
 let prefix = 'customer-variant-value'
 router
     .get(`/${prefix}`, controllers.PaginateData)
-    // .get(`/${prefix}`, controllers.All)
+    .get(`/${prefix}/only`, controllers.All)
     .post(`/${prefix}/store`, controllers.store)
     .post(`/${prefix}/delete`, controllers.destroy)
     // .post(`/${prefix}/restore`, controllers.restore)
