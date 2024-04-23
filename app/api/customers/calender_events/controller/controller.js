@@ -19,7 +19,7 @@ const store = async (req, res) => {
         event_date: req.body.event_date,
         event_type: req.body.event_type,
         event_description: req.body.event_description,
-        creator: req.body.creator,
+        creator: req.user.id,
         meet_link: req.body.meet_link
     }
 
