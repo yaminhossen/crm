@@ -3,6 +3,7 @@ const db = require('../../../db')
 var fs = require('fs-extra')
 const { dirname } = require('path');
 const appDir = dirname(require.main.filename);
+const { v4: uuidv4 } = require('uuid');
 
 // const db = db
 
@@ -33,9 +34,10 @@ const crm_contact_num_dataTable = db.crm_contact_numbers
 // 1. create item
 
 const store = async (req, res) => {
-
+    let uu_id = uuidv4()
+    // console.log('customer uuid', uu_id);
     let info = {
-        uuid: req.body.uuid,
+        uuid:uu_id,
         full_name: req.body.full_name,
         email: req.body.email,
         contact_number: req.body.contact_number,
@@ -244,7 +246,7 @@ const All = async (req, res) => {
 // 2. get customer items
 
 const GetCustomer = async (req, res) => {
-    const { Op } = require('sequelize');
+    const { Op, UUIDV4 } = require('sequelize');
     let searchKey = req.query.search_key;
     let newUser = []
     let newFeedback = []
