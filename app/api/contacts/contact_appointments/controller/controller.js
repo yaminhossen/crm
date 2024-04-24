@@ -21,7 +21,7 @@ const store = async (req, res) => {
         date: req.body.date,
         contact_type: req.body.contact_type,
         note: req.body.note,
-        creator: req.body.creator
+        creator: req.user.id
     }
 
     const item = await appointment_dataTable.create(info)

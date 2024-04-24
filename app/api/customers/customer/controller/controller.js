@@ -400,6 +400,7 @@ const PaginateData = async (req, res) => {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
     let query = {
+       
         order: [['id', 'DESC']],
     };
     if (searchKey) {

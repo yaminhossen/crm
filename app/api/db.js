@@ -261,6 +261,7 @@ db.user_Designations.belongsTo(db.users, {
 
 
 
+
 // db.sequelize.sync({ force: false })
 //     .then(() => {
 //         console.log('yes sequelize re-sync done!');
