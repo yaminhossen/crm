@@ -23,7 +23,7 @@ const store = async (req, res) => {
         next_contact_date: req.body.next_contact_date,
         contact_type: req.body.contact_type,
         note: req.body.note,
-        creator: req.body.creator
+        creator: req.user.id
     }
 
     const item = await history_dataTable.create(info)
