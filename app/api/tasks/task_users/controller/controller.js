@@ -18,17 +18,16 @@ const Task_variant_value = db.task_variant_values
 const store = async (req, res) => {
     // console.log('user_id: req.body.user_id');
     let newtask = {
-        title: req.body.task_title,
-        description: req.body.task_description,
-        end_time: req.body.end_time
+        title: req.body.task_title
+       
     }
     const task = await Tasks.create(newtask)
-    let taskUser = {
-        user_id: req.body.user_id,
-        task_id: task.id
-    }
+    // let taskUser = {
+    //     user_id: req.body.user_id,
+    //     task_id: task.id
+    // }
 
-    const task_user = await DataTable.create(taskUser)
+    // const task_user = await DataTable.create(taskUser)
     console.log('new task', task.id);
     res.status(200).send(task)
 }
