@@ -13,6 +13,7 @@ let prefix = 'user'
 router
     .get(`/${prefix}`, controllers.PaginateData)
     .get(`/${prefix}/only`, controllers.All)
+    .get(`/${prefix}/all`, controllers.All_user)
     .post(`/${prefix}/store`, controllers.store)
     .post(`/${prefix}/delete`, controllers.destroy)
     // .post(`/${prefix}/restore`, controllers.restore)

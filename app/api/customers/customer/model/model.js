@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     
     const Customer = sequelize.define("customer", {
         uuid: {
-            type: DataTypes.STRING(50)
+            type: DataTypes.STRING(150)
         },
         full_name: {
             type: DataTypes.STRING(50)

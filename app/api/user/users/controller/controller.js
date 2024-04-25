@@ -1,5 +1,6 @@
 const { paginate } = require('../../../../utilites/paginate')
 const db = require('../../../db')
+const { v4: uuidv4 } = require('uuid');
 // const db = db
 
 // create main model 
@@ -15,10 +16,10 @@ const departmentDataTable = db.user_work_departments
 // 1. create item
 
 const store = async (req, res) => {
-    console.log("req body test backend store", req.body);
-
+    // console.log("req body test backend store", req.body);
+    let uid = uuidv4();
     let info = {
-        user_uid: req.body.user_uid,
+        user_uid: uid,
         user_name: req.body.user_name,
         password: req.body.password,
         confirm_password: req.body.confirm_password,
@@ -36,6 +37,10 @@ const store = async (req, res) => {
 
 const All = async (req, res) => {
     let items = await DataTable.findAll({ where: { role: 'employee' } })
+    res.status(200).send(items)
+}
+const All_user = async (req, res) => {
+    let items = await DataTable.findAll({})
     res.status(200).send(items)
 }
 
@@ -135,6 +140,7 @@ const getPublisheditem = async (req, res) => {
 module.exports = {
     store,
     All,
+    All_user,
     PaginateData,
     get,
     update,

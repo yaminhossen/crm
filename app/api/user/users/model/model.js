@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     
     const User = sequelize.define("user", {
         user_uid: {
-            type: DataTypes.BIGINT
+            type: DataTypes.STRING(150)
         },
         user_name: {
             type: DataTypes.STRING(30)

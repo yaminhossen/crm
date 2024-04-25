@@ -8,6 +8,7 @@ const DataTable = db.tasks
 const TaskUsers = db.task_users
 const TaskVariants= db.task_variants
 const TaskVariantValues = db.task_variant_values
+const TaskVariantTask = db.task_variant_tasks
 const Users = db.users
 
 // main works
@@ -19,10 +20,25 @@ const store = async (req, res) => {
     let info = {
         title: req.body.title,
         description: req.body.description,
-        end_time: req.body.phone_number
+        end_time: req.body.end_time
     }
-
+    console.log("req body from task store", req.body);
     const item = await DataTable.create(info)
+    let task_info = {
+        task_id: item.id,
+        user_id:req.body.user
+    }
+    const task_user = await TaskUsers.create(task_info)
+    let variant_value = await TaskVariantValues.findOne({ where: { id: req.body.task_variant_value_id } })
+
+    let variant = await TaskVariants.findOne({ where: { id: variant_value.task_variant_id } })
+
+    let task_variant_task_info = {
+        task_id: item.id,
+        task_variant_value_id:req.body.task_variant_value_id,
+        variant_id: variant.id
+    }
+    const task_variant_task = await TaskVariantTask.create(task_variant_task_info)
     res.status(200).send(item)
 
 }
@@ -82,10 +98,29 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     
     let id = req.body.id
-    // let id = req.params.id
-    // console.log("req body", req.body);
-    const item = await DataTable.update(req.body, { where: { id: id }})
-    res.status(200).send(item)
+    let info = {
+        title: req.body.title,
+        description: req.body.description,
+        end_time: req.body.end_time
+    }
+    await DataTable.update(info, { where: { id: id }})
+    // const item = await DataTable.findOne({ where: { id: id }})
+    // console.log('item id ', item);
+    let task_info = {
+        task_id: id,
+        user_id:req.body.user
+    }
+    const task_user = await TaskUsers.update(task_info, { where: { task_id: id }})
+    // 
+    let variant_value = await TaskVariantValues.findOne({ where: { id: req.body.task_variant_value_id } })
+    let variant = await TaskVariants.findOne({ where: { id: variant_value.task_variant_id } })
+    let task_variant_task_info = {
+        task_id: id,
+        task_variant_value_id:req.body.task_variant_value_id,
+        variant_id: variant.id
+    }
+    const task_variant_task = await TaskVariantTask.update(task_variant_task_info, { where: { task_id: id }})
+    res.status(200).send(task_variant_task)
 }
 
 // // 5. delete item
