@@ -1,4 +1,5 @@
 const { paginate } = require('../../../../utilites/paginate')
+const { taskUserPaginate } = require('../../../../utilites/taskUserPaginate')
 const db = require('../../../db')
 
 // const db = db
@@ -92,7 +93,7 @@ const get = async (req, res) => {
         ]
     };
     
-    let item = await paginate(req, DataTable, parseInt(req.query.page_limit||1), query)
+    let item = await taskUserPaginate(req, DataTable, parseInt(req.query.page_limit||3), query)
 
     res.status(200).send(item)
 }
