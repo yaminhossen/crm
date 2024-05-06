@@ -22,6 +22,13 @@ async function getDataWithPagination(req, page, pageSize, model, query) {
         
         ...query,
     });
+    const users2 = await model.findAndCountAll({
+        where: {
+            status: 1 
+        },
+        
+        ...query,
+    });
 
     const totalPages = Math.ceil(users.count / pageSize);
     const baseUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split('?')[0];
@@ -39,7 +46,8 @@ async function getDataWithPagination(req, page, pageSize, model, query) {
         per_page: pageSize.toString(),
         prev_page_url: page > 1 ? `${baseUrl}?page=${page - 1}` : null,
         to: offset + users.rows.length,
-        total: users.count,
+        total: users2?.rows?.length,
+        // totala: users2,
     };
 
     return response;

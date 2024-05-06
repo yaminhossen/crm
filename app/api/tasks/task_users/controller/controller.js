@@ -93,8 +93,8 @@ const get = async (req, res) => {
         ]
     };
     
-    let item = await taskUserPaginate(req, DataTable, parseInt(req.query.page_limit||3), query)
-
+    let item = await taskUserPaginate(req, DataTable, parseInt(req.query.page_limit||1), query)
+    // console.log('tatala',item.total)
     res.status(200).send(item)
 }
 
