@@ -20,7 +20,8 @@ router
     .get(`/user/:userid/task`, controllers.gettask)
     // .get(`/user/:userid/task`, controllers.gettask)
 
-    .get(`/${prefix}/details/:id`, controllers.get);
+    .get(`/${prefix}/details/:id`, controllers.get)
+    .get(`/${prefix}/details/only/:id`, controllers.Only);
 
 
 module.exports = () => router;

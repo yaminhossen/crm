@@ -45,6 +45,7 @@ const All = async (req, res) => {
     res.status(200).send(items)
 }
 
+
 // 2.1 get all data by paginate
 const PaginateData = async (req, res) => {
     const { Op } = require('sequelize');
@@ -92,17 +93,27 @@ const get = async (req, res) => {
     };
     
     let item = await paginate(req, DataTable, parseInt(req.query.page_limit||1), query)
-    // let item2 = await db.task_variant_tasks.findOne({
-    //     where: {
-    //         task_id: id
-    //     }
-    // })
-    // let item3 = await db.task_variant_values.findOne({
-    //     where: {
-    //         task_variant_id: item2.task_variant_value_id
-    //     }
-    // })
+
     res.status(200).send(item)
+}
+
+const Only = async (req, res) => {
+    let id = req.params.id
+    let items = await DataTable.findAll({
+        where: { task_id: id },
+        order: [['createdAt', 'DESC']],
+        include: [
+            {
+                model: Tasks,
+                include: [Task_variant_value]
+            },
+            {
+                model: Users
+            },
+        ]
+    })
+    console.log('user items', items);
+    res.status(200).send(items)
 }
 
 // const get = async (req, res) => {
@@ -188,6 +199,7 @@ module.exports = {
     All,
     get,
     update,
+    Only,
     destroy,
     getPublisheditem,
     gettask,
