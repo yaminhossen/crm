@@ -37,7 +37,7 @@ const store = async (req, res) => {
     let uu_id = uuidv4()
     // console.log('customer uuid', uu_id);
     let info = {
-        uuid:uu_id,
+        uuid: uu_id,
         full_name: req.body.full_name,
         email: req.body.email,
         contact_number: req.body.contact_number,
@@ -256,26 +256,31 @@ const GetCustomer = async (req, res) => {
         if (searchKey.length) {
             const query = {
                 where: {
-                    status: 1,
-                    contact_number: {
-                        [Op.like]: `%${searchKey}%`
-                    }
+                    // status: 1,
+                    [Op.or]: [
+                        {
+                            contact_number: {
+                                [Op.like]: `%${searchKey}%`
+                            }
+                        },
+                        { full_name: { [Op.like]: `%${searchKey}%` } },
+                    ]
                 },
             };
 
             let customer = await Customer_DataTable.findOne(query)
-            
-            if(customer){
+            console.log('customer',customer);
+            if (customer) {
+                newUser = customer
                 let cu_id = customer.id;
                 contact_history = await contact_history_dataTable.findOne({ where: { customer_id: cu_id } })
                 let ch_id = contact_history.id;
-                let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({ 
+                let Contact_history_feedback = await contact_history_feedback_dataTable.findOne({
                     where: { contact_history_id: ch_id },
                     order: [
                         ['id', 'DESC']
                     ]
                 })
-                newUser = customer
                 newFeedback = Contact_history_feedback
             }
         }
@@ -400,7 +405,7 @@ const PaginateData = async (req, res) => {
     const { Op } = require('sequelize');
     let searchKey = req.query.search_key;
     let query = {
-       
+
         order: [['id', 'DESC']],
     };
     if (searchKey) {
@@ -430,20 +435,20 @@ const get = async (req, res) => {
     let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
 
     res.status(200).json({ customer, contact_number, variant_customer, calender_event, relevent_document })
-/* 
-    try {
-        let id = req.params.id
-        let customer = await Customer_DataTable.findOne({ where: { id: id } })
-        let contact_number = await Contact_number_Datatable.findOne({ where: { customer_id: id } })
-        let group_customer = await Group_customer_Datatable.findOne({ where: { customer_id: id } })
-        let variant_customer = await Variant_customer_Datatable.findOne({ where: { customer_id: id } })
-        let calender_event = await Calender_event_Datatable.findOne({ where: { customer_id: id } })
-        let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
-
-        res.status(200).json({ customer, contact_number, group_customer, variant_customer, calender_event, relevent_document })
-    } catch (error) {
-
-    } */
+    /* 
+        try {
+            let id = req.params.id
+            let customer = await Customer_DataTable.findOne({ where: { id: id } })
+            let contact_number = await Contact_number_Datatable.findOne({ where: { customer_id: id } })
+            let group_customer = await Group_customer_Datatable.findOne({ where: { customer_id: id } })
+            let variant_customer = await Variant_customer_Datatable.findOne({ where: { customer_id: id } })
+            let calender_event = await Calender_event_Datatable.findOne({ where: { customer_id: id } })
+            let relevent_document = await Relevent_document_Datatable.findOne({ where: { customer_id: id } })
+    
+            res.status(200).json({ customer, contact_number, group_customer, variant_customer, calender_event, relevent_document })
+        } catch (error) {
+    
+        } */
 }
 // 3. get2 single item
 
